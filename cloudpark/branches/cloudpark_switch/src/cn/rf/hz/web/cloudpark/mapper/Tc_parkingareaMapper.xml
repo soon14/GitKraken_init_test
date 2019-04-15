@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_parkingareaMapper">
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_parkingarea">
+		<id column="AreaID" property="areaid" jdbcType="INTEGER" />
+		<result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="AreaName" property="areaname" jdbcType="VARCHAR" />
+		<result column="ParentId" property="parentid" jdbcType="INTEGER" />
+		<result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+		<result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+		<result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+		<result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+		<result column="IsDelete" property="isdelete" jdbcType="BIT" />
+		<result column="DeletePeople" property="deletepeople" jdbcType="INTEGER" />
+		<result column="DeleteDate" property="deletedate" jdbcType="TIMESTAMP" />
+		<result column="AreaType" property="areatype" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		AreaID, ParkingLotNo, AreaName, ParentId, CreatePeople, CreateDate,
+		UpdatePeople,
+		UpdateDate, IsDelete, DeletePeople, DeleteDate,AreaType
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tc_parkingarea
+		where AreaID = #{areaid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from tc_parkingarea
+		where AreaID = #{areaid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_parkingarea">
+		insert into tc_parkingarea (AreaID, ParkingLotNo, AreaName,
+		ParentId, CreatePeople, CreateDate,
+		UpdatePeople, UpdateDate, IsDelete,
+		DeletePeople, DeleteDate,AreaType)
+		values (#{areaid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR},
+		#{areaname,jdbcType=VARCHAR},
+		#{parentid,jdbcType=INTEGER}, #{createpeople,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP},
+		#{updatepeople,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP},
+		#{isdelete,jdbcType=BIT},
+		#{deletepeople,jdbcType=INTEGER}, #{deletedate,jdbcType=TIMESTAMP}, #{areatype,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_parkingarea">
+		insert into tc_parkingarea
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="areaid != null">
+				AreaID,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+			<if test="areaname != null">
+				AreaName,
+			</if>
+			<if test="parentid != null">
+				ParentId,
+			</if>
+			<if test="createpeople != null">
+				CreatePeople,
+			</if>
+			<if test="createdate != null">
+				CreateDate,
+			</if>
+			<if test="updatepeople != null">
+				UpdatePeople,
+			</if>
+			<if test="updatedate != null">
+				UpdateDate,
+			</if>
+			<if test="isdelete != null">
+				IsDelete,
+			</if>
+			<if test="deletepeople != null">
+				DeletePeople,
+			</if>
+			<if test="deletedate != null">
+				DeleteDate,
+			</if>
+			<if test="areatype != null">
+				AreaType,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="areaid != null">
+				#{areaid,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="areaname != null">
+				#{areaname,jdbcType=VARCHAR},
+			</if>
+			<if test="parentid != null">
+				#{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="createpeople != null">
+				#{createpeople,jdbcType=INTEGER},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatepeople != null">
+				#{updatepeople,jdbcType=INTEGER},
+			</if>
+			<if test="updatedate != null">
+				#{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isdelete != null">
+				#{isdelete,jdbcType=BIT},
+			</if>
+			<if test="deletepeople != null">
+				#{deletepeople,jdbcType=INTEGER},
+			</if>
+			<if test="deletedate != null">
+				#{deletedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="areatype != null">
+				#{areatype,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_parkingarea">
+		update tc_parkingarea
+		<set>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="areaname != null">
+				AreaName = #{areaname,jdbcType=VARCHAR},
+			</if>
+			<if test="parentid != null">
+				ParentId = #{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="createpeople != null">
+				CreatePeople = #{createpeople,jdbcType=INTEGER},
+			</if>
+			<if test="createdate != null">
+				CreateDate = #{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatepeople != null">
+				UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+			</if>
+			<if test="updatedate != null">
+				UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isdelete != null">
+				IsDelete = #{isdelete,jdbcType=BIT},
+			</if>
+			<if test="deletepeople != null">
+				DeletePeople = #{deletepeople,jdbcType=INTEGER},
+			</if>
+			<if test="deletedate != null">
+				DeleteDate = #{deletedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="areatype != null">
+				AreaType = #{areatype,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where AreaID = #{areaid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_parkingarea">
+		update tc_parkingarea
+		set ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+		AreaName = #{areaname,jdbcType=VARCHAR},
+		ParentId = #{parentid,jdbcType=INTEGER},
+		CreatePeople = #{createpeople,jdbcType=INTEGER},
+		CreateDate = #{createdate,jdbcType=TIMESTAMP},
+		UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+		UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+		IsDelete = #{isdelete,jdbcType=BIT},
+		DeletePeople = #{deletepeople,jdbcType=INTEGER},
+		DeleteDate = #{deletedate,jdbcType=TIMESTAMP},
+		AreaType = #{areatype,jdbcType=VARCHAR}
+		where AreaID = #{areaid,jdbcType=INTEGER}
+	</update>
+
+	<select id="queryparkingAreaByParkingLotNo" resultMap="BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from tc_parkingarea
+		where ParkingLotNo=#{parkinglotno} and IsDelete=0
+	</select>
+	
+	<select id="queryExternalAreaByParkingLotNo" parameterType="Object" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from tc_parkingarea
+		where ParkingLotNo=#{parkinglotno}
+		 	and IsDelete=0 
+		 	and ParentId is null LIMIT 1
+	</select>
+</mapper>

@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.sharding.dao.Tc_usercrdtm_inMapper">
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in">
+		<id column="RecordID" property="recordid" jdbcType="INTEGER" />
+		<id column="partitionID" property="partitionid" jdbcType="INTEGER" />
+		<result column="UserName" property="username" jdbcType="VARCHAR" />
+		<result column="CarCode" property="carcode" jdbcType="VARCHAR" />
+		<result column="ChargeRuleID" property="chargeruleid" jdbcType="INTEGER" />
+		<result column="CarLabel" property="carlabel" jdbcType="VARCHAR" />
+		<result column="CarColor" property="carcolor" jdbcType="VARCHAR" />
+		<result column="CarStyleid" property="carstyleid" jdbcType="INTEGER" />
+		<result column="Crdtm" property="crdtm" jdbcType="TIMESTAMP" />
+		<result column="LastoutTime" property="lastouttime" jdbcType="TIMESTAMP" />
+		<result column="ChannelID" property="channelid" jdbcType="INTEGER" />
+		<result column="carintype" property="carintype" jdbcType="INTEGER" />
+		<result column="ImagePath" property="imagepath" jdbcType="VARCHAR" />
+		<result column="RecognizeCarCode" property="recognizecarcode"
+			jdbcType="VARCHAR" />
+		<result column="Note" property="note" jdbcType="VARCHAR" />
+		<result column="CarCode2" property="carcode2" jdbcType="VARCHAR" />
+		<result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="Parkinglocation" property="parkinglocation"
+			jdbcType="VARCHAR" />
+		<result column="areaId" property="areaid"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<!--<sql id="Base_Column_List"> RecordID, partitionID, UserName, CarCode, 
+		ChargeRuleID, CarLabel, CarColor, CarStyleid, Crdtm, ChannelID, ImagePath, 
+		RecognizeCarCode, Note, CarCode2, ParkingLotNo, Parkinglocation </sql> -->
+	<sql id="Base_Column_List">
+		recordid, partitionid, username, carcode,
+		chargeruleid,lastouttime,
+		carlabel, carcolor,
+		carstyleid,
+		crdtm,
+		channelid, imagepath,
+		recognizecarcode, note, carcode2, parkinglotno,
+		parkinglocation,carintype,areaId
+	</sql>
+
+	<sql id="Base_Column_List_ALL">
+		recordid, partitionid, username, carcode,
+		chargeruleid,lastouttime,
+		carlabel, carcolor,
+		crdtm as intime,
+		channelid, imagepath,
+		recognizecarcode, note, carcode2, parkinglotno,
+		parkinglocation,carintype,areaId
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_inKey">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where RecordID = #{recordid,jdbcType=INTEGER}
+		and
+		partitionID = #{partitionid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_inKey">
+		delete from
+		tc_usercrdtm_in
+		where RecordID = #{recordid,jdbcType=INTEGER}
+		and
+		partitionID = #{partitionid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in">
+		insert into tc_usercrdtm_in
+		(RecordID, partitionID, UserName,
+		CarCode, ChargeRuleID, CarLabel,
+		CarColor, CarStyleid, Crdtm,
+		ChannelID, ImagePath, RecognizeCarCode,
+		Note, CarCode2, ParkingLotNo,
+		Parkinglocation)
+		values
+		(#{recordid,jdbcType=INTEGER}, #{partitionid,jdbcType=INTEGER},
+		#{username,jdbcType=VARCHAR},
+		#{carcode,jdbcType=VARCHAR},
+		#{chargeruleid,jdbcType=INTEGER}, #{carlabel,jdbcType=VARCHAR},
+		#{carcolor,jdbcType=VARCHAR}, #{carstyleid,jdbcType=INTEGER},
+		#{crdtm,jdbcType=TIMESTAMP},
+		#{channelid,jdbcType=INTEGER},
+		#{imagepath,jdbcType=VARCHAR}, #{recognizecarcode,jdbcType=VARCHAR},
+		#{note,jdbcType=VARCHAR}, #{carcode2,jdbcType=VARCHAR},
+		#{parkinglotno,jdbcType=VARCHAR},
+		#{parkinglocation,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in">
+		insert into tc_usercrdtm_in
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				RecordID,
+			</if>
+			<if test="partitionid != null">
+				partitionID,
+			</if>
+			<if test="username != null">
+				UserName,
+			</if>
+			<if test="carcode != null">
+				CarCode,
+			</if>
+			<if test="chargeruleid != null">
+				ChargeRuleID,
+			</if>
+			<if test="carlabel != null">
+				CarLabel,
+			</if>
+			<if test="carcolor != null">
+				CarColor,
+			</if>
+			<if test="carstyleid != null">
+				CarStyleid,
+			</if>
+			<if test="crdtm != null">
+				Crdtm,
+			</if>
+			<if test="channelid != null">
+				ChannelID,
+			</if>
+			<if test="imagepath != null">
+				ImagePath,
+			</if>
+			<if test="recognizecarcode != null">
+				RecognizeCarCode,
+			</if>
+			<if test="note != null">
+				Note,
+			</if>
+			<if test="carcode2 != null">
+				CarCode2,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+			<if test="parkinglocation != null">
+				Parkinglocation,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				#{recordid,jdbcType=INTEGER},
+			</if>
+			<if test="partitionid != null">
+				#{partitionid,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode != null">
+				#{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeruleid != null">
+				#{chargeruleid,jdbcType=INTEGER},
+			</if>
+			<if test="carlabel != null">
+				#{carlabel,jdbcType=VARCHAR},
+			</if>
+			<if test="carcolor != null">
+				#{carcolor,jdbcType=VARCHAR},
+			</if>
+			<if test="carstyleid != null">
+				#{carstyleid,jdbcType=INTEGER},
+			</if>
+			<if test="crdtm != null">
+				#{crdtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="channelid != null">
+				#{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="imagepath != null">
+				#{imagepath,jdbcType=VARCHAR},
+			</if>
+			<if test="recognizecarcode != null">
+				#{recognizecarcode,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode2 != null">
+				#{carcode2,jdbcType=VARCHAR},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="parkinglocation != null">
+				#{parkinglocation,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in">
+		update tc_usercrdtm_in
+		<set>
+			<if test="username != null">
+				UserName = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode != null">
+				CarCode = #{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeruleid != null">
+				ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+			</if>
+			<if test="carlabel != null">
+				CarLabel = #{carlabel,jdbcType=VARCHAR},
+			</if>
+			<if test="carcolor != null">
+				CarColor = #{carcolor,jdbcType=VARCHAR},
+			</if>
+			<if test="carstyleid != null">
+				CarStyleid = #{carstyleid,jdbcType=INTEGER},
+			</if>
+			<if test="crdtm != null">
+				Crdtm = #{crdtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="channelid != null">
+				ChannelID = #{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="imagepath != null">
+				ImagePath = #{imagepath,jdbcType=VARCHAR},
+			</if>
+			<if test="recognizecarcode != null">
+				RecognizeCarCode = #{recognizecarcode,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				Note = #{note,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode2 != null">
+				CarCode2 = #{carcode2,jdbcType=VARCHAR},
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="parkinglocation != null">
+				Parkinglocation = #{parkinglocation,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where RecordID = #{recordid,jdbcType=INTEGER}
+		and partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in">
+		update
+		tc_usercrdtm_in
+		set UserName = #{username,jdbcType=VARCHAR},
+		CarCode =
+		#{carcode,jdbcType=VARCHAR},
+		ChargeRuleID =
+		#{chargeruleid,jdbcType=INTEGER},
+		CarLabel =
+		#{carlabel,jdbcType=VARCHAR},
+		CarColor = #{carcolor,jdbcType=VARCHAR},
+		CarStyleid = #{carstyleid,jdbcType=INTEGER},
+		Crdtm =
+		#{crdtm,jdbcType=TIMESTAMP},
+		ChannelID = #{channelid,jdbcType=INTEGER},
+		ImagePath = #{imagepath,jdbcType=VARCHAR},
+		RecognizeCarCode =
+		#{recognizecarcode,jdbcType=VARCHAR},
+		Note = #{note,jdbcType=VARCHAR},
+		CarCode2 = #{carcode2,jdbcType=VARCHAR},
+		ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR},
+		Parkinglocation =
+		#{parkinglocation,jdbcType=VARCHAR}
+		where RecordID =
+		#{recordid,jdbcType=INTEGER}
+		and partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</update>
+
+	<delete id="deleteParkOut" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in">
+		delete from
+		tc_usercrdtm_in
+		where CarCode = #{carcode,jdbcType=VARCHAR} and
+		ParkingLotNo=#{parkinglotno,jdbcType=VARCHAR}
+		AND partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</delete>
+
+	<select id="queryTc_usercrdtm_in_limit" resultType="java.util.Map"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List_ALL" />
+		FROM tc_usercrdtm_in a WHERE a.ParkingLotNo= #{ParkingLotNo} ORDER BY
+		RecordID LIMIT #{fpage},#{limtcount}
+	</select>
+
+	<select id="queryTc_usercrdtm_in" resultType="java.util.Map"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where ParkingLotNo =
+		#{ParkingLotNo}
+	</select>
+
+	<select id="queryLaterCode" resultType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where CarCode = #{carcode}
+		and
+		ParkingLotNo=#{parkinglotno} and <![CDATA[ Crdtm>]]>
+		#{datetime,jdbcType=TIMESTAMP}
+	</select>
+
+
+	<select id="queryParkingStatebyCarCode" resultType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where CarCode = #{carcode}
+		and
+		ParkingLotNo=#{parkinglotno} and partitionID=#{partitionID}
+	</select>
+
+
+	<delete id="delcarfrom_in" parameterType="Object">
+		delete from
+		tc_usercrdtm_in
+		where CarCode = #{carcode}
+		and
+		ParkingLotNo=#{parkinglotno} and partitionID=#{partitionID}
+	</delete>
+
+
+	<select id="selectByParknoAndCarCode" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where 1=1
+		<if test="parkinglotno != null">
+			<![CDATA[ and ParkingLotNo = #{parkinglotno}]]>
+		</if>
+		<if test="partitionid != null">
+			<![CDATA[ and partitionID = #{partitionid}]]>
+		</if>
+		<if test="carcode != null">
+			<![CDATA[ and CarCode like #{carcode} and CarCode not like '%无牌车%']]>
+		</if>
+	</select>
+
+
+
+	<select id="selectByParknoAndCarCode1" resultType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in"
+		parameterType="Object">
+		select 
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in a
+		where 1=1
+		and ParkingLotNo
+		= #{parkinglotno}
+		and partitionID = #{partitionid}
+		and (CarCode like
+		#{carcode1}
+		|| CarCode like #{carcode2}
+		|| CarCode like #{carcode3}
+		||
+		CarCode like #{carcode4}
+		|| CarCode like #{carcode5}
+		|| CarCode like
+		#{carcode6}) and CarCode not like '%无牌车%'
+	</select>
+
+
+	<select id="selectByParknoAndCarCode2" resultType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in"
+		parameterType="Object">
+		select 
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where 1=1
+		<if test="parkinglotno != null">
+			<![CDATA[ and ParkingLotNo = #{parkinglotno}]]>
+		</if>
+		<if test="carcode1 != null">
+			<![CDATA[  and CarCode not like '%无牌车%' and ( CarCode like #{carcode1}]]>
+		</if>
+		<if test="carcode2 != null">
+			<![CDATA[ or CarCode like #{carcode2}]]>
+		</if>
+		<if test="carcode3 != null">
+			<![CDATA[ or CarCode like #{carcode3}]]>
+		</if>
+		<if test="carcode4 != null">
+			<![CDATA[ or CarCode like #{carcode4}]]>
+		</if>
+		<if test="carcode5 != null">
+			<![CDATA[ or CarCode like #{carcode5}]]>
+		</if>
+		<if test="carcode6 != null">
+			<![CDATA[ or CarCode like #{carcode6}]]>
+		</if>
+		<if test="carcode7 != null">
+			<![CDATA[ or CarCode like #{carcode7}]]>
+		</if>
+		<if test="carcode8 != null">
+			<![CDATA[ or CarCode like #{carcode8}]]>
+		</if>
+		<if test="carcode9 != null">
+			<![CDATA[ or CarCode like #{carcode9}]]>
+		</if>
+		<if test="carcode10 != null">
+			<![CDATA[ or CarCode like #{carcode10} )]]>
+		</if>
+		<if test="partitionid != null">
+			<![CDATA[ and partitionID = #{partitionid}]]>
+		</if>
+	</select>
+
+
+	<select id="selectByParknoAndNumber" resultType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in"
+		parameterType="Object">
+		select 
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where ParkingLotNo =
+		#{parkinglotno} order by Crdtm desc limit #{topsize}
+	</select>
+
+
+
+
+	<insert id="batchInsertUsercrdtm_in" parameterType="java.util.List">
+		insert into tc_usercrdtm_in (RecordID, partitionID, UserName,
+		CarCode,
+		ChargeRuleID, Crdtm,
+		ChannelID, ImagePath,
+		ParkingLotNo,CarStyleid,LastoutTime,CarCode2,carintype,areaId)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.recordid},#{item.partitionid},#{item.username},#{item.carcode},#{item.chargeruleid}
+			,#{item.crdtm}
+			,#{item.channelid},#{item.imagepath}
+			,#{item.parkinglotno}
+			,#{item.carstyleid}
+			,#{item.lastouttime}
+			,#{item.carcode2}
+			,#{item.carintype}
+			,#{item.areaid}
+			)
+		</foreach>
+	</insert>
+
+	<delete id="batchDelUsercrdtm_in" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			delete from tc_usercrdtm_in where CarCode=#{item.carcode}
+			and
+			ParkingLotNo=#{item.parkinglotno}
+
+		</foreach>
+	</delete>
+
+	<delete id="batchDelUsercrdtm_in_out" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			delete from tc_usercrdtm_in where CarCode=#{item.carcode}
+			and
+			ParkingLotNo=#{item.parkinglotno} and <![CDATA[ Crdtm<]]>
+			#{item.crdtm}
+
+		</foreach>
+	</delete>
+
+	<update id="batchUpdateUsercrdtm_in" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update tc_usercrdtm_in
+			<set>
+				CarCode2= #{item.carcode2},
+				CarCode=#{item.carcode},
+				UserName=#{item.username},
+				ImagePath=#{item.imagepath},
+				ChannelID=#{item.channelid},
+				ChargeRuleID=#{item.chargeruleid},
+				LastoutTime=#{item.lastouttime},
+				carintype=#{item.carintype}
+			</set>
+			where RecordID = #{item.recordid} and partitionID =
+			#{item.partitionid}
+		</foreach>
+	</update>
+
+	<update id="batchReplaceOldUsercrdtm_in" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update tc_usercrdtm_in
+			<set>
+				CarCode2= #{item.carcode2},
+				CarCode=#{item.carcode},
+				Crdtm=#{item.crdtm},
+				UserName=#{item.username},
+				ImagePath=#{item.imagepath},
+				ChannelID=#{item.channelid},
+				ChargeRuleID=#{item.chargeruleid},
+				LastoutTime=#{item.lastouttime},
+				carintype=#{item.carintype}
+			</set>
+			where ParkingLotNo = #{item.parkinglotno} and CarCode=#{item.carcode}
+			and partitionID =
+			#{item.partitionid} and 
+			<![CDATA[Crdtm< #{item.crdtm}]]>
+		</foreach>
+	</update>
+
+	<select id="queryByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where PartitionID = #{PartitionID} and
+		ParkingLotNo = #{ParkingLotNo}
+		<if test="CarCode != null">
+			and CarCode = #{CarCode}
+		</if>
+		<if test="Crdtm != null">
+			and Crdtm = #{Crdtm}
+		</if>
+	</select>
+
+	<select id="queryOneByCarCodeOrderByCrdtm" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		tc_usercrdtm_in
+		where
+		partitionID = #{partitionID}
+		and ParkingLotNo =
+		#{ParkingLotNo}
+		and CarCode = #{CarCode}
+		order by Crdtm desc Limit 1
+	</select>
+
+	<delete id="batchDelUsercrdtm_inByRecordId" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			delete from
+			tc_usercrdtm_in
+			where
+			(RecordID = #{item.recordid}
+			and partitionID = #{item.partitionid})
+		</foreach>
+	</delete>
+
+	<delete id="deletebyrecordid" parameterType="Object">
+		delete from
+		tc_usercrdtm_in
+		where RecordID = #{recordid} and ParkingLotNo =
+		#{parkinglotno}
+	</delete>
+
+	<select id="selectByParknoAndSize" resultType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in"
+		parameterType="Object">
+		select *
+		from tc_usercrdtm_in
+		where ParkingLotNo =
+		#{parkinglotno} and partitionID = #{partitionid} order by Crdtm desc
+		limit #{offset}
+	</select>
+
+	<select id="selectcarin" resultType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_in"
+		parameterType="Object">
+		select *
+		from tc_usercrdtm_in
+		where ParkingLotNo
+		=#{parkinglotno} and CarCode =#{carcode} limit 1
+	</select>
+
+
+	<!-- <select id="selectcarincount" parameterType="Object" resultType="java.lang.Integer"> 
+		select count(1) from tc_usercrdtm_in where ParkingLotNo ='12' </select> -->
+	<select id="selectcarinCount" resultType="java.lang.Integer">
+		select CONVERT(count(recordid),SIGNED) from tc_usercrdtm_in where
+		ParkingLotNo=#{parkinglotno}
+	</select>
+
+
+	<select id="selectCarInNoLincenPlateNumber" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select 
+		<include refid="Base_Column_List" />
+		from tc_usercrdtm_in
+		where ParkingLotNo
+		=#{parkinglotno} and CarCode like ${carcode} and partitionID = #{partitionid}
+	</select>
+	
+	
+	<select id="queryUserCrdtmInListCountByWhere" parameterType="java.util.Map" resultType="int">
+		select CONVERT(count(RecordID),SIGNED) total
+			from
+				tc_usercrdtm_in
+			where 
+				<![CDATA[partitionID = #{partitionID}]]>
+				<![CDATA[and ParkingLotNo = #{parkNo}]]>
+		<if test="startDate != null">	
+			<![CDATA[and Crdtm >= #{startDate}]]>
+		</if>
+		<if test="endDate != null">		
+			<![CDATA[and Crdtm <=#{endDate}]]>
+		</if>		
+		<if test="channelID != null">
+			<![CDATA[and ChannelID = #{channelID}]]>
+		</if>
+		<if test="carCode != null">
+			<![CDATA[and CarCode like CONCAT('%',#{carCode},'%') ]]>
+		</if>
+		<if test="chargeRuleID != null">
+			<![CDATA[and ChargeRuleID = #{chargeRuleID}]]>
+		</if>
+		<if test="userName != null">
+			<![CDATA[and UserName like CONCAT('%',#{userName},'%') ]]>
+		</if>
+	</select>
+	
+	<select id="queryUserCrdtmInListByWhere" parameterType="java.util.Map" resultMap="BaseResultMap">
+	select
+		<include refid="Base_Column_List" />
+		from
+			tc_usercrdtm_in
+		where 
+			<![CDATA[partitionID = #{partitionID}]]>
+			<![CDATA[and ParkingLotNo = #{parkNo}]]>
+		<if test="startDate != null">	
+			<![CDATA[and Crdtm >= #{startDate}]]>
+		</if>
+		<if test="endDate != null">		
+			<![CDATA[and Crdtm <=#{endDate}]]>
+		</if>
+		<if test="channelID != null">
+			<![CDATA[and ChannelID = #{channelID}]]>
+		</if>
+		<if test="carCode != null">
+			<![CDATA[and CarCode like CONCAT('%',#{carCode},'%') ]]>
+		</if>
+		<if test="chargeRuleID != null">
+			<![CDATA[and ChargeRuleID = #{chargeRuleID}]]>
+		</if>
+		<if test="userName != null">
+			<![CDATA[and UserName like CONCAT('%',#{userName},'%') ]]>
+		</if>
+	</select>
+
+</mapper>

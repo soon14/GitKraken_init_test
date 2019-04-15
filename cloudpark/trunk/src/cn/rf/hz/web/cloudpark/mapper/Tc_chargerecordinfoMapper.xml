@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.sharding.dao.Tc_chargerecordinfoMapper">
+	<resultMap id="BaseResultMap"
+		type="cn.rf.hz.web.cloudpark.moder.Tc_chargerecordinfo">
+		<id column="RecordId" property="recordid" jdbcType="BIGINT" />
+		<id column="partitionID" property="partitionid" jdbcType="INTEGER" />
+		<result column="ChannelID" property="channelid" jdbcType="INTEGER" />
+		<result column="ChargeRuleID" property="chargeruleid" jdbcType="INTEGER" />
+		<result column="ChargeUserID" property="chargeuserid" jdbcType="VARCHAR" />
+		<result column="AmountType" property="amounttype" jdbcType="INTEGER" />
+		<result column="EmplyNo" property="emplyno" jdbcType="VARCHAR" />
+		<result column="EmplyName" property="emplyname" jdbcType="VARCHAR" />
+		<result column="CarCode" property="carcode" jdbcType="VARCHAR" />
+		<result column="CarStyleid" property="carstyleid" jdbcType="INTEGER" />
+		<result column="CarLabel" property="carlabel" jdbcType="VARCHAR" />
+		<result column="CarColor" property="carcolor" jdbcType="VARCHAR" />
+		<result column="InTime" property="intime" jdbcType="TIMESTAMP" />
+		<result column="OutTime" property="outtime" jdbcType="TIMESTAMP" />
+		<result column="StopTime" property="stoptime" jdbcType="VARCHAR" />
+		<result column="RealChargeAmount" property="realchargeamount"
+			jdbcType="REAL" />
+		<result column="ChargeDate" property="chargedate" jdbcType="TIMESTAMP" />
+		<result column="ReductionAmount" property="reductionamount"
+			jdbcType="REAL" />
+		<result column="ReductionType" property="reductiontype"
+			jdbcType="VARCHAR" />
+		<result column="ChargeType" property="chargetype" jdbcType="INTEGER" />
+		<result column="InRecordID" property="inrecordid" jdbcType="INTEGER" />
+		<result column="OutRecordID" property="outrecordid" jdbcType="INTEGER" />
+		<result column="ReductionsName" property="reductionsname"
+			jdbcType="VARCHAR" />
+		<result column="BarCodeNo" property="barcodeno" jdbcType="VARCHAR" />
+		<result column="ChargeMoney" property="chargemoney" jdbcType="REAL" />
+		<result column="ChargeAmount" property="chargeamount" jdbcType="REAL" />
+		<result column="NotChargeAmount" property="notchargeamount"
+			jdbcType="REAL" />
+		<result column="IsCharge" property="ischarge" jdbcType="BIT" />
+		<result column="ReliefHour" property="reliefhour" jdbcType="INTEGER" />
+		<result column="IsUpload" property="isupload" jdbcType="BIT" />
+		<result column="LastOutTime" property="lastouttime" jdbcType="TIMESTAMP" />
+		<result column="ChargeSource" property="chargesource" jdbcType="VARCHAR" />
+		<result column="DeviceId" property="deviceid" jdbcType="INTEGER" />
+		<result column="PayRecordId" property="payrecordid" jdbcType="INTEGER" />
+		<result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RecordId, partitionID, ChannelID, ChargeRuleID,
+		ChargeUserID, AmountType,
+		EmplyNo,
+		EmplyName, CarCode, CarStyleid,
+		CarLabel, CarColor, InTime, OutTime, StopTime,
+		RealChargeAmount,
+		ChargeDate, ReductionAmount, ReductionType, ChargeType, InRecordID,
+		OutRecordID,
+		ReductionsName, BarCodeNo, ChargeMoney, ChargeAmount,
+		NotChargeAmount,
+		IsCharge,
+		ReliefHour, IsUpload, LastOutTime,
+		ChargeSource, DeviceId, PayRecordId,
+		ParkingLotNo
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerecordinfoKey">
+		select
+		<include refid="Base_Column_List" />
+		from tc_chargerecordinfo
+		where RecordId = #{recordid,jdbcType=BIGINT}
+		and partitionID = #{partitionid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerecordinfoKey">
+		delete from
+		tc_chargerecordinfo
+		where RecordId = #{recordid,jdbcType=BIGINT}
+		and
+		partitionID = #{partitionid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerecordinfo">
+		insert into
+		tc_chargerecordinfo (RecordId, partitionID, ChannelID,
+		ChargeRuleID,
+		ChargeUserID, AmountType,
+		EmplyNo, EmplyName, CarCode,
+		CarStyleid,
+		CarLabel, CarColor,
+		InTime, OutTime, StopTime,
+		RealChargeAmount,
+		ChargeDate, ReductionAmount,
+		ReductionType, ChargeType, InRecordID,
+		OutRecordID, ReductionsName, BarCodeNo,
+		ChargeMoney, ChargeAmount,
+		NotChargeAmount,
+		IsCharge, ReliefHour, IsUpload,
+		LastOutTime,
+		ChargeSource, DeviceId,
+		PayRecordId, ParkingLotNo)
+		values
+		(#{recordid,jdbcType=BIGINT}, #{partitionid,jdbcType=INTEGER},
+		#{channelid,jdbcType=INTEGER},
+		#{chargeruleid,jdbcType=INTEGER},
+		#{chargeuserid,jdbcType=VARCHAR}, #{amounttype,jdbcType=INTEGER},
+		#{emplyno,jdbcType=VARCHAR}, #{emplyname,jdbcType=VARCHAR},
+		#{carcode,jdbcType=VARCHAR},
+		#{carstyleid,jdbcType=INTEGER},
+		#{carlabel,jdbcType=VARCHAR}, #{carcolor,jdbcType=VARCHAR},
+		#{intime,jdbcType=TIMESTAMP}, #{outtime,jdbcType=TIMESTAMP},
+		#{stoptime,jdbcType=VARCHAR},
+		#{realchargeamount,jdbcType=REAL},
+		#{chargedate,jdbcType=TIMESTAMP}, #{reductionamount,jdbcType=REAL},
+		#{reductiontype,jdbcType=VARCHAR}, #{chargetype,jdbcType=INTEGER},
+		#{inrecordid,jdbcType=INTEGER},
+		#{outrecordid,jdbcType=INTEGER},
+		#{reductionsname,jdbcType=VARCHAR}, #{barcodeno,jdbcType=VARCHAR},
+		#{chargemoney,jdbcType=REAL}, #{chargeamount,jdbcType=REAL},
+		#{notchargeamount,jdbcType=REAL},
+		#{ischarge,jdbcType=BIT},
+		#{reliefhour,jdbcType=INTEGER}, #{isupload,jdbcType=BIT},
+		#{lastouttime,jdbcType=TIMESTAMP}, #{chargesource,jdbcType=VARCHAR},
+		#{deviceid,jdbcType=INTEGER},
+		#{payrecordid,jdbcType=INTEGER},
+		#{parkinglotno,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerecordinfo">
+		insert into tc_chargerecordinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				RecordId,
+			</if>
+			<if test="partitionid != null">
+				partitionID,
+			</if>
+			<if test="channelid != null">
+				ChannelID,
+			</if>
+			<if test="chargeruleid != null">
+				ChargeRuleID,
+			</if>
+			<if test="chargeuserid != null">
+				ChargeUserID,
+			</if>
+			<if test="amounttype != null">
+				AmountType,
+			</if>
+			<if test="emplyno != null">
+				EmplyNo,
+			</if>
+			<if test="emplyname != null">
+				EmplyName,
+			</if>
+			<if test="carcode != null">
+				CarCode,
+			</if>
+			<if test="carstyleid != null">
+				CarStyleid,
+			</if>
+			<if test="carlabel != null">
+				CarLabel,
+			</if>
+			<if test="carcolor != null">
+				CarColor,
+			</if>
+			<if test="intime != null">
+				InTime,
+			</if>
+			<if test="outtime != null">
+				OutTime,
+			</if>
+			<if test="stoptime != null">
+				StopTime,
+			</if>
+			<if test="realchargeamount != null">
+				RealChargeAmount,
+			</if>
+			<if test="chargedate != null">
+				ChargeDate,
+			</if>
+			<if test="reductionamount != null">
+				ReductionAmount,
+			</if>
+			<if test="reductiontype != null">
+				ReductionType,
+			</if>
+			<if test="chargetype != null">
+				ChargeType,
+			</if>
+			<if test="inrecordid != null">
+				InRecordID,
+			</if>
+			<if test="outrecordid != null">
+				OutRecordID,
+			</if>
+			<if test="reductionsname != null">
+				ReductionsName,
+			</if>
+			<if test="barcodeno != null">
+				BarCodeNo,
+			</if>
+			<if test="chargemoney != null">
+				ChargeMoney,
+			</if>
+			<if test="chargeamount != null">
+				ChargeAmount,
+			</if>
+			<if test="notchargeamount != null">
+				NotChargeAmount,
+			</if>
+			<if test="ischarge != null">
+				IsCharge,
+			</if>
+			<if test="reliefhour != null">
+				ReliefHour,
+			</if>
+			<if test="isupload != null">
+				IsUpload,
+			</if>
+			<if test="lastouttime != null">
+				LastOutTime,
+			</if>
+			<if test="chargesource != null">
+				ChargeSource,
+			</if>
+			<if test="deviceid != null">
+				DeviceId,
+			</if>
+			<if test="payrecordid != null">
+				PayRecordId,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				#{recordid,jdbcType=BIGINT},
+			</if>
+			<if test="partitionid != null">
+				#{partitionid,jdbcType=INTEGER},
+			</if>
+			<if test="channelid != null">
+				#{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="chargeruleid != null">
+				#{chargeruleid,jdbcType=INTEGER},
+			</if>
+			<if test="chargeuserid != null">
+				#{chargeuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="amounttype != null">
+				#{amounttype,jdbcType=INTEGER},
+			</if>
+			<if test="emplyno != null">
+				#{emplyno,jdbcType=VARCHAR},
+			</if>
+			<if test="emplyname != null">
+				#{emplyname,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode != null">
+				#{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="carstyleid != null">
+				#{carstyleid,jdbcType=INTEGER},
+			</if>
+			<if test="carlabel != null">
+				#{carlabel,jdbcType=VARCHAR},
+			</if>
+			<if test="carcolor != null">
+				#{carcolor,jdbcType=VARCHAR},
+			</if>
+			<if test="intime != null">
+				#{intime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="outtime != null">
+				#{outtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="stoptime != null">
+				#{stoptime,jdbcType=VARCHAR},
+			</if>
+			<if test="realchargeamount != null">
+				#{realchargeamount,jdbcType=REAL},
+			</if>
+			<if test="chargedate != null">
+				#{chargedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reductionamount != null">
+				#{reductionamount,jdbcType=REAL},
+			</if>
+			<if test="reductiontype != null">
+				#{reductiontype,jdbcType=VARCHAR},
+			</if>
+			<if test="chargetype != null">
+				#{chargetype,jdbcType=INTEGER},
+			</if>
+			<if test="inrecordid != null">
+				#{inrecordid,jdbcType=INTEGER},
+			</if>
+			<if test="outrecordid != null">
+				#{outrecordid,jdbcType=INTEGER},
+			</if>
+			<if test="reductionsname != null">
+				#{reductionsname,jdbcType=VARCHAR},
+			</if>
+			<if test="barcodeno != null">
+				#{barcodeno,jdbcType=VARCHAR},
+			</if>
+			<if test="chargemoney != null">
+				#{chargemoney,jdbcType=REAL},
+			</if>
+			<if test="chargeamount != null">
+				#{chargeamount,jdbcType=REAL},
+			</if>
+			<if test="notchargeamount != null">
+				#{notchargeamount,jdbcType=REAL},
+			</if>
+			<if test="ischarge != null">
+				#{ischarge,jdbcType=BIT},
+			</if>
+			<if test="reliefhour != null">
+				#{reliefhour,jdbcType=INTEGER},
+			</if>
+			<if test="isupload != null">
+				#{isupload,jdbcType=BIT},
+			</if>
+			<if test="lastouttime != null">
+				#{lastouttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="chargesource != null">
+				#{chargesource,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceid != null">
+				#{deviceid,jdbcType=INTEGER},
+			</if>
+			<if test="payrecordid != null">
+				#{payrecordid,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerecordinfo">
+		update tc_chargerecordinfo
+		<set>
+			<if test="channelid != null">
+				ChannelID = #{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="chargeruleid != null">
+				ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+			</if>
+			<if test="chargeuserid != null">
+				ChargeUserID = #{chargeuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="amounttype != null">
+				AmountType = #{amounttype,jdbcType=INTEGER},
+			</if>
+			<if test="emplyno != null">
+				EmplyNo = #{emplyno,jdbcType=VARCHAR},
+			</if>
+			<if test="emplyname != null">
+				EmplyName = #{emplyname,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode != null">
+				CarCode = #{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="carstyleid != null">
+				CarStyleid = #{carstyleid,jdbcType=INTEGER},
+			</if>
+			<if test="carlabel != null">
+				CarLabel = #{carlabel,jdbcType=VARCHAR},
+			</if>
+			<if test="carcolor != null">
+				CarColor = #{carcolor,jdbcType=VARCHAR},
+			</if>
+			<if test="intime != null">
+				InTime = #{intime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="outtime != null">
+				OutTime = #{outtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="stoptime != null">
+				StopTime = #{stoptime,jdbcType=VARCHAR},
+			</if>
+			<if test="realchargeamount != null">
+				RealChargeAmount = #{realchargeamount,jdbcType=REAL},
+			</if>
+			<if test="chargedate != null">
+				ChargeDate = #{chargedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reductionamount != null">
+				ReductionAmount = #{reductionamount,jdbcType=REAL},
+			</if>
+			<if test="reductiontype != null">
+				ReductionType = #{reductiontype,jdbcType=VARCHAR},
+			</if>
+			<if test="chargetype != null">
+				ChargeType = #{chargetype,jdbcType=INTEGER},
+			</if>
+			<if test="inrecordid != null">
+				InRecordID = #{inrecordid,jdbcType=INTEGER},
+			</if>
+			<if test="outrecordid != null">
+				OutRecordID = #{outrecordid,jdbcType=INTEGER},
+			</if>
+			<if test="reductionsname != null">
+				ReductionsName = #{reductionsname,jdbcType=VARCHAR},
+			</if>
+			<if test="barcodeno != null">
+				BarCodeNo = #{barcodeno,jdbcType=VARCHAR},
+			</if>
+			<if test="chargemoney != null">
+				ChargeMoney = #{chargemoney,jdbcType=REAL},
+			</if>
+			<if test="chargeamount != null">
+				ChargeAmount = #{chargeamount,jdbcType=REAL},
+			</if>
+			<if test="notchargeamount != null">
+				NotChargeAmount = #{notchargeamount,jdbcType=REAL},
+			</if>
+			<if test="ischarge != null">
+				IsCharge = #{ischarge,jdbcType=BIT},
+			</if>
+			<if test="reliefhour != null">
+				ReliefHour = #{reliefhour,jdbcType=INTEGER},
+			</if>
+			<if test="isupload != null">
+				IsUpload = #{isupload,jdbcType=BIT},
+			</if>
+			<if test="lastouttime != null">
+				LastOutTime = #{lastouttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="chargesource != null">
+				ChargeSource = #{chargesource,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceid != null">
+				DeviceId = #{deviceid,jdbcType=INTEGER},
+			</if>
+			<if test="payrecordid != null">
+				PayRecordId = #{payrecordid,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where RecordId = #{recordid,jdbcType=BIGINT}
+		and partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerecordinfo">
+		update
+		tc_chargerecordinfo
+		set ChannelID = #{channelid,jdbcType=INTEGER},
+		ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+		ChargeUserID =
+		#{chargeuserid,jdbcType=VARCHAR},
+		AmountType =
+		#{amounttype,jdbcType=INTEGER},
+		EmplyNo = #{emplyno,jdbcType=VARCHAR},
+		EmplyName = #{emplyname,jdbcType=VARCHAR},
+		CarCode =
+		#{carcode,jdbcType=VARCHAR},
+		CarStyleid =
+		#{carstyleid,jdbcType=INTEGER},
+		CarLabel =
+		#{carlabel,jdbcType=VARCHAR},
+		CarColor = #{carcolor,jdbcType=VARCHAR},
+		InTime = #{intime,jdbcType=TIMESTAMP},
+		OutTime =
+		#{outtime,jdbcType=TIMESTAMP},
+		StopTime = #{stoptime,jdbcType=VARCHAR},
+		RealChargeAmount = #{realchargeamount,jdbcType=REAL},
+		ChargeDate =
+		#{chargedate,jdbcType=TIMESTAMP},
+		ReductionAmount =
+		#{reductionamount,jdbcType=REAL},
+		ReductionType =
+		#{reductiontype,jdbcType=VARCHAR},
+		ChargeType =
+		#{chargetype,jdbcType=INTEGER},
+		InRecordID =
+		#{inrecordid,jdbcType=INTEGER},
+		OutRecordID =
+		#{outrecordid,jdbcType=INTEGER},
+		ReductionsName =
+		#{reductionsname,jdbcType=VARCHAR},
+		BarCodeNo =
+		#{barcodeno,jdbcType=VARCHAR},
+		ChargeMoney =
+		#{chargemoney,jdbcType=REAL},
+		ChargeAmount =
+		#{chargeamount,jdbcType=REAL},
+		NotChargeAmount =
+		#{notchargeamount,jdbcType=REAL},
+		IsCharge = #{ischarge,jdbcType=BIT},
+		ReliefHour = #{reliefhour,jdbcType=INTEGER},
+		IsUpload =
+		#{isupload,jdbcType=BIT},
+		LastOutTime =
+		#{lastouttime,jdbcType=TIMESTAMP},
+		ChargeSource =
+		#{chargesource,jdbcType=VARCHAR},
+		DeviceId =
+		#{deviceid,jdbcType=INTEGER},
+		PayRecordId =
+		#{payrecordid,jdbcType=INTEGER},
+		ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR}
+		where RecordId =
+		#{recordid,jdbcType=BIGINT}
+		and partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</update>
+	<insert id="insertChargerecordInfo" parameterType="Object">
+		insert into
+		tc_chargerecordinfo (
+		RecordId, partitionID, ChannelID,
+		ChargeRuleID,
+		ChargeUserID, AmountType,
+		EmplyNo, EmplyName, CarCode,
+		CarStyleid,
+		CarLabel, CarColor,
+		InTime, OutTime, StopTime,
+		RealChargeAmount,
+		ChargeDate, ReductionAmount,
+		ReductionType, ChargeType, InRecordID,
+		OutRecordID, ReductionsName, BarCodeNo,
+		ChargeMoney, ChargeAmount,
+		NotChargeAmount,
+		IsCharge, ReliefHour, IsUpload,
+		LastOutTime,
+		ChargeSource, DeviceId,
+		PayRecordId, ParkingLotNo
+		)
+		values
+		(#{recordid,jdbcType=INTEGER}, #{partitionid,jdbcType=INTEGER},
+		#{channelid,jdbcType=INTEGER},
+		#{chargeruleid,jdbcType=INTEGER},
+		#{chargeuserid,jdbcType=VARCHAR}, #{amounttype,jdbcType=INTEGER},
+		#{emplyno,jdbcType=VARCHAR}, #{emplyname,jdbcType=VARCHAR},
+		#{carcode,jdbcType=VARCHAR},
+		#{carstyleid,jdbcType=INTEGER},
+		#{carlabel,jdbcType=VARCHAR}, #{carcolor,jdbcType=VARCHAR},
+		#{intime,jdbcType=TIMESTAMP}, #{outtime,jdbcType=TIMESTAMP},
+		#{stoptime,jdbcType=VARCHAR},
+		#{realchargeamount,jdbcType=REAL},
+		#{chargedate,jdbcType=TIMESTAMP}, #{reductionamount,jdbcType=REAL},
+		#{reductiontype,jdbcType=VARCHAR}, #{chargetype,jdbcType=INTEGER},
+		#{inrecordid,jdbcType=INTEGER},
+		#{outrecordid,jdbcType=INTEGER},
+		#{reductionsname,jdbcType=VARCHAR}, #{barcodeno,jdbcType=VARCHAR},
+		#{chargemoney,jdbcType=REAL}, #{chargeamount,jdbcType=REAL},
+		#{notchargeamount,jdbcType=REAL},
+		#{ischarge,jdbcType=BIT},
+		#{reliefhour,jdbcType=INTEGER}, #{isupload,jdbcType=BIT},
+		#{lastouttime,jdbcType=TIMESTAMP}, #{chargesource,jdbcType=VARCHAR},
+		#{deviceid,jdbcType=INTEGER},
+		#{payrecordid,jdbcType=INTEGER},
+		#{parkinglotno,jdbcType=VARCHAR})
+	</insert>
+
+
+
+
+	<insert id="batchInsertChargerecordinfo" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			INSERT INTO tc_chargerecordinfo
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="item.recordid != null">
+					RecordId,
+				</if>
+				<if test="item.partitionid != null">
+					partitionID,
+				</if>
+				<if test="item.channelid != null">
+					ChannelID,
+				</if>
+				<if test="item.chargeruleid != null">
+					ChargeRuleID,
+				</if>
+				<if test="item.chargeuserid != null">
+					ChargeUserID,
+				</if>
+				<if test="item.amounttype != null">
+					AmountType,
+				</if>
+				<if test="item.emplyno != null">
+					EmplyNo,
+				</if>
+				<if test="item.emplyname != null">
+					EmplyName,
+				</if>
+				<if test="item.carcode != null">
+					CarCode,
+				</if>
+				<if test="item.carstyleid != null">
+					CarStyleid,
+				</if>
+				<if test="item.carlabel != null">
+					CarLabel,
+				</if>
+				<if test="item.carcolor != null">
+					CarColor,
+				</if>
+				<if test="item.intime != null">
+					InTime,
+				</if>
+				<if test="item.outtime != null">
+					OutTime,
+				</if>
+				<if test="item.stoptime != null">
+					StopTime,
+				</if>
+				<if test="item.realchargeamount != null">
+					RealChargeAmount,
+				</if>
+				<if test="item.chargedate != null">
+					ChargeDate,
+				</if>
+				<if test="item.reductionamount != null">
+					ReductionAmount,
+				</if>
+				<if test="item.reductiontype != null">
+					ReductionType,
+				</if>
+				<if test="item.chargetype != null">
+					ChargeType,
+				</if>
+				<if test="item.inrecordid != null">
+					InRecordID,
+				</if>
+				<if test="item.outrecordid != null">
+					OutRecordID,
+				</if>
+				<if test="item.reductionsname != null">
+					ReductionsName,
+				</if>
+				<if test="item.barcodeno != null">
+					BarCodeNo,
+				</if>
+				<if test="item.chargemoney != null">
+					ChargeMoney,
+				</if>
+				<if test="item.chargeamount != null">
+					ChargeAmount,
+				</if>
+				<if test="item.notchargeamount != null">
+					NotChargeAmount,
+				</if>
+				<if test="item.ischarge != null">
+					IsCharge,
+				</if>
+				<if test="item.reliefhour != null">
+					ReliefHour,
+				</if>
+				<if test="item.isupload != null">
+					IsUpload,
+				</if>
+				<if test="item.lastouttime != null">
+					LastOutTime,
+				</if>
+				<if test="item.chargesource != null">
+					ChargeSource,
+				</if>
+				<if test="item.deviceid != null">
+					DeviceId,
+				</if>
+				<if test="item.payrecordid != null">
+					PayRecordId,
+				</if>
+				<if test="item.parkinglotno != null">
+					ParkingLotNo,
+				</if>
+
+
+				<if test="item.remarks1 != null">
+					remarks1,
+				</if>
+
+				<if test="item.remarks2 != null">
+					remarks2,
+				</if>
+
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="item.recordid != null">
+					#{item.recordid,jdbcType=BIGINT},
+				</if>
+				<if test="item.partitionid != null">
+					#{item.partitionid,jdbcType=INTEGER},
+				</if>
+				<if test="item.channelid != null">
+					#{item.channelid,jdbcType=INTEGER},
+				</if>
+				<if test="item.chargeruleid != null">
+					#{item.chargeruleid,jdbcType=INTEGER},
+				</if>
+				<if test="item.chargeuserid != null">
+					#{item.chargeuserid,jdbcType=VARCHAR},
+				</if>
+				<if test="item.amounttype != null">
+					#{item.amounttype,jdbcType=INTEGER},
+				</if>
+				<if test="item.emplyno != null">
+					#{item.emplyno,jdbcType=VARCHAR},
+				</if>
+				<if test="item.emplyname != null">
+					#{item.emplyname,jdbcType=VARCHAR},
+				</if>
+				<if test="item.carcode != null">
+					#{item.carcode,jdbcType=VARCHAR},
+				</if>
+				<if test="item.carstyleid != null">
+					#{item.carstyleid,jdbcType=INTEGER},
+				</if>
+				<if test="item.carlabel != null">
+					#{item.carlabel,jdbcType=VARCHAR},
+				</if>
+				<if test="item.carcolor != null">
+					#{item.carcolor,jdbcType=VARCHAR},
+				</if>
+				<if test="item.intime != null">
+					#{item.intime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="item.outtime != null">
+					#{item.outtime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="item.stoptime != null">
+					#{item.stoptime,jdbcType=VARCHAR},
+				</if>
+				<if test="item.realchargeamount != null">
+					#{item.realchargeamount,jdbcType=REAL},
+				</if>
+				<if test="item.chargedate != null">
+					#{item.chargedate,jdbcType=TIMESTAMP},
+				</if>
+				<if test="item.reductionamount != null">
+					#{item.reductionamount,jdbcType=REAL},
+				</if>
+				<if test="item.reductiontype != null">
+					#{item.reductiontype,jdbcType=VARCHAR},
+				</if>
+				<if test="item.chargetype != null">
+					#{item.chargetype,jdbcType=INTEGER},
+				</if>
+				<if test="item.inrecordid != null">
+					#{item.inrecordid,jdbcType=INTEGER},
+				</if>
+				<if test="item.outrecordid != null">
+					#{item.outrecordid,jdbcType=INTEGER},
+				</if>
+				<if test="item.reductionsname != null">
+					#{item.reductionsname,jdbcType=VARCHAR},
+				</if>
+				<if test="item.barcodeno != null">
+					#{item.barcodeno,jdbcType=VARCHAR},
+				</if>
+				<if test="item.chargemoney != null">
+					#{item.chargemoney,jdbcType=REAL},
+				</if>
+				<if test="item.chargeamount != null">
+					#{item.chargeamount,jdbcType=REAL},
+				</if>
+				<if test="item.notchargeamount != null">
+					#{item.notchargeamount,jdbcType=REAL},
+				</if>
+				<if test="item.ischarge != null">
+					#{item.ischarge,jdbcType=BIT},
+				</if>
+				<if test="item.reliefhour != null">
+					#{item.reliefhour,jdbcType=INTEGER},
+				</if>
+				<if test="item.isupload != null">
+					#{item.isupload,jdbcType=BIT},
+				</if>
+				<if test="item.lastouttime != null">
+					#{item.lastouttime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="item.chargesource != null">
+					#{item.chargesource,jdbcType=VARCHAR},
+				</if>
+				<if test="item.deviceid != null">
+					#{item.deviceid,jdbcType=INTEGER},
+				</if>
+				<if test="item.payrecordid != null">
+					#{item.payrecordid,jdbcType=INTEGER},
+				</if>
+				<if test="item.parkinglotno != null">
+					#{item.parkinglotno,jdbcType=VARCHAR},
+				</if>
+
+				<if test="item.remarks1 != null">
+					#{item.remarks1,jdbcType=VARCHAR},
+				</if>
+				<if test="item.remarks2!= null">
+					#{item.remarks2,jdbcType=VARCHAR},
+				</if>
+			</trim>
+		</foreach>
+	</insert>
+
+<!-- 	<select id="queryChargerecordinfo" resultType="java.util.Map"
+		parameterType="Object">
+		select b.recordid, b.partitionid, b.channelid, b.chargeruleid,
+		b.chargeuserid, b.amounttype, b.emplyno,
+		b.emplyname, b.carcode,
+		b.carstyleid, b.carlabel, b.carcolor, b.intime, b.outtime,
+		b.stoptime,
+		b.realchargeamount,
+		b.chargedate, b.reductionamount, b.reductiontype,
+		b.chargetype, b.inrecordid,
+		b.outrecordid,
+		b.reductionsname,
+		b.barcodeno, b.chargemoney, b.chargeamount, b.notchargeamount,
+		b.ischarge,
+		b.reliefhour, b.isupload, b.lastouttime, b.chargesource,
+		b.deviceid, b.payrecordid,
+		b.parkinglotno,b.lastouttime from
+		tc_usercrdtm_in a inner join
+		tc_chargerecordinfo b
+		on
+		a.CarCode=b.CarCode <![CDATA[ and  a.Crdtm=b.intime ]]>
+		where a.ParkingLotNo=#{ParkingLotNo}
+	</select>
+ -->
+
+
+	<select id="queryChargerecordinfo" resultType="java.util.Map"
+		parameterType="Object">
+		select b.recordid, b.partitionid, b.channelid, b.chargeruleid,
+		b.chargeuserid, b.amounttype, b.emplyno,
+		b.emplyname, b.carcode,
+		b.carstyleid, b.carlabel, b.carcolor, b.intime, b.outtime,
+		b.stoptime,
+		b.realchargeamount,
+		b.chargedate, b.reductionamount, b.reductiontype,
+		b.chargetype, b.inrecordid,
+		b.outrecordid,
+		b.reductionsname,
+		b.barcodeno, b.chargemoney, b.chargeamount, b.notchargeamount,
+		b.ischarge,
+		b.reliefhour, b.isupload, b.lastouttime, b.chargesource,
+		b.deviceid, b.payrecordid,
+		b.parkinglotno,b.lastouttime from tc_chargerecordinfo b
+		where b.ParkingLotNo=#{ParkingLotNo} and b.status=1
+	</select>
+	
+	<select id="queryTotalAmountChargerecordinfo" resultType="java.util.Map"
+		parameterType="Object">
+		select b.recordid, b.partitionid, b.channelid, b.chargeruleid,
+		b.chargeuserid, b.amounttype, b.emplyno,
+		b.emplyname, b.carcode,
+		b.carstyleid, b.carlabel, b.carcolor, b.intime, b.outtime,
+		b.stoptime,
+		b.realchargeamount,
+		b.chargedate, b.reductionamount, b.reductiontype,
+		b.chargetype, b.inrecordid,
+		b.outrecordid,
+		b.reductionsname,
+		b.barcodeno, b.chargemoney, b.chargeamount, b.notchargeamount,
+		b.ischarge,
+		b.reliefhour, b.isupload, b.lastouttime, b.chargesource,
+		b.deviceid, b.payrecordid,
+		b.parkinglotno,b.lastouttime from tc_chargerecordinfo b
+		where b.ParkingLotNo=#{ParkingLotNo} and b.amounttype=0 and b.status=1
+	</select>
+
+	<select id="queryByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tc_chargerecordinfo
+		where PartitionID = #{PartitionID} and
+		ParkingLotNo = #{ParkingLotNo}
+		<if test="CarCode != null">
+			and CarCode = #{CarCode}
+		</if>
+		<if test="AmountType != null">
+			and AmountType = #{AmountType}
+		</if>
+		<if test="InTime != null">
+			and InTime = #{InTime} order by InTime desc
+		</if>
+		<if test="OutTime != null">
+			and OutTime = #{OutTime} order by OutTime desc
+		</if>
+
+	</select>
+
+
+	<update id="updatestatebycarcode" parameterType="Object">
+		update tc_chargerecordinfo set status=0 where 
+		ParkingLotNo=#{parkinglotno} and partitionID=#{partitionID} and status=1 and CarCode = #{carcode}
+	</update>
+
+	<update id="updatestatebyrecordid" parameterType="Object">
+		update tc_chargerecordinfo set status=0 where 
+		ParkingLotNo=#{parkinglotno} and partitionID=#{partitionID} and status=1 and RecordId = #{recordid}
+	</update>
+
+
+</mapper>

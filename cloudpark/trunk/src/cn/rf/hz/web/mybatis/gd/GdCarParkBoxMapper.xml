@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.GdCarParkBoxMapper" > 
+   
+    <insert id="saveGdCarparkInout" parameterType="Object" useGeneratedKeys="true" keyProperty="recordId" >
+ <selectKey resultType="java.lang.Integer" order="AFTER"  keyProperty="recordId">
+	SELECT LAST_INSERT_ID() as recordId
+  </selectKey>
+  insert into gd_carpark_inout(recordId,carparkId,inOutName,latitude,longitude,imgName,addTime,openBill,openName)
+ values(#{recordId},#{carparkId},#{inOutName},#{latitude},#{longitude},#{imgName},now(),#{openBill},#{openName})
+</insert>
+
+ <insert id="saveGdCarparkEnterclose" parameterType="Object" useGeneratedKeys="true" keyProperty="recordId" >
+ <selectKey resultType="java.lang.Integer" order="AFTER"  keyProperty="recordId">
+	SELECT LAST_INSERT_ID() as recordId
+  </selectKey>
+  insert into gd_carpark_enterclose(recordId,inOutId,carparkId,entercloseName,boxImei,isInOut,addTime,updateTime)
+ values(#{recordId},#{inOutId},#{carparkId},#{entercloseName},#{boxImei},#{isInOut},now(),now())
+</insert>
+
+<delete id="delGdCarparkInout" parameterType="Object">
+		delete from
+		gd_carpark_inout where carParkId=${carParkId}
+	</delete>
+	
+	<delete id="delGdCarparkEnterclose" parameterType="Object">
+		delete from
+		gd_carpark_enterclose where carParkId=${carParkId}
+	</delete>
+	
+	
+	<select id="findRegion" resultType="java.util.Map"
+		parameterType="Object">
+		select * from region where region_type = #{region_type} and parent_id = #{parent_id}
+	</select>
+   
+   
+   <select id="findRegionByid" resultType="java.util.Map"
+		parameterType="Object">
+		select * from region where region_id = #{region_id} 
+	</select>
+	
+	 <select id="findInOutInfo" resultType="java.util.Map"
+		parameterType="Object">
+		 SELECT c.`recordId` AS carParkId,c.`carParkName`,b.`recordid` AS inOutId,b.`inOutName`,
+ a.`recordId` AS entercloseId,a.`entercloseName`,a.`boxImei`,a.`isInOut` FROM gd_carpark_enterclose a 
+ LEFT JOIN gd_carpark_inout b ON a.`inOutId` = b.recordId
+ LEFT JOIN gd_car_parks c ON b.carparkid = c.recordid
+ WHERE a.`carparkId` = ${carParkId}
+	</select>
+	
+		<update id="updateInOutInfo" parameterType="Object">
+		update gd_carpark_enterclose set 
+		<trim  suffixOverrides="," >
+			updateTime=now(),
+			<if test="entercloseName != null  and entercloseName != '' ">
+				entercloseName=#{entercloseName},
+			</if>
+			<if test="boxImei != null  and boxImei != '' ">
+				boxImei=#{boxImei},
+			</if>
+			<if test="isInOut != null  and isInOut != '' ">
+				
+				<if test="isInOut != 0 and isInOut != 1 ">
+					isInOut='0',
+				</if>
+				<if test="isInOut == 0 or isInOut == 1 ">
+					isInOut=#{isInOut},
+				</if>
+			</if>
+		</trim>
+		where recordId=${entercloseId} and inOutId=${inOutId} and carparkId = ${carparkId}
+	</update>
+	
+	<select id="queryByList" resultType="java.util.Map"
+		parameterType="Object">
+		select * from gd_carpark_inout where carParkId = #{carParkId}
+	</select>
+	
+	<select id="queryByList1" resultType="java.util.Map"
+		parameterType="Object">
+		select * from gd_carpark_enterclose where inOutId = #{inOutId}
+	</select>
+	
+</mapper>   

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_userexpiryinfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_userexpiryinfo" >
+    <id column="RecordID" property="recordid" jdbcType="INTEGER" />
+    <result column="UserID" property="userid" jdbcType="INTEGER" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <result column="ProductID" property="productid" jdbcType="INTEGER" />
+    <result column="StartTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="EndTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="CycleCount" property="cyclecount" jdbcType="INTEGER" />
+    <result column="Amount" property="amount" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="OperatorID" property="operatorid" jdbcType="INTEGER" />
+    <result column="IsDelete" property="isdelete" jdbcType="BIT" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordID, UserID, ParkingLotNo, ProductID, StartTime, EndTime, CycleCount, Amount, 
+    CreateTime, OperatorID, IsDelete, Remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_userexpiryinfo
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_userexpiryinfo
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_userexpiryinfo" >
+    insert into tc_userexpiryinfo (RecordID, UserID, ParkingLotNo, 
+      ProductID, StartTime, EndTime, 
+      CycleCount, Amount, CreateTime, 
+      OperatorID, IsDelete, Remark
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR}, 
+      #{productid,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{cyclecount,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{operatorid,jdbcType=INTEGER}, #{isdelete,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_userexpiryinfo" >
+    insert into tc_userexpiryinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="productid != null" >
+        ProductID,
+      </if>
+      <if test="starttime != null" >
+        StartTime,
+      </if>
+      <if test="endtime != null" >
+        EndTime,
+      </if>
+      <if test="cyclecount != null" >
+        CycleCount,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="operatorid != null" >
+        OperatorID,
+      </if>
+      <if test="isdelete != null" >
+        IsDelete,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cyclecount != null" >
+        #{cyclecount,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorid != null" >
+        #{operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_userexpiryinfo" >
+    update tc_userexpiryinfo
+    <set >
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        ProductID = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        StartTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        EndTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cyclecount != null" >
+        CycleCount = #{cyclecount,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorid != null" >
+        OperatorID = #{operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        IsDelete = #{isdelete,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_userexpiryinfo" >
+    update tc_userexpiryinfo
+    set UserID = #{userid,jdbcType=INTEGER},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      ProductID = #{productid,jdbcType=INTEGER},
+      StartTime = #{starttime,jdbcType=TIMESTAMP},
+      EndTime = #{endtime,jdbcType=TIMESTAMP},
+      CycleCount = #{cyclecount,jdbcType=INTEGER},
+      Amount = #{amount,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      OperatorID = #{operatorid,jdbcType=INTEGER},
+      IsDelete = #{isdelete,jdbcType=BIT},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </update>
+</mapper>

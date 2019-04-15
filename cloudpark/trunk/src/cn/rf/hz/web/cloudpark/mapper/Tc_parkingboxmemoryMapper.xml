@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_parkingboxmemoryMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_parkingboxmemory" >
+    <id column="RecordId" property="recordid" jdbcType="INTEGER" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <result column="SerialNumber" property="serialnumber" jdbcType="VARCHAR" />
+    <result column="MemorySize" property="memorysize" jdbcType="DECIMAL" />
+    <result column="MemoryUsedSize" property="memoryusedsize" jdbcType="DECIMAL" />
+    <result column="MemoryNotUsedSize" property="memorynotusedsize" jdbcType="DECIMAL" />
+    <result column="MemoryUsage" property="memoryusage" jdbcType="DECIMAL" />
+    <result column="MemoryNotUsage" property="memorynotusage" jdbcType="DECIMAL" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordId, ParkingLotNo, SerialNumber, MemorySize, MemoryUsedSize, MemoryNotUsedSize, 
+    MemoryUsage, MemoryNotUsage, CreateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_parkingboxmemory
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_parkingboxmemory
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_parkingboxmemory" >
+    insert into tc_parkingboxmemory (RecordId, ParkingLotNo, SerialNumber, 
+      MemorySize, MemoryUsedSize, MemoryNotUsedSize, 
+      MemoryUsage, MemoryNotUsage, CreateTime
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR}, #{serialnumber,jdbcType=VARCHAR}, 
+      #{memorysize,jdbcType=DECIMAL}, #{memoryusedsize,jdbcType=DECIMAL}, #{memorynotusedsize,jdbcType=DECIMAL}, 
+      #{memoryusage,jdbcType=DECIMAL}, #{memorynotusage,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_parkingboxmemory" >
+    insert into tc_parkingboxmemory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordId,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="serialnumber != null" >
+        SerialNumber,
+      </if>
+      <if test="memorysize != null" >
+        MemorySize,
+      </if>
+      <if test="memoryusedsize != null" >
+        MemoryUsedSize,
+      </if>
+      <if test="memorynotusedsize != null" >
+        MemoryNotUsedSize,
+      </if>
+      <if test="memoryusage != null" >
+        MemoryUsage,
+      </if>
+      <if test="memorynotusage != null" >
+        MemoryNotUsage,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="memorysize != null" >
+        #{memorysize,jdbcType=DECIMAL},
+      </if>
+      <if test="memoryusedsize != null" >
+        #{memoryusedsize,jdbcType=DECIMAL},
+      </if>
+      <if test="memorynotusedsize != null" >
+        #{memorynotusedsize,jdbcType=DECIMAL},
+      </if>
+      <if test="memoryusage != null" >
+        #{memoryusage,jdbcType=DECIMAL},
+      </if>
+      <if test="memorynotusage != null" >
+        #{memorynotusage,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_parkingboxmemory" >
+    update tc_parkingboxmemory
+    <set >
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="memorysize != null" >
+        MemorySize = #{memorysize,jdbcType=DECIMAL},
+      </if>
+      <if test="memoryusedsize != null" >
+        MemoryUsedSize = #{memoryusedsize,jdbcType=DECIMAL},
+      </if>
+      <if test="memorynotusedsize != null" >
+        MemoryNotUsedSize = #{memorynotusedsize,jdbcType=DECIMAL},
+      </if>
+      <if test="memoryusage != null" >
+        MemoryUsage = #{memoryusage,jdbcType=DECIMAL},
+      </if>
+      <if test="memorynotusage != null" >
+        MemoryNotUsage = #{memorynotusage,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_parkingboxmemory" >
+    update tc_parkingboxmemory
+    set ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      MemorySize = #{memorysize,jdbcType=DECIMAL},
+      MemoryUsedSize = #{memoryusedsize,jdbcType=DECIMAL},
+      MemoryNotUsedSize = #{memorynotusedsize,jdbcType=DECIMAL},
+      MemoryUsage = #{memoryusage,jdbcType=DECIMAL},
+      MemoryNotUsage = #{memorynotusage,jdbcType=DECIMAL},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP}
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </update>
+</mapper>

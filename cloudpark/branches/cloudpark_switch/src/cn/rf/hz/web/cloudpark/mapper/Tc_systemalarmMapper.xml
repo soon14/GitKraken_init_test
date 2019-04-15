@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_systemalarmMapper">
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_systemalarm">
+    <id column="RecordId" jdbcType="INTEGER" property="recordid" />
+    <result column="ChannleID" jdbcType="INTEGER" property="channleid" />
+    <result column="AlarmType" jdbcType="INTEGER" property="alarmtype" />
+    <result column="AlarmDesc" jdbcType="VARCHAR" property="alarmdesc" />
+    <result column="AlarmDate" jdbcType="TIMESTAMP" property="alarmdate" />
+    <result column="IsUpload" jdbcType="BIT" property="isupload" />
+    <result column="ParkingLotNo" jdbcType="VARCHAR" property="parkinglotno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RecordId, ChannleID, AlarmType, AlarmDesc, AlarmDate, IsUpload, ParkingLotNo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tc_systemalarm
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tc_systemalarm
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_systemalarm">
+    insert into tc_systemalarm (RecordId, ChannleID, AlarmType, 
+      AlarmDesc, AlarmDate, IsUpload, 
+      ParkingLotNo)
+    values (#{recordid,jdbcType=INTEGER}, #{channleid,jdbcType=INTEGER}, #{alarmtype,jdbcType=INTEGER}, 
+      #{alarmdesc,jdbcType=VARCHAR}, #{alarmdate,jdbcType=TIMESTAMP}, #{isupload,jdbcType=BIT}, 
+      #{parkinglotno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_systemalarm">
+    insert into tc_systemalarm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recordid != null">
+        RecordId,
+      </if>
+      <if test="channleid != null">
+        ChannleID,
+      </if>
+      <if test="alarmtype != null">
+        AlarmType,
+      </if>
+      <if test="alarmdesc != null">
+        AlarmDesc,
+      </if>
+      <if test="alarmdate != null">
+        AlarmDate,
+      </if>
+      <if test="isupload != null">
+        IsUpload,
+      </if>
+      <if test="parkinglotno != null">
+        ParkingLotNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recordid != null">
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="channleid != null">
+        #{channleid,jdbcType=INTEGER},
+      </if>
+      <if test="alarmtype != null">
+        #{alarmtype,jdbcType=INTEGER},
+      </if>
+      <if test="alarmdesc != null">
+        #{alarmdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmdate != null">
+        #{alarmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isupload != null">
+        #{isupload,jdbcType=BIT},
+      </if>
+      <if test="parkinglotno != null">
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_systemalarm">
+    update tc_systemalarm
+    <set>
+      <if test="channleid != null">
+        ChannleID = #{channleid,jdbcType=INTEGER},
+      </if>
+      <if test="alarmtype != null">
+        AlarmType = #{alarmtype,jdbcType=INTEGER},
+      </if>
+      <if test="alarmdesc != null">
+        AlarmDesc = #{alarmdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmdate != null">
+        AlarmDate = #{alarmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isupload != null">
+        IsUpload = #{isupload,jdbcType=BIT},
+      </if>
+      <if test="parkinglotno != null">
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_systemalarm">
+    update tc_systemalarm
+    set ChannleID = #{channleid,jdbcType=INTEGER},
+      AlarmType = #{alarmtype,jdbcType=INTEGER},
+      AlarmDesc = #{alarmdesc,jdbcType=VARCHAR},
+      AlarmDate = #{alarmdate,jdbcType=TIMESTAMP},
+      IsUpload = #{isupload,jdbcType=BIT},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+ <insert id="batchInsertSystemalarm" parameterType="java.util.List" > 
+ insert into tc_systemalarm (
+ 	  RecordId, ChannleID, AlarmType
+ 	  ,AlarmDesc, AlarmDate, IsUpload
+      ,ParkingLotNo)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.recordid},#{item.channleid},#{item.alarmtype}
+        ,#{item.alarmdesc},#{item.alarmdate},#{item.isupload}
+        ,#{item.parkinglotno}
+        )  
+    </foreach>  
+</insert> 
+
+</mapper>

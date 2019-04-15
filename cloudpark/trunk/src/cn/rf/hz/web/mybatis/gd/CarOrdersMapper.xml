@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.CarOrdersMapper">
+	<!-- Result Map -->
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.bean.gd.OrderForm">
+		<result column="orderFormId" property="orderFormId" />
+		<result column="orderFormNo" property="orderFormNo" />
+		<result column="userPhoneId" property="userPhoneId" />
+		<result column="staffId" property="staffId" />
+		<result column="orderGenerationTime" property="orderGenerationTime" />
+		<result column="areFare" property="areFare" />
+		<result column="phone" property="phone" />
+		<result column="changeOrderTime" property="changeOrderTime" />
+		<result column="acquiringPerson" property="acquiringPerson" />
+		<result column="clearingPeople" property="clearingPeople" />
+		<result column="playingPeople" property="playingPeople" />
+		<result column="orderAmount" property="orderAmount" />
+		<result column="acquiringTime" property="acquiringTime" />
+		<result column="settlementTime" property="settlementTime" />
+		<result column="licensePlateNumber" property="licensePlateNumber" />
+		<result column="carParkId" property="carParkId" />
+		<result column="playingTime" property="playingTime" />
+		<result column="days" property="days" />
+		<result column="months" property="months" />
+		<result column="isItEffective" property="isItEffective" />
+		<result column="reasonForCancellation" property="reasonForCancellation" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		orderFormNo,userPhoneId,staffId,orderGenerationTime,areFare,phone,changeOrderTime,acquiringPerson,clearingPeople,orderAmount,acquiringTime,settlementTime,licensePlateNumber,carParkId,playingTime,days,months,isItEffective,reasonForCancellation
+	</sql>
+
+	<update id="update1" parameterType="Object">
+		update order_form set
+		acquiringPerson=#{staffId},acquiringTime=now() where
+		uuid=#{userPId}
+		and acquiringPerson is null and acquiringTime is null
+		and
+		isItEffective=0
+	</update>
+
+	<update id="update2" parameterType="Object">
+		update order_form set
+		staffId=#{staffId},changeOrderTime=now() where
+		uuid=#{userPId}
+		and
+		acquiringPerson is not null and staffId is null
+		and changeOrderTime is
+		null and isItEffective=0
+	</update>
+	<select id="queryOrderFormWhether" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderFormId) from order_form where
+		uuid=#{userPhoneId} and
+		playingTime is null and isItEffective=0
+	</select>
+
+	<update id="updateStopParking" parameterType="Object">
+		update order_form
+		set isItEffective=1 where uuid=#{userPhoneId} and
+		staffId is null and
+		acquiringPerson is null and clearingPeople is null and
+		isItEffective=0
+	</update>
+	<update id="updateStopParkingBox" parameterType="Object">
+		update
+		order_form
+		set isItEffective=1 where uuid=#{userPhoneId} and
+		changeOrderTime is null and
+		acquiringTime is null and playingTime is
+		null and
+		isItEffective=0
+	</update>
+	<update id="updateCancelParkingSpace" parameterType="Object">
+		update
+		order_form set isItEffective=1,reasonForCancellation=${reason}
+		where
+		uuid=#{userPhoneId} and staffId is not null and
+		acquiringPerson is null
+		and clearingPeople is null and isItEffective=0
+	</update>
+	<update id="updateCancelParkingSpaceBox" parameterType="Object">
+		update
+		order_form set isItEffective=1,reasonForCancellation=${reason}
+		where
+		uuid=#{userPhoneId} and changeOrderTime is not null and
+		acquiringTime
+		is null
+		and playingTime is null and isItEffective=0 and orderFormNo=#{orderFormNo}
+	</update>
+
+	<select id="findCancelParkingSpace" resultType="java.util.Map"
+		parameterType="Object">
+		select staffId from order_form where
+		uuid=#{userPhoneId}
+		and staffId
+		is not null and acquiringPerson is null
+		and clearingPeople
+		is null and
+		isItEffective=1 and orderFormNo=#{orderFormNo}
+	</select>
+
+	<select id="admissionScanCodeCount1" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderformid) from order_form where
+		uuid=#{userPId} and
+		acquiringPerson is not null and
+		licensePlateNumber=#{licensePlateNumber} and acquiringTime is not null
+		and playingTime is null and isItEffective is null
+	</select>
+
+	<insert id="admissionScanCodeSave" parameterType="Object"
+		useGeneratedKeys="true" keyProperty="orderFormId">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="orderFormId">
+			SELECT LAST_INSERT_ID() as orderFormId
+		</selectKey>
+		insert into
+		order_form(orderFormNo,uuid,staffId,changeOrderTime,areFare,phone,orderGenerationTime,licensePlateNumber,orderAmount,acquiringPerson,acquiringTime,carParkId)
+		values(${orderFormNo},#{userPhoneId},#{staffId},now(),${areFare},${phone},now(),#{licensePlateNumber},${orderAmount},#{acquiringPerson},now(),${carParkId})
+	</insert>
+
+	<select id="queryOrderByUserPhoneId" resultType="java.util.Map"
+		parameterType="Object">
+		select staffId from order_form where
+		uuid=#{userPhoneId}
+		and staffId is not null and acquiringPerson is not null
+		and
+		clearingPeople is null and
+		isItEffective=0 and playingTime is null
+	</select>
+
+	<select id="queryIsItEffective" resultType="java.util.Map"
+		parameterType="Object">
+		select 	a.orderFormNo as orderFormNo,
+				a.changeOrderTime as changeOrderTime,
+				a.acquiringTime as acquiringTime,
+				a.isItEffective as isItEffective,
+				a.uuid as uuid,
+				c.recordid as carParkId,
+				c.parkPrice as parkPrice,
+				c.carParkName as carParkName,
+				c.latitude as latitude,
+				c.longitude as longitude,
+				c.parkingEmptyNum as parkingEmptyNum,
+				a.staffId,a.status,a.orderMode
+					from
+					order_form a, gd_car_parks c
+						where
+						a.carParkId=c.recordId and
+						a.uuid=#{userPhoneId} and
+						a.isItEffective  = 0 and
+						a.changeOrderTime is not null and
+						a.playingTime is null order by orderGenerationTime desc  limit 0,1
+	</select>
+
+
+	<select id="queryEarningsDayMap" resultType="java.lang.Integer"
+		parameterType="Object">
+		select IFNULL(sum(orderAmount),0) as orderAmount from
+		order_form
+		where
+		clearingPeople=#{staffId} and
+		day(settlementTime)=day(now()) and
+		isItEffective=0 group by
+		day(settlementTime)
+	</select>
+
+	<select id="queryEarningsEarningsJdMap" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderFormId) as orderFormId from order_form
+		where
+		staffId=#{staffId} and day(changeOrderTime)=day(now()) and
+		isItEffective=0
+	</select>
+
+	<select id="queryEarningsEarningsSdMap" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderFormId) as orderFormId from order_form
+		where
+		acquiringPerson=#{staffId} and day(acquiringTime)=day(now()) and
+		isItEffective=0
+	</select>
+
+	<select id="queryEarningsMonthMap" resultType="java.lang.Integer"
+		parameterType="Object">
+		select ifnull(sum(orderAmount),0) as orderAmount from
+		order_form
+		where
+		clearingPeople=#{staffId} and
+		month(settlementTime)=month(now())
+		and
+		isItEffective=0 group by
+		month(settlementTime)
+	</select>
+
+	<select id="queryEarningsEarningsJdMapmon" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderFormId) as orderFormId from order_form
+		where
+		staffId=#{staffId} and month(changeOrderTime)=month(now()) and
+		isItEffective=0
+	</select>
+
+	<select id="queryEarningsEarningsSdMapmon" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderFormId) as orderFormId from order_form
+		where
+		acquiringPerson=#{staffId} and month(acquiringTime)=month(now())
+		and
+		isItEffective=0
+	</select>
+
+
+	<select id="queryEarningsYearList" resultType="java.util.Map"
+		parameterType="Object">
+		select month(settlementTime) as
+		months,ifnull(sum(orderAmount),0)
+		as orderAmount from
+		order_form where
+		clearingPeople=#{staffId} and
+		month(settlementTime)=${months} and
+		isItEffective=0 group by
+		month(settlementTime) order by settlementTime
+	</select>
+
+	<select id="queryEarningsYearListjssy" resultType="java.util.Map"
+		parameterType="Object">
+		select month(changeOrderTime) as
+		months,ifnull(count(orderFormId),0) as orderFormId
+		from order_form
+		where
+		staffId=#{staffId} and
+		year(changeOrderTime)=year(now()) and
+		isItEffective=0 group by
+		month(changeOrderTime) order by
+		changeOrderTime
+	</select>
+
+	<select id="queryEarningsYearListsdsy" resultType="java.util.Map"
+		parameterType="Object">
+		select month(acquiringTime) as
+		months,ifnull(count(orderFormId),0)
+		as orderFormId from
+		order_form where
+		acquiringPerson=#{staffId} and
+		month(acquiringTime)=${months} and
+		isItEffective=0 group by
+		month(acquiringTime) order by acquiringTime
+	</select>
+	<update id="updateCarParks" parameterType="Object">
+		update gd_car_parks
+		set parkingEmptyNum=${parkingEmptyNum} where
+		recordId=${carParkId}
+	</update>
+
+
+	<select id="updateScanCodeAppearancesCount1" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderFormId) from order_form where
+		uuid=#{userPId} and
+		carParkId=${carParkId} and acquiringPerson
+		is not
+		null and
+		clearingPeople is null and playingTime is null and
+		acquiringTime is not null
+		and isItEffective=0
+	</select>
+	<update id="updateScanCodeAppearancesUpdrow" parameterType="Object">
+		update order_form set playingTime=now(),playingPeople=#{playingPeople}
+		where uuid=#{userPId}
+		and carParkId=${carParkId} and
+		acquiringPerson is
+		not null and
+		clearingPeople is null and playingTime
+		is null and
+		acquiringTime is not null
+		and isItEffective=0
+	</update>
+	<select id="updateScanCodeAppearancesResultMap" resultType="java.util.Map"
+		parameterType="Object">
+		select uuid as uuid,licensePlateNumber as
+		licensePlateNumber
+		from order_form where uuid=#{userPId} and
+		carParkId=${carParkId} and acquiringPerson is not null and
+		clearingPeople is null and playingTime is not null and acquiringTime
+		is not
+		null and isItEffective=0
+	</select>
+
+	<insert id="saveOrderForm" parameterType="Object"
+		useGeneratedKeys="true" keyProperty="orderFormId">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="orderFormId">
+			SELECT LAST_INSERT_ID() as orderFormId
+		</selectKey>
+		insert into
+		order_form(orderFormNo,uuid,areFare,phone,orderGenerationTime,licensePlateNumber,orderAmount,carParkId,status,orderMode)
+		values(${orderFormNo},#{uuid},${areFare},${phone},now(),#{licensePlateNumber},${orderAmount},${carParkId},0,1)
+	</insert>
+
+	<update id="updateOrderFormRowcount" parameterType="Object">
+		update
+		order_form set
+		staffId=#{staffId},changeOrderTime=now(),carParkId=${carParkId},status = 1 WHERE
+		orderFormNo=${orderFormNo} and staffId is null and isItEffective=0
+	</update>
+
+	<select id="updateOrderFormResultMap" resultType="java.util.Map"
+		parameterType="Object">
+		select a.userPhoneId as userPhoneId,c.recordid as
+		carParkId,
+		c.parkPrice as
+		parkPrice,c.carParkName as
+		carParkName,c.latitude as
+		latitude,c.longitude as
+		longitude,c.parkingEmptyNum as parkingEmptyNum,a.staffId,a.uuid
+		from
+		order_form a,gd_car_parks c where
+		a.carParkId=c.recordId
+		and
+		a.staffId=#{staffId} and
+		orderFormNo=${orderFormNo} and
+		isItEffective=0
+	</select>
+	<delete id="deleteOrderFormRowcount" parameterType="Object">
+		delete from
+		order_form where orderFormId=${orderFormId}
+	</delete>
+
+	<!-- 已缴费订单记录 -->
+	<select id="queryOrderFormResultList" resultType="java.util.Map"
+		parameterType="Object">
+		select a.carParkId as
+		carParkId,b.carParkName
+		as carParkName,a.licensePlateNumber as
+		licensePlateNumber,
+		a.acquiringTime as
+		acquiringTime,a.orderGenerationTime as
+		orderGenerationTime,
+		a.playingTime as playingTime,a.settlementTime as
+		settlementTime,a.orderAmount as
+		orderAmount,a.areFare as areFare,a.orderFormId as orderFormId,
+		b.picUrl as picUrl from order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and a.orderFormId in (${orderFormId}) and
+		clearingPeople is not null and orderGenerationTime is not null and
+		acquiringTime is not null and a.settlementTime is not null and
+		a.playingTime is not null and a.isItEffective=0 order by
+		a.acquiringTime desc  
+	</select>
+	
+		<select id="queryOrderFormResultListBox" resultType="java.util.Map"
+		parameterType="Object">
+		select a.carParkId as
+		carParkId,b.carParkName
+		as
+		carParkName,a.licensePlateNumber as
+		licensePlateNumber,
+		a.acquiringTime
+		as
+		acquiringTime,a.orderGenerationTime as
+		orderGenerationTime,
+		a.playingTime as playingTime,a.settlementTime as
+		settlementTime,a.orderAmount as
+		orderAmount,a.areFare as
+		areFare,a.orderFormId as orderFormId,
+		b.picUrl as picUrl from
+		order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and
+		a.orderFormId in (${orderFormId}) and orderGenerationTime is not null
+		and
+		acquiringTime is not null and
+		a.isItEffective &lt;&gt; 1 order by
+		a.acquiringTime desc
+	</select>
+
+
+	<select id="queryOrderFormWhetherRowcount" resultType="java.lang.Integer"
+		parameterType="Object">
+		select orderFormId from order_form where
+		userPhoneId=${userPhoneId} and
+		playingTime is null and isItEffective=0
+	</select>
+
+
+	<select id="queryOrderFormResultList2" resultType="java.util.Map"
+		parameterType="Object">
+		SELECT a.inTime,a.addtime,b.picUrl fROM gd_entrance_recognize a
+LEFT JOIN  gd_car_parks b ON a.carParkId=b.recordId 
+WHERE   a.parkRecordID IN (${parkRecordID}) AND a.carParkId
+		IN(${carParkId})
+	</select>
+
+
+	<select id="queryOrderFormResultList3" resultType="java.util.Map"
+		parameterType="Object">
+		select count(*) from order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and a.userPhoneId=#{userPhoneId} and
+		clearingPeople is not null and orderGenerationTime is not null and
+		acquiringTime is not null and a.settlementTime is not null and
+		a.playingTime is not null and a.isItEffective=0
+	</select>
+
+	<select id="queryOrderFormResultList4" resultType="java.util.Map"
+		parameterType="Object">
+		SELECT count(*) fROM gd_entrance_recognize a
+LEFT JOIN  gd_car_parks b ON a.carParkId=b.recordId 
+WHERE   a.parkRecordID IN
+		(${parkRecordID}) AND a.carParkId IN(${carParkId})
+	</select>
+
+	<select id="queryOrderForm4PauseOrdersMap" resultType="java.util.Map"
+		parameterType="Object">
+		select pauseOrders as pauseOrders from Staff where
+		uuid=#{staffId}
+	</select>
+
+	<select id="queryOrderForm4ResultList1" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as
+		orderFormNo,a.licensePlateNumber
+		as
+		licensePlateNumber,a.areFare as
+		areFare,a.orderGenerationTime,a.userPhoneId,a.phone,a.uuid
+		from
+		order_form a
+		where
+		staffId is null and
+		isItEffective
+		 = 0
+		order by
+		orderGenerationTime desc limit #{offset},#{limit}
+	</select>
+	<select id="queryOrderForm4ResultList2" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as
+		orderFormNo,a.licensePlateNumber
+		as
+		licensePlateNumber,a.areFare as
+		areFare,a.changeOrderTime,a.userPhoneId,a.phone,a.uuid,b.carParkName
+		as carParkName from order_form a,gd_car_parks b
+		where
+		a.carParkId=b.recordId and
+		a.staffId = #{staffId} and a.acquiringTime
+		is null and
+		a.settlementTime is null and
+		a.isItEffective  = 0
+		order by orderGenerationTime desc limit #{offset},#{limit}
+	</select>
+	<select id="queryOrderForm4ResultList3" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as
+		orderFormNo,a.orderFormId as
+		recordId,a.licensePlateNumber
+		as licensePlateNumber,a.areFare as
+		areFare,a.carParkId as
+		carParkId,a.changeOrderTime,a.acquiringTime,a.userPhoneId,a.phone,a.uuid,b.carParkName
+		as carParkName,a.acquiringPerson
+		from order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and
+		a.acquiringPerson = #{staffId} and
+		a.acquiringTime is not
+		null
+		and a.playingTime
+		is null and
+		a.settlementTime is null and
+		a.isItEffective  = 0 order by
+		orderGenerationTime desc limit #{offset},#{limit}
+	</select>
+
+	<select id="queryOrderForm4ResultList4" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as
+		orderFormNo,a.licensePlateNumber
+		as licensePlateNumber,a.areFare as
+		areFare,(a.orderAmount+a.discountAmount) as
+		orderAmount,a.changeOrderTime as changeOrderTime,a.acquiringTime as
+		acquiringTime,a.playingTime as
+		playingTime,a.userPhoneId,a.phone,a.uuid,b.carParkName
+		as carParkName
+		from
+		order_form a,gd_car_parks b where a.carParkId=b.recordId and
+		a.clearingPeople =#{staffId} and
+		a.settlementTime is
+		not null
+		and
+		a.isItEffective
+		 = 0 order by orderGenerationTime desc limit
+		#{offset},#{limit}
+	</select>
+
+
+	<select id="queryOrderForm4ResuCount1" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(*)
+		from order_form a
+		where
+		staffId is null and
+		isItEffective
+		 = 0
+	</select>
+	<select id="queryOrderForm4ResuCount2" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(*) from order_form a,gd_car_parks b
+		where
+		a.carParkId=b.recordId and
+		a.staffId = #{staffId} and a.acquiringTime
+		is null and
+		a.settlementTime is null and
+		a.isItEffective  = 0
+	</select>
+	<select id="queryOrderForm4ResuCount3" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(*)
+		from order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and
+		a.acquiringPerson = #{staffId} and
+		a.acquiringTime is not
+		null
+		and a.playingTime
+		is null and
+		a.settlementTime is null and
+		a.isItEffective  = 0
+	</select>
+
+	<select id="queryOrderForm4ResuCount4" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(*)
+		from
+		order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and
+		a.clearingPeople =#{staffId} and
+		a.settlementTime is
+		not null
+		and
+		a.isItEffective
+		 = 0
+	</select>
+
+	<!-- 例子 start -->
+	<!-- 查未接单的订单 -->
+	<select id="queryOrderForm4ResultList1Box" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as
+		orderFormNo,a.licensePlateNumber
+		as
+		licensePlateNumber,a.areFare as
+		areFare,a.orderGenerationTime,a.userPhoneId,a.phone,a.uuid
+		from
+		order_form a
+		where isItEffective  = 0
+		and
+		changeOrderTime is null 
+		order by orderGenerationTime desc limit
+		#{offset},#{limit}
+	</select>
+
+	<!-- 未入场，已接单 -->
+	<select id="queryOrderForm4ResultList2Box" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as
+		orderFormNo,a.licensePlateNumber
+		as
+		licensePlateNumber,a.areFare as
+		areFare,a.changeOrderTime,a.userPhoneId,a.phone,a.uuid,b.carParkName
+		as carParkName from order_form a,gd_car_parks b
+		where
+		a.carParkId=b.recordId and changeOrderTime is not null and
+		a.acquiringTime
+		is null and playingTime is null and
+		a.isItEffective
+		 = 0 and a.carParkId = #{carParkId}
+		order by orderGenerationTime desc limit #{offset},#{limit}
+	</select>
+
+	<!-- 已入场 -->
+	<select id="queryOrderForm4ResultList3Box" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as
+		orderFormNo,a.orderFormId as
+		recordId,a.licensePlateNumber
+		as licensePlateNumber,a.areFare as
+		areFare,a.carParkId as
+		carParkId,a.changeOrderTime,a.acquiringTime,a.userPhoneId,a.phone,a.uuid,b.carParkName
+		as carParkName,a.acquiringPerson
+		from order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and changeOrderTime is not null and
+		a.acquiringTime is
+		not
+		null
+		and a.playingTime
+		is null and
+		a.isItEffective
+		 = 0  and a.carParkId = #{carParkId} order by orderGenerationTime
+		desc limit
+		#{offset},#{limit}
+	</select>
+	<!-- 已离场 -->
+	<select id="queryOrderForm4ResultList4Box" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormId as parkingRecordIds,a.carParkId as parkId,a.orderFormNo as
+		orderFormNo,a.licensePlateNumber
+		as licensePlateNumber,a.areFare as
+		areFare,(a.orderAmount+a.discountAmount) as
+		orderAmount,a.changeOrderTime as changeOrderTime,a.acquiringTime as
+		acquiringTime,a.playingTime as
+		playingTime,a.userPhoneId,a.phone,a.uuid,b.carParkName
+		as carParkName
+		from
+		order_form a,gd_car_parks b where a.carParkId=b.recordId and
+		a.playingTime is
+		not null
+		and
+		a.isItEffective &lt;&gt; 1  and a.carParkId = #{carParkId}  order by
+		orderGenerationTime desc limit #{offset},#{limit}
+	</select>
+
+
+	<select id="queryOrderForm4ResuCount1Box" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(*)
+		from order_form a
+		where isItEffective
+		 = 0
+		and
+		changeOrderTime is null
+	</select>
+	<select id="queryOrderForm4ResuCount2Box" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(*) from order_form a,gd_car_parks b
+		where
+		a.carParkId=b.recordId and changeOrderTime is not null and
+		a.acquiringTime
+		is null and playingTime is null and
+		a.isItEffective
+		 = 0 and a.carParkId = #{carParkId} 
+	</select>
+	<select id="queryOrderForm4ResuCount3Box" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(*)
+		from order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and changeOrderTime is not null and
+		a.acquiringTime is
+		not
+		null
+		and a.playingTime
+		is null and
+		a.isItEffective
+		 = 0 and a.carParkId = #{carParkId} 
+	</select>
+
+	<select id="queryOrderForm4ResuCount4Box" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(*)
+		from
+		order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and
+		a.playingTime is
+		not null
+		and
+		a.isItEffective &lt;&gt; 1 and a.carParkId = #{carParkId} 
+	</select>
+
+	<!-- 例子 end -->
+
+
+
+	<select id="earningsJd1" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderFormId) as orderFormId from order_form
+		where staffId=#{staffId} and month(changeOrderTime)=month(now()) and
+		isItEffective=0
+	</select>
+
+	<select id="earningsJd2" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(orderFormId) as orderFormId from order_form
+		where acquiringPerson=#{staffId} and month(acquiringTime)=month(now())
+		and isItEffective=0
+	</select>
+
+
+	<update id="updateNotifyAppearances" parameterType="Object">
+		update
+		order_form set playingTime=now(), playingPeople=#{playingPeople} where
+		orderFormNo=#{orderFormNo} and isItEffective = 0
+	</update>
+
+	<select id="updateNotifyAppearancesResultMap" resultType="java.util.Map"
+		parameterType="Object">
+		select uuid as uuid,licensePlateNumber as
+		licensePlateNumber from order_form where orderFormNo=#{orderFormNo}
+		and isItEffective=0
+	</select>
+
+
+
+	<select id="queryChargeAmountExOrderList" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as orderFormNo,a.carParkId as
+		carParkId,b.carParkName as carParkName,a.licensePlateNumber as
+		licensePlateNumber,
+		a.acquiringTime as acquiringTime,a.playingTime as
+		playingTime,
+		a.areFare as areFare,b.picUrl as picUrl,a.orderFormId as
+		orderFormId,a.acquiringPerson from order_form a,gd_car_parks b where
+		a.carParkId=b.recordId and
+		a.uuid=#{userPhoneId}
+		and clearingPeople is
+		null and a.isItEffective
+		 = 0
+		and
+		a.acquiringTime is not null order
+		by a.acquiringTime desc
+	</select>
+
+	<select id="queryChargeAmountExOrderBoxList" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as orderFormNo,a.carParkId as
+		carParkId,b.carParkName as carParkName,a.licensePlateNumber as
+		licensePlateNumber,
+		a.acquiringTime as acquiringTime,a.playingTime as
+		playingTime,
+		a.areFare as areFare,b.picUrl as picUrl,a.orderFormId as
+		orderFormId,a.sources,b.latitude,b.longitude,b.province,b.mycity,b.dist
+		from order_form a  
+		left join gd_car_parks b on a.carParkId=b.recordId 
+		where a.uuid=#{userPhoneId}
+		and acquiringTime is
+		not null and playingTime is null and a.isItEffective = 0 and
+		a.acquiringTime >=	DATE_ADD(NOW(), INTERVAL -24 * 3 HOUR)
+		and	a.acquiringTime is not null order by a.acquiringTime desc
+	</select>
+
+	<select id="queryChargeAmountEnterrecoedList" resultType="java.util.Map"
+		parameterType="Object">
+		select a.recordId as recordId,a.oldRecordId as
+		oldRecordId,a.carParkId as carParkId,b.carParkName as
+		carParkName,a.recognitionNumber as recognitionNumber,
+		a.inTime as
+		inTime,a.mark as mark,b.picUrl as picUrl,b.latitude,b.longitude,a.imgName as imgName,
+		b.province,b.mycity,b.dist
+		fROM gd_entrance_recognize a
+		LEFT JOIN  gd_car_parks b ON a.carParkId=b.recordId 
+		WHERE a.inTime >= DATE_ADD(NOW(), INTERVAL -24 * 3 HOUR)
+		and	a.recognitionNumber=#{licensePlateNumber} AND recognitionNumber &lt;&gt; '' order by a.inTime desc
+	</select>
+	<select id="queryChargeAmountEnterrecoedListBox" resultType="java.util.Map"
+		parameterType="Object">
+		select a.recordId as recordId,a.oldRecordId as
+		oldRecordId,a.carParkId as carParkId,b.carParkName as
+		carParkName,a.recognitionNumber as recognitionNumber,
+		a.inTime as
+		inTime,a.mark as mark,b.picUrl as picUrl
+		fROM gd_entrance_recognize a
+LEFT JOIN  gd_car_parks b ON a.carParkId=b.recordId 
+WHERE  
+		a.inTime >=
+		DATE_ADD(NOW(), INTERVAL -24 *3 HOUR)
+		 order by a.inTime desc
+	</select>
+
+	<select id="findOrderformByid" resultType="java.util.Map"
+		parameterType="Object">
+		select a.*,b.carParkName as carParkName,b.province,b.mycity,b.dist from order_form
+		a, gd_car_parks b where orderFormNo = #{orderFormNo} and
+		a.carParkId=b.recordId
+	</select>
+
+	<select id="queryChargeAmountExByPlateOrderList" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as orderFormNo,a.carParkId as
+		carParkId,b.carParkName as carParkName,a.recognitionNumber as
+		licensePlateNumber,
+		a.acquiringTime as acquiringTime,a.playingTime,
+		a.areFare as areFare,b.picUrl as picUrl,a.orderFormId as
+		orderFormId,a.acquiringPerson from order_form a,gd_car_parks
+		b where
+		a.carParkId=b.recordId and
+		a.recognitionNumber=#{licensePlateNumber}
+		AND recognitionNumber &lt;&gt; ''
+		and
+		clearingPeople is null
+		and a.isItEffective  = 0 and
+		a.acquiringTime is not
+		null order by
+		a.acquiringTime desc
+	</select>
+
+	<select id="queryChargeAmountExByPlateOrderListBox" resultType="java.util.Map"
+		parameterType="Object">
+		select a.orderFormNo as orderFormNo,a.carParkId as
+		carParkId,b.carParkName as carParkName,a.licensePlateNumber as
+		licensePlateNumber,
+		a.acquiringTime as acquiringTime,a.playingTime,
+		a.areFare as areFare,b.picUrl as picUrl,a.orderFormId as orderFormId,a.sources,b.province,b.mycity,b.dist
+		from order_form a
+		left join gd_car_parks	b on a.carParkId=b.recordId 
+		where a.licensePlateNumber=#{licensePlateNumber} and
+		playingTime is null
+		and a.acquiringTime >=
+		DATE_ADD(NOW(), INTERVAL -24 *3 HOUR)
+		and
+		a.isItEffective  = 0 and a.acquiringTime is not null order by
+		a.acquiringTime desc
+	</select>
+
+	<select id="queryChargeAmountEntByPlateerrecoedList" resultType="java.util.Map"
+		parameterType="Object">
+		select a.recordId as recordId,a.oldRecordId as
+		oldRecordId,a.carParkId as carParkId,b.carParkName as
+		carParkName,a.recognitionNumber as recognitionNumber,
+		a.inTime as
+		inTime,a.mark as mark,b.picUrl as picUrl, a.imgName as imgName,b.province,b.mycity,b.dist
+		fROM gd_entrance_recognize a
+		LEFT JOIN  gd_car_parks b ON a.carParkId=b.recordId 
+		WHERE   a.inTime >=	DATE_ADD(NOW(), INTERVAL -24 *3 HOUR) and
+		a.recognitionNumber=#{licensePlateNumber} AND recognitionNumber &lt;&gt; '' order by a.inTime desc
+	</select>
+
+
+	<update id="updateOrderform" parameterType="Object">
+		update order_form set
+		clearingPeople=#{clearingPeople},settlementTime=#{settlementTime},orderAmount
+		= ${orderAmount},discountAmount
+		= ${discountAmount}
+		where
+		orderFormNo=#{orderFormNo} and clearingPeople is
+		null and
+		acquiringPerson is not null and staffId is not null and
+		isItEffective=0
+	</update>
+
+
+	<select id="contextInitializedFind" resultType="java.util.Map"
+		parameterType="Object">
+		
+		SELECT
+		staffId,orderFormNo,licensePlateNumber,DATE_FORMAT(changeOrderTime,'%Y-%m-%d %H:%i:%s') AS changeOrderTime 
+		FROM order_form WHERE changeOrderTime IS
+		NOT NULL AND playingTime IS  NULL and acquiringTime is null  AND isItEffective = 0
+		
+	</select>
+	<select id="contextInitializedFindBox" resultType="java.util.Map"
+		parameterType="Object">
+		select
+		staffId,orderFormNo,licensePlateNumber,date_format(changeOrderTime,'%Y-%m-%d %H:%i:%s') as changeOrderTime from order_form where
+		orderGenerationTime is not null and changeOrderTime is
+		not null and
+		acquiringTime is null and
+		isItEffective  = 0
+	</select>
+
+	<update id="contextInitializedUpdate" parameterType="Object">
+		update
+		order_form set isItEffective=1 where orderFormNo=#{orderFormNo}
+	</update>
+
+
+
+	<insert id="save" parameterType="Object" useGeneratedKeys="true"
+		keyProperty="orderFormId">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="orderFormId">
+			SELECT LAST_INSERT_ID() as orderFormId
+		</selectKey>
+		insert into
+		order_form(orderFormNo,userPhoneId,staffId,orderGenerationTime,areFare,phone,changeOrderTime,acquiringPerson,
+		clearingPeople,orderAmount,acquiringTime,settlementTime,licensePlateNumber,carParkId,playingTime,isItEffective,reasonForCancellation,uuid,playingPeople,
+		discountAmount,isException,exception)
+		values(#{orderFormNo},#{userPhoneId},#{staffId},FROM_UNIXTIME(
+		#{orderGenerationTime}/1000, '%Y%m%d%H%i%s' ),#{areFare},#{phone},
+		FROM_UNIXTIME( #{changeOrderTime}/1000, '%Y%m%d%H%i%s'
+		),#{acquiringPerson},
+		#{clearingPeople},#{orderAmount},FROM_UNIXTIME(#{acquiringTime}/1000,
+		'%Y%m%d%H%i%s' ),FROM_UNIXTIME(#{settlementTime}/1000, '%Y%m%d%H%i%s'
+		),#{licensePlateNumber},#{carParkId},FROM_UNIXTIME(#{playingTime}/1000,
+		'%Y%m%d%H%i%s' ),#{isItEffective},
+		#{reasonForCancellation},#{uuid},#{playingPeople},#{discountAmount},#{isException},#{exception})
+	</insert>
+
+
+	<update id="update" parameterType="Object">
+		update order_form set
+		<trim suffixOverrides=",">
+			<if test="orderFormId != null and orderFormId != '' ">
+				orderFormId=#{orderFormId},
+			</if>
+			<if test="orderFormNo != null  and orderFormNo != '' ">
+				orderFormNo=#{orderFormNo},
+			</if>
+			<if test="userPhoneId != null  and userPhoneId != '' ">
+				userPhoneId=#{userPhoneId},
+			</if>
+			<if test="staffId != null  and staffId != '' ">
+				staffId=#{staffId},
+			</if>
+			<if test="orderGenerationTime != null  and orderGenerationTime != '' ">
+				orderGenerationTime=#{orderGenerationTime},
+			</if>
+			<if test="areFare != null  and areFare != '' ">
+				areFare=#{areFare},
+			</if>
+			<if test="phone != null  and phone != '' ">
+				phone=#{phone},
+			</if>
+			<if test="changeOrderTime != null  and changeOrderTime != '' ">
+				changeOrderTime=FROM_UNIXTIME( #{changeOrderTime}/1000,
+				'%Y%m%d%H%i%s' ),
+			</if>
+			<if test="acquiringPerson != null  and acquiringPerson != '' ">
+				acquiringPerson=#{acquiringPerson},
+			</if>
+			<if test="clearingPeople != null  and clearingPeople != '' ">
+				clearingPeople=#{clearingPeople},
+			</if>
+			<if test="orderAmount != null  and orderAmount != '' ">
+				orderAmount=#{orderAmount},
+			</if>
+			<if test="acquiringTime != null  and acquiringTime != '' ">
+				acquiringTime = FROM_UNIXTIME( #{acquiringTime}/1000,
+				'%Y%m%d%H%i%s' ),
+			</if>
+			<if test="IsRecognition != null  and IsRecognition != '' ">
+				settlementTime = FROM_UNIXTIME( #{settlementTime}/1000,
+				'%Y%m%d%H%i%s' ),
+			</if>
+			<if test="licensePlateNumber != null  and licensePlateNumber != '' ">
+				licensePlateNumber=#{licensePlateNumber},
+			</if>
+			<if test="carParkId != null  and carParkId != '' ">
+				carParkId=#{carParkId},
+			</if>
+			<if test="playingTime != null  and playingTime != '' ">
+				playingTime=FROM_UNIXTIME( #{playingTime}/1000,
+				'%Y%m%d%H%i%s' ),
+			</if>
+			<if test="isItEffective != null  and isItEffective != '' ">
+				isItEffective=#{isItEffective},
+			</if>
+			<if test="reasonForCancellation != null  and reasonForCancellation != '' ">
+				reasonForCancellation=#{reasonForCancellation},
+			</if>
+			<if test="uuid != null  and uuid != '' ">
+				uuid=#{uuid},
+			</if>
+			<if test="playingPeople != null  and playingPeople != '' ">
+				playingPeople=#{playingPeople},
+			</if>
+			<if test="discountAmount != null  and discountAmount != '' ">
+				discountAmount=#{discountAmount},
+			</if>
+
+			<if test="isException != null  and isException != '' ">
+				isException=#{isException},
+			</if>
+
+			<if test="exception != null  and exception != '' ">
+				exception=#{exception},
+			</if>
+		</trim>
+		where 1 = 1
+		<if test="orderFormIdWhere != null and orderFormIdWhere != '' ">
+			and orderFormId=#{orderFormIdWhere}
+		</if>
+		<if test="orderFormNoWhere != null   and orderFormNoWhere != '' ">
+			and orderFormNo=#{orderFormNoWhere}
+		</if>
+		<if test="userPhoneIdWhere != null   and userPhoneIdWhere != '' ">
+			and userPhoneId=#{userPhoneIdWhere}
+		</if>
+		<if test="staffIdWhere != null   and staffIdWhere != '' ">
+			and staffId=#{staffIdWhere}
+		</if>
+		<if
+			test="orderGenerationTimeWhere != null  and orderGenerationTimeWhere != '' ">
+			and orderGenerationTime=#{orderGenerationTimeWhere}
+		</if>
+		<if test="areFareWhere != null  and areFareWhere != '' ">
+			and areFare=#{areFareWhere}
+		</if>
+		<if test="phoneWhere != null  and phoneWhere != '' ">
+			and phone=#{phoneWhere}
+		</if>
+		<if test="changeOrderTimeWhere != null and changeOrderTimeWhere != ''  ">
+			and changeOrderTime=#{changeOrderTimeWhere}
+		</if>
+		<if test="acquiringPersonWhere != null and acquiringPersonWhere != ''  ">
+			and acquiringPerson=#{acquiringPersonWhere}
+		</if>
+		<if test="clearingPeopleWhere != null and clearingPeopleWhere != ''  ">
+			and clearingPeople=#{clearingPeopleWhere}
+		</if>
+		<if test="orderAmountWhere != null and orderAmountWhere != ''  ">
+			and orderAmount=#{orderAmountWhere}
+		</if>
+		<if test="acquiringTimeWhere != null and acquiringTimeWhere != ''  ">
+			and acquiringTime = #{acquiringTimeWhere}
+		</if>
+		<if test="IsRecognitionWhere != null and IsRecognitionWhere != ''  ">
+			and settlementTime = #{settlementTimeWhere}
+		</if>
+		<if
+			test="licensePlateNumberWhere != null  and licensePlateNumberWhere != '' ">
+			and licensePlateNumber=#{licensePlateNumberWhere}
+		</if>
+		<if test="carParkIdWhere != null  and carParkIdWhere != '' ">
+			and carParkId=#{carParkIdWhere}
+		</if>
+		<if test="playingTimeWhere != null  and playingTimeWhere != '' ">
+			and playingTime=#{playingTimeWhere}
+		</if>
+		<if test="isItEffectiveWhere != null  and isItEffectiveWhere != '' ">
+			and isItEffective=#{isItEffectiveWhere}
+		</if>
+		<if
+			test="reasonForCancellationWhere != null  and reasonForCancellationWhere != '' ">
+			and reasonForCancellation=#{reasonForCancellationWhere}
+		</if>
+		<if test="uuidWhere != null  and uuidWhere != '' ">
+			and uuid=#{uuidWhere}
+		</if>
+		<if test="playingPeopleWhere != null  and playingPeopleWhere != '' ">
+			and playingPeople=#{playingPeopleWhere}
+		</if>
+		<if test="discountAmountWhere != null  and discountAmountWhere != '' ">
+			and discountAmount=#{discountAmountWhere}
+		</if>
+
+		<if test="isExceptionWhere != null  and isExceptionWhere != '' ">
+			and isException=#{isExceptionWhere}
+		</if>
+
+		<if test="exceptionWhere != null  and exceptionWhere != '' ">
+			and exception=#{exceptionWhere}
+		</if>
+	</update>
+
+
+	<select id="findOrderformInOutInfo" resultType="java.util.Map"
+		parameterType="Object">
+		select count(*) as count from order_form where uuid =
+		#{uuid} and status = 2 and
+		orderGenerationTime> DATE_ADD(NOW(), INTERVAL -30 DAY) order by
+		orderGenerationTime desc
+	</select>
+
+	<select id="findOrderFormCreateTime" resultType="java.util.Map"
+		parameterType="Object">
+		select *
+		from
+		order_form where uuid = #{uuid}
+		and isItEffective =0  order by orderGenerationTime
+		desc limit 0,1
+	</select>
+
+
+	<insert id="saveOrderFormsBox" parameterType="Object"
+		useGeneratedKeys="true" keyProperty="orderFormId">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="orderFormId">
+			SELECT LAST_INSERT_ID() as orderFormId
+		</selectKey>
+		insert into
+		order_form(phone,uuid,staffId,carParkId,licensePlateNumber,areFare,orderFormNo,orderGenerationTime,changeOrderTime,sources,status,orderMode)
+		values(#{phone},#{uuid},#{staffId},#{carParkId},#{licensePlateNumber},#{areFare},#{orderFormNo},now(),now(),#{sources},0,#{orderMode})
+	</insert>
+
+
+	<update id="updatePlayingTime" parameterType="Object">
+		UPDATE order_form a
+		SET a.`playingTime`=NOW(), a.status=3 WHERE playingTime IS NULL AND
+		a.`isItEffective`=0 AND UUID=#{uuid} AND carParkId = #{carParkId}   AND STATUS=2
+	</update>
+	
+		<select id="updatePlayingTime1" resultType="java.util.Map"
+		parameterType="Object">
+		select a.*,b.carParkName
+		from
+		order_form a,gd_car_parks b WHERE a.carParkId = b.recordId and a.playingTime IS NULL AND
+		a.`isItEffective`=0 AND a.UUID=#{uuid} AND a.carParkId = #{carParkId}  AND STATUS=2
+	</select>
+
+	<update id="updateAcquiringTime" parameterType="Object">
+		UPDATE order_form
+		a SET a.`acquiringTime`=NOW(),a.status = 2 WHERE acquiringTime IS NULL AND
+		playingTime IS NULL AND a.`isItEffective`=0 AND UUID=#{uuid} AND carParkId = #{carParkId}  
+		ORDER BY orderGenerationTime DESC LIMIT 1
+	</update>
+	<update id="updateOrderFormIsItEffective" parameterType="Object">
+	update 
+		order_form set isItEffective = 2,status=3,playingTime=#{playingTime} where uuid = #{uuid}
+		and playingTime is null and isItEffective  = 0  order by orderGenerationTime
+		desc limit 1
+	
+	</update>
+	
+	<!-- 是否有效订单 ， 更新状态 -->
+	<update id="updateItEffective" parameterType="Object">
+		update order_form set isItEffective = #{isItEffective},playingTime=#{playingTime},status=#{status} where orderFormNo = #{orderFormNo} limit 1
+	</update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>   

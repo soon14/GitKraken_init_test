@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.GdAreaNodeMapper" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="cn.rf.hz.web.bean.gd.AreaNode" >
+	<result column="recordId" property="recordId"/>
+	<result column="nodeId" property="nodeId"/>
+	<result column="areaId" property="areaId"/>
+	<result column="positionX" property="positionX"/>
+	<result column="positionY" property="positionY"/>
+	<result column="type" property="type"/>
+	<result column="updTime" property="updTime"/>
+	<result column="carParkId" property="carParkId"/>
+</resultMap>
+       
+<!-- gd_area_node table all fields -->
+<sql id="Base_Column_List" >
+	 recordId,nodeId,areaId,positionX,positionY,type,updTime,carParkId
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="recordId != null" >
+	    and recordId =  #{recordId}
+	</if>
+	<if test="nodeId != null" >
+	    and nodeId =  #{nodeId}
+	</if>
+	<if test="areaId != null" >
+	    and areaId =  #{areaId}
+	</if>
+	<if test="positionX != null" >
+	    and positionX =  #{positionX}
+	</if>
+	<if test="positionY != null" >
+	    and positionY =  #{positionY}
+	</if>
+	<if test="type != null" >
+	    and type =  #{type}
+	</if>
+	<if test="updTime != null" >
+	    and updTime =  #{updTime}
+	</if>
+	<if test="carParkId != null" >
+	    and carParkId =  #{carParkId}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_area_node(recordId,nodeId,areaId,positionX,positionY,type,updTime,carParkId)
+ values(#{recordId},#{nodeId},#{areaId},#{positionX},#{positionY},#{type},#{updTime},#{carParkId})
+</insert>
+<insert id="save" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_area_node(recordId,nodeId,areaId,positionX,positionY,type,updTime,carParkId)
+ values(#{recordId},#{nodeId},#{areaId},#{positionX},#{positionY},#{type},#{updTime},#{carParkId})
+</insert>
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update gd_area_node set nodeId=#{nodeId},areaId=#{areaId},positionX=#{positionX},positionY=#{positionY},type=#{type},updTime=#{updTime},carParkId=#{carParkId} where recordId=#{recordId}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update gd_area_node set 
+	<trim  suffixOverrides="," >
+	<if test="nodeId != null  ">
+		nodeId=#{nodeId},
+	</if>
+	<if test="areaId != null  ">
+		areaId=#{areaId},
+	</if>
+	<if test="positionX != null  ">
+		positionX=#{positionX},
+	</if>
+	<if test="positionY != null  ">
+		positionY=#{positionY},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="updTime != null  ">
+		updTime=#{updTime},
+	</if>
+	</trim> where recordId=#{recordId} and carParkId=#{carParkId}
+</update>
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateById" parameterType="Object" >
+	update gd_area_node set 
+	<trim  suffixOverrides="," >
+	<if test="nodeId != null  ">
+		nodeId=#{nodeId},
+	</if>
+	<if test="areaId != null  ">
+		areaId=#{areaId},
+	</if>
+	<if test="positionX != null  ">
+		positionX=#{positionX},
+	</if>
+	<if test="positionY != null  ">
+		positionY=#{positionY},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="updTime != null  ">
+		updTime=#{updTime},
+	</if>
+	</trim> where nodeId= #{nodeId} and carParkId=#{carParkId}
+</update>
+
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from gd_area_node where recordId = #{recordId}
+</delete>
+ 
+<!-- 根据id查询 页面 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from gd_area_node where recordId = #{recordId} limit 0,1
+</select>
+<select id="findById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from gd_area_node  
+	 WHERE nodeId= #{parkingId} AND carParkId= #{carParkId}  limit 0,1
+</select>
+
+<select id="queryByPageUserId"  resultMap="BaseResultMap" parameterType="Object">
+	
+select * from gd_area_node A right join
+ pageuser_areanode_rel  
+ B on  A.nodeId = B.areaNodeId
+  where B.pageUserId= #{pageUserId}
+</select>
+
+<select id="findAllByAreaId"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from gd_area_node  
+	 WHERE areaId=#{areaId} AND carParkId=#{carParkId} AND (type = 0 OR type = 1)
+</select>
+
+<!-- 页面 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from gd_area_node 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询页面列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from gd_area_node 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+</mapper>   

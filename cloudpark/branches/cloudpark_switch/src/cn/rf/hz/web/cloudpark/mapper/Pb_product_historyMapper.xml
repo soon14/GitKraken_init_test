@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Pb_product_historyMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Pb_product_history" >
+    <id column="ProductID" property="productid" jdbcType="INTEGER" />
+    <id column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <id column="VersionNumber" property="versionnumber" jdbcType="VARCHAR" />
+    <result column="HolidayID" property="holidayid" jdbcType="INTEGER" />
+    <result column="WeekID" property="weekid" jdbcType="INTEGER" />
+    <result column="RuleID" property="ruleid" jdbcType="INTEGER" />
+    <result column="IsLong" property="islong" jdbcType="INTEGER" />
+    <result column="ProductName" property="productname" jdbcType="VARCHAR" />
+    <result column="LongRuleID" property="longruleid" jdbcType="INTEGER" />
+    <result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="IsDelete" property="isdelete" jdbcType="INTEGER" />
+    <result column="OverProductID" property="overproductid" jdbcType="INTEGER" />
+    <result column="IsOver" property="isover" jdbcType="INTEGER" />
+    <result column="ChannelIds" property="channelids" jdbcType="VARCHAR" />
+    <result column="AreaIds" property="areaids" jdbcType="VARCHAR" />
+    <result column="DataSource" property="datasource" jdbcType="VARCHAR" />
+    <result column="SourceId" property="sourceid" jdbcType="VARCHAR" />
+    <result column="EventTime" property="eventtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ProductID, ParkingLotNo, VersionNumber, HolidayID, WeekID, RuleID, IsLong, ProductName, 
+    LongRuleID, CreatePeople, CreateDate, UpdatePeople, UpdateDate, IsDelete, OverProductID, 
+    IsOver, ChannelIds, AreaIds, DataSource, SourceId, EventTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product_historyKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from pb_product_history
+    where ProductID = #{productid,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product_historyKey" >
+    delete from pb_product_history
+    where ProductID = #{productid,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product_history" >
+    insert into pb_product_history (ProductID, ParkingLotNo, VersionNumber, 
+      HolidayID, WeekID, RuleID, 
+      IsLong, ProductName, LongRuleID, 
+      CreatePeople, CreateDate, UpdatePeople, 
+      UpdateDate, IsDelete, OverProductID, 
+      IsOver, ChannelIds, AreaIds, 
+      DataSource, SourceId, EventTime
+      )
+    values (#{productid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR}, #{versionnumber,jdbcType=VARCHAR}, 
+      #{holidayid,jdbcType=INTEGER}, #{weekid,jdbcType=INTEGER}, #{ruleid,jdbcType=INTEGER}, 
+      #{islong,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, #{longruleid,jdbcType=INTEGER}, 
+      #{createpeople,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{updatepeople,jdbcType=INTEGER}, 
+      #{updatedate,jdbcType=TIMESTAMP}, #{isdelete,jdbcType=INTEGER}, #{overproductid,jdbcType=INTEGER}, 
+      #{isover,jdbcType=INTEGER}, #{channelids,jdbcType=VARCHAR}, #{areaids,jdbcType=VARCHAR}, 
+      #{datasource,jdbcType=VARCHAR}, #{sourceid,jdbcType=VARCHAR}, #{eventtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product_history" >
+    insert into pb_product_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productid != null" >
+        ProductID,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="versionnumber != null" >
+        VersionNumber,
+      </if>
+      <if test="holidayid != null" >
+        HolidayID,
+      </if>
+      <if test="weekid != null" >
+        WeekID,
+      </if>
+      <if test="ruleid != null" >
+        RuleID,
+      </if>
+      <if test="islong != null" >
+        IsLong,
+      </if>
+      <if test="productname != null" >
+        ProductName,
+      </if>
+      <if test="longruleid != null" >
+        LongRuleID,
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+      <if test="isdelete != null" >
+        IsDelete,
+      </if>
+      <if test="overproductid != null" >
+        OverProductID,
+      </if>
+      <if test="isover != null" >
+        IsOver,
+      </if>
+      <if test="channelids != null" >
+        ChannelIds,
+      </if>
+      <if test="areaids != null" >
+        AreaIds,
+      </if>
+      <if test="datasource != null" >
+        DataSource,
+      </if>
+      <if test="sourceid != null" >
+        SourceId,
+      </if>
+      <if test="eventtime != null" >
+        EventTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="versionnumber != null" >
+        #{versionnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="holidayid != null" >
+        #{holidayid,jdbcType=INTEGER},
+      </if>
+      <if test="weekid != null" >
+        #{weekid,jdbcType=INTEGER},
+      </if>
+      <if test="ruleid != null" >
+        #{ruleid,jdbcType=INTEGER},
+      </if>
+      <if test="islong != null" >
+        #{islong,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="longruleid != null" >
+        #{longruleid,jdbcType=INTEGER},
+      </if>
+      <if test="createpeople != null" >
+        #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="overproductid != null" >
+        #{overproductid,jdbcType=INTEGER},
+      </if>
+      <if test="isover != null" >
+        #{isover,jdbcType=INTEGER},
+      </if>
+      <if test="channelids != null" >
+        #{channelids,jdbcType=VARCHAR},
+      </if>
+      <if test="areaids != null" >
+        #{areaids,jdbcType=VARCHAR},
+      </if>
+      <if test="datasource != null" >
+        #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceid != null" >
+        #{sourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="eventtime != null" >
+        #{eventtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product_history" >
+    update pb_product_history
+    <set >
+      <if test="holidayid != null" >
+        HolidayID = #{holidayid,jdbcType=INTEGER},
+      </if>
+      <if test="weekid != null" >
+        WeekID = #{weekid,jdbcType=INTEGER},
+      </if>
+      <if test="ruleid != null" >
+        RuleID = #{ruleid,jdbcType=INTEGER},
+      </if>
+      <if test="islong != null" >
+        IsLong = #{islong,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        ProductName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="longruleid != null" >
+        LongRuleID = #{longruleid,jdbcType=INTEGER},
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople = #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        IsDelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="overproductid != null" >
+        OverProductID = #{overproductid,jdbcType=INTEGER},
+      </if>
+      <if test="isover != null" >
+        IsOver = #{isover,jdbcType=INTEGER},
+      </if>
+      <if test="channelids != null" >
+        ChannelIds = #{channelids,jdbcType=VARCHAR},
+      </if>
+      <if test="areaids != null" >
+        AreaIds = #{areaids,jdbcType=VARCHAR},
+      </if>
+      <if test="datasource != null" >
+        DataSource = #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceid != null" >
+        SourceId = #{sourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="eventtime != null" >
+        EventTime = #{eventtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ProductID = #{productid,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product_history" >
+    update pb_product_history
+    set HolidayID = #{holidayid,jdbcType=INTEGER},
+      WeekID = #{weekid,jdbcType=INTEGER},
+      RuleID = #{ruleid,jdbcType=INTEGER},
+      IsLong = #{islong,jdbcType=INTEGER},
+      ProductName = #{productname,jdbcType=VARCHAR},
+      LongRuleID = #{longruleid,jdbcType=INTEGER},
+      CreatePeople = #{createpeople,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      IsDelete = #{isdelete,jdbcType=INTEGER},
+      OverProductID = #{overproductid,jdbcType=INTEGER},
+      IsOver = #{isover,jdbcType=INTEGER},
+      ChannelIds = #{channelids,jdbcType=VARCHAR},
+      AreaIds = #{areaids,jdbcType=VARCHAR},
+      DataSource = #{datasource,jdbcType=VARCHAR},
+      SourceId = #{sourceid,jdbcType=VARCHAR},
+      EventTime = #{eventtime,jdbcType=TIMESTAMP}
+    where ProductID = #{productid,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

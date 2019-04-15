@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_weekrule_historyMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_weekrule_history" >
+    <id column="RecordID" property="recordid" jdbcType="INTEGER" />
+    <id column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <id column="VersionNumber" property="versionnumber" jdbcType="VARCHAR" />
+    <result column="RuleName" property="rulename" jdbcType="VARCHAR" />
+    <result column="StartEndTime" property="startendtime" jdbcType="VARCHAR" />
+    <result column="Monday" property="monday" jdbcType="INTEGER" />
+    <result column="Tuesday" property="tuesday" jdbcType="INTEGER" />
+    <result column="Wednesday" property="wednesday" jdbcType="INTEGER" />
+    <result column="Thursday" property="thursday" jdbcType="INTEGER" />
+    <result column="Friday" property="friday" jdbcType="INTEGER" />
+    <result column="Saturday" property="saturday" jdbcType="INTEGER" />
+    <result column="Sunday" property="sunday" jdbcType="INTEGER" />
+    <result column="Priority" property="priority" jdbcType="INTEGER" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="IsDelete" property="isdelete" jdbcType="BIT" />
+    <result column="DeletePeople" property="deletepeople" jdbcType="INTEGER" />
+    <result column="DeleteDate" property="deletedate" jdbcType="TIMESTAMP" />
+    <result column="IsUpload" property="isupload" jdbcType="BIT" />
+    <result column="EventTime" property="eventtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordID, ParkingLotNo, VersionNumber, RuleName, StartEndTime, Monday, Tuesday, Wednesday, 
+    Thursday, Friday, Saturday, Sunday, Priority, Note, CreatePeople, CreateDate, UpdatePeople, 
+    UpdateDate, IsDelete, DeletePeople, DeleteDate, IsUpload, EventTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_weekrule_historyKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_weekrule_history
+    where RecordID = #{recordid,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_weekrule_historyKey" >
+    delete from tc_weekrule_history
+    where RecordID = #{recordid,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_weekrule_history" >
+    insert into tc_weekrule_history (RecordID, ParkingLotNo, VersionNumber, 
+      RuleName, StartEndTime, Monday, 
+      Tuesday, Wednesday, Thursday, 
+      Friday, Saturday, Sunday, 
+      Priority, Note, CreatePeople, 
+      CreateDate, UpdatePeople, UpdateDate, 
+      IsDelete, DeletePeople, DeleteDate, 
+      IsUpload, EventTime)
+    values (#{recordid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR}, #{versionnumber,jdbcType=VARCHAR}, 
+      #{rulename,jdbcType=VARCHAR}, #{startendtime,jdbcType=VARCHAR}, #{monday,jdbcType=INTEGER}, 
+      #{tuesday,jdbcType=INTEGER}, #{wednesday,jdbcType=INTEGER}, #{thursday,jdbcType=INTEGER}, 
+      #{friday,jdbcType=INTEGER}, #{saturday,jdbcType=INTEGER}, #{sunday,jdbcType=INTEGER}, 
+      #{priority,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, #{createpeople,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updatepeople,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP}, 
+      #{isdelete,jdbcType=BIT}, #{deletepeople,jdbcType=INTEGER}, #{deletedate,jdbcType=TIMESTAMP}, 
+      #{isupload,jdbcType=BIT}, #{eventtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_weekrule_history" >
+    insert into tc_weekrule_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordID,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="versionnumber != null" >
+        VersionNumber,
+      </if>
+      <if test="rulename != null" >
+        RuleName,
+      </if>
+      <if test="startendtime != null" >
+        StartEndTime,
+      </if>
+      <if test="monday != null" >
+        Monday,
+      </if>
+      <if test="tuesday != null" >
+        Tuesday,
+      </if>
+      <if test="wednesday != null" >
+        Wednesday,
+      </if>
+      <if test="thursday != null" >
+        Thursday,
+      </if>
+      <if test="friday != null" >
+        Friday,
+      </if>
+      <if test="saturday != null" >
+        Saturday,
+      </if>
+      <if test="sunday != null" >
+        Sunday,
+      </if>
+      <if test="priority != null" >
+        Priority,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+      <if test="isdelete != null" >
+        IsDelete,
+      </if>
+      <if test="deletepeople != null" >
+        DeletePeople,
+      </if>
+      <if test="deletedate != null" >
+        DeleteDate,
+      </if>
+      <if test="isupload != null" >
+        IsUpload,
+      </if>
+      <if test="eventtime != null" >
+        EventTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="versionnumber != null" >
+        #{versionnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="rulename != null" >
+        #{rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="startendtime != null" >
+        #{startendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="monday != null" >
+        #{monday,jdbcType=INTEGER},
+      </if>
+      <if test="tuesday != null" >
+        #{tuesday,jdbcType=INTEGER},
+      </if>
+      <if test="wednesday != null" >
+        #{wednesday,jdbcType=INTEGER},
+      </if>
+      <if test="thursday != null" >
+        #{thursday,jdbcType=INTEGER},
+      </if>
+      <if test="friday != null" >
+        #{friday,jdbcType=INTEGER},
+      </if>
+      <if test="saturday != null" >
+        #{saturday,jdbcType=INTEGER},
+      </if>
+      <if test="sunday != null" >
+        #{sunday,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createpeople != null" >
+        #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=BIT},
+      </if>
+      <if test="deletepeople != null" >
+        #{deletepeople,jdbcType=INTEGER},
+      </if>
+      <if test="deletedate != null" >
+        #{deletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isupload != null" >
+        #{isupload,jdbcType=BIT},
+      </if>
+      <if test="eventtime != null" >
+        #{eventtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_weekrule_history" >
+    update tc_weekrule_history
+    <set >
+      <if test="rulename != null" >
+        RuleName = #{rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="startendtime != null" >
+        StartEndTime = #{startendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="monday != null" >
+        Monday = #{monday,jdbcType=INTEGER},
+      </if>
+      <if test="tuesday != null" >
+        Tuesday = #{tuesday,jdbcType=INTEGER},
+      </if>
+      <if test="wednesday != null" >
+        Wednesday = #{wednesday,jdbcType=INTEGER},
+      </if>
+      <if test="thursday != null" >
+        Thursday = #{thursday,jdbcType=INTEGER},
+      </if>
+      <if test="friday != null" >
+        Friday = #{friday,jdbcType=INTEGER},
+      </if>
+      <if test="saturday != null" >
+        Saturday = #{saturday,jdbcType=INTEGER},
+      </if>
+      <if test="sunday != null" >
+        Sunday = #{sunday,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        Priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople = #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        IsDelete = #{isdelete,jdbcType=BIT},
+      </if>
+      <if test="deletepeople != null" >
+        DeletePeople = #{deletepeople,jdbcType=INTEGER},
+      </if>
+      <if test="deletedate != null" >
+        DeleteDate = #{deletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isupload != null" >
+        IsUpload = #{isupload,jdbcType=BIT},
+      </if>
+      <if test="eventtime != null" >
+        EventTime = #{eventtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RecordID = #{recordid,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_weekrule_history" >
+    update tc_weekrule_history
+    set RuleName = #{rulename,jdbcType=VARCHAR},
+      StartEndTime = #{startendtime,jdbcType=VARCHAR},
+      Monday = #{monday,jdbcType=INTEGER},
+      Tuesday = #{tuesday,jdbcType=INTEGER},
+      Wednesday = #{wednesday,jdbcType=INTEGER},
+      Thursday = #{thursday,jdbcType=INTEGER},
+      Friday = #{friday,jdbcType=INTEGER},
+      Saturday = #{saturday,jdbcType=INTEGER},
+      Sunday = #{sunday,jdbcType=INTEGER},
+      Priority = #{priority,jdbcType=INTEGER},
+      Note = #{note,jdbcType=VARCHAR},
+      CreatePeople = #{createpeople,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      IsDelete = #{isdelete,jdbcType=BIT},
+      DeletePeople = #{deletepeople,jdbcType=INTEGER},
+      DeleteDate = #{deletedate,jdbcType=TIMESTAMP},
+      IsUpload = #{isupload,jdbcType=BIT},
+      EventTime = #{eventtime,jdbcType=TIMESTAMP}
+    where RecordID = #{recordid,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

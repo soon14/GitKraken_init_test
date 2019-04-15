@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_chargerule_historyMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_chargerule_history" >
+    <id column="ChargeRuleID" property="chargeruleid" jdbcType="INTEGER" />
+    <id column="parkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <id column="VersionNumber" property="versionnumber" jdbcType="VARCHAR" />
+    <result column="ChargeRuleName" property="chargerulename" jdbcType="VARCHAR" />
+    <result column="UserType" property="usertype" jdbcType="INTEGER" />
+    <result column="ChargeNo" property="chargeno" jdbcType="INTEGER" />
+    <result column="ChildRuleID" property="childruleid" jdbcType="INTEGER" />
+    <result column="AllFilesName" property="allfilesname" jdbcType="VARCHAR" />
+    <result column="PageName" property="pagename" jdbcType="VARCHAR" />
+    <result column="ChargeRuleDescribe" property="chargeruledescribe" jdbcType="VARCHAR" />
+    <result column="IsFixed" property="isfixed" jdbcType="BIT" />
+    <result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="IsDelete" property="isdelete" jdbcType="BIT" />
+    <result column="DeletePeople" property="deletepeople" jdbcType="INTEGER" />
+    <result column="DeleteDate" property="deletedate" jdbcType="TIMESTAMP" />
+    <result column="ParkingType" property="parkingtype" jdbcType="INTEGER" />
+    <result column="IsUpload" property="isupload" jdbcType="BIT" />
+    <result column="IsWeekRule" property="isweekrule" jdbcType="BIT" />
+    <result column="EventTime" property="eventtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ChargeRuleID, parkingLotNo, VersionNumber, ChargeRuleName, UserType, ChargeNo, ChildRuleID, 
+    AllFilesName, PageName, ChargeRuleDescribe, IsFixed, CreatePeople, CreateDate, UpdatePeople, 
+    UpdateDate, IsDelete, DeletePeople, DeleteDate, ParkingType, IsUpload, IsWeekRule, 
+    EventTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerule_historyKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_chargerule_history
+    where ChargeRuleID = #{chargeruleid,jdbcType=INTEGER}
+      and parkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerule_historyKey" >
+    delete from tc_chargerule_history
+    where ChargeRuleID = #{chargeruleid,jdbcType=INTEGER}
+      and parkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerule_history" >
+    insert into tc_chargerule_history (ChargeRuleID, parkingLotNo, VersionNumber, 
+      ChargeRuleName, UserType, ChargeNo, 
+      ChildRuleID, AllFilesName, PageName, 
+      ChargeRuleDescribe, IsFixed, CreatePeople, 
+      CreateDate, UpdatePeople, UpdateDate, 
+      IsDelete, DeletePeople, DeleteDate, 
+      ParkingType, IsUpload, IsWeekRule, 
+      EventTime)
+    values (#{chargeruleid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR}, #{versionnumber,jdbcType=VARCHAR}, 
+      #{chargerulename,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, #{chargeno,jdbcType=INTEGER}, 
+      #{childruleid,jdbcType=INTEGER}, #{allfilesname,jdbcType=VARCHAR}, #{pagename,jdbcType=VARCHAR}, 
+      #{chargeruledescribe,jdbcType=VARCHAR}, #{isfixed,jdbcType=BIT}, #{createpeople,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updatepeople,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP}, 
+      #{isdelete,jdbcType=BIT}, #{deletepeople,jdbcType=INTEGER}, #{deletedate,jdbcType=TIMESTAMP}, 
+      #{parkingtype,jdbcType=INTEGER}, #{isupload,jdbcType=BIT}, #{isweekrule,jdbcType=BIT}, 
+      #{eventtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerule_history" >
+    insert into tc_chargerule_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chargeruleid != null" >
+        ChargeRuleID,
+      </if>
+      <if test="parkinglotno != null" >
+        parkingLotNo,
+      </if>
+      <if test="versionnumber != null" >
+        VersionNumber,
+      </if>
+      <if test="chargerulename != null" >
+        ChargeRuleName,
+      </if>
+      <if test="usertype != null" >
+        UserType,
+      </if>
+      <if test="chargeno != null" >
+        ChargeNo,
+      </if>
+      <if test="childruleid != null" >
+        ChildRuleID,
+      </if>
+      <if test="allfilesname != null" >
+        AllFilesName,
+      </if>
+      <if test="pagename != null" >
+        PageName,
+      </if>
+      <if test="chargeruledescribe != null" >
+        ChargeRuleDescribe,
+      </if>
+      <if test="isfixed != null" >
+        IsFixed,
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+      <if test="isdelete != null" >
+        IsDelete,
+      </if>
+      <if test="deletepeople != null" >
+        DeletePeople,
+      </if>
+      <if test="deletedate != null" >
+        DeleteDate,
+      </if>
+      <if test="parkingtype != null" >
+        ParkingType,
+      </if>
+      <if test="isupload != null" >
+        IsUpload,
+      </if>
+      <if test="isweekrule != null" >
+        IsWeekRule,
+      </if>
+      <if test="eventtime != null" >
+        EventTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chargeruleid != null" >
+        #{chargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="versionnumber != null" >
+        #{versionnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chargerulename != null" >
+        #{chargerulename,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="chargeno != null" >
+        #{chargeno,jdbcType=INTEGER},
+      </if>
+      <if test="childruleid != null" >
+        #{childruleid,jdbcType=INTEGER},
+      </if>
+      <if test="allfilesname != null" >
+        #{allfilesname,jdbcType=VARCHAR},
+      </if>
+      <if test="pagename != null" >
+        #{pagename,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeruledescribe != null" >
+        #{chargeruledescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="isfixed != null" >
+        #{isfixed,jdbcType=BIT},
+      </if>
+      <if test="createpeople != null" >
+        #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=BIT},
+      </if>
+      <if test="deletepeople != null" >
+        #{deletepeople,jdbcType=INTEGER},
+      </if>
+      <if test="deletedate != null" >
+        #{deletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parkingtype != null" >
+        #{parkingtype,jdbcType=INTEGER},
+      </if>
+      <if test="isupload != null" >
+        #{isupload,jdbcType=BIT},
+      </if>
+      <if test="isweekrule != null" >
+        #{isweekrule,jdbcType=BIT},
+      </if>
+      <if test="eventtime != null" >
+        #{eventtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerule_history" >
+    update tc_chargerule_history
+    <set >
+      <if test="chargerulename != null" >
+        ChargeRuleName = #{chargerulename,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        UserType = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="chargeno != null" >
+        ChargeNo = #{chargeno,jdbcType=INTEGER},
+      </if>
+      <if test="childruleid != null" >
+        ChildRuleID = #{childruleid,jdbcType=INTEGER},
+      </if>
+      <if test="allfilesname != null" >
+        AllFilesName = #{allfilesname,jdbcType=VARCHAR},
+      </if>
+      <if test="pagename != null" >
+        PageName = #{pagename,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeruledescribe != null" >
+        ChargeRuleDescribe = #{chargeruledescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="isfixed != null" >
+        IsFixed = #{isfixed,jdbcType=BIT},
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople = #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        IsDelete = #{isdelete,jdbcType=BIT},
+      </if>
+      <if test="deletepeople != null" >
+        DeletePeople = #{deletepeople,jdbcType=INTEGER},
+      </if>
+      <if test="deletedate != null" >
+        DeleteDate = #{deletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parkingtype != null" >
+        ParkingType = #{parkingtype,jdbcType=INTEGER},
+      </if>
+      <if test="isupload != null" >
+        IsUpload = #{isupload,jdbcType=BIT},
+      </if>
+      <if test="isweekrule != null" >
+        IsWeekRule = #{isweekrule,jdbcType=BIT},
+      </if>
+      <if test="eventtime != null" >
+        EventTime = #{eventtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ChargeRuleID = #{chargeruleid,jdbcType=INTEGER}
+      and parkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_chargerule_history" >
+    update tc_chargerule_history
+    set ChargeRuleName = #{chargerulename,jdbcType=VARCHAR},
+      UserType = #{usertype,jdbcType=INTEGER},
+      ChargeNo = #{chargeno,jdbcType=INTEGER},
+      ChildRuleID = #{childruleid,jdbcType=INTEGER},
+      AllFilesName = #{allfilesname,jdbcType=VARCHAR},
+      PageName = #{pagename,jdbcType=VARCHAR},
+      ChargeRuleDescribe = #{chargeruledescribe,jdbcType=VARCHAR},
+      IsFixed = #{isfixed,jdbcType=BIT},
+      CreatePeople = #{createpeople,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      IsDelete = #{isdelete,jdbcType=BIT},
+      DeletePeople = #{deletepeople,jdbcType=INTEGER},
+      DeleteDate = #{deletedate,jdbcType=TIMESTAMP},
+      ParkingType = #{parkingtype,jdbcType=INTEGER},
+      IsUpload = #{isupload,jdbcType=BIT},
+      IsWeekRule = #{isweekrule,jdbcType=BIT},
+      EventTime = #{eventtime,jdbcType=TIMESTAMP}
+    where ChargeRuleID = #{chargeruleid,jdbcType=INTEGER}
+      and parkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

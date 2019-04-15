@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_userinfoMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.reformer.cloudpark.model.Tc_userinfo">
+		<id column="RecordID" property="recordid" jdbcType="INTEGER" />
+		<result column="UserNo" property="userno" jdbcType="VARCHAR" />
+		<result column="UserName" property="username" jdbcType="VARCHAR" />
+		<result column="ParkingLot" property="parkinglot" jdbcType="INTEGER" />
+		<result column="CarCode" property="carcode" jdbcType="VARCHAR" />
+		<result column="CarCode1" property="carcode1" jdbcType="VARCHAR" />
+		<result column="CarCode2" property="carcode2" jdbcType="VARCHAR" />
+		<result column="ChargeRuleID" property="chargeruleid" jdbcType="INTEGER" />
+		<result column="UserPropertiy" property="userpropertiy"
+			jdbcType="INTEGER" />
+		<result column="Bgndt" property="bgndt" jdbcType="TIMESTAMP" />
+		<result column="Enddt" property="enddt" jdbcType="TIMESTAMP" />
+		<result column="CarLabel" property="carlabel" jdbcType="VARCHAR" />
+		<result column="CarColor" property="carcolor" jdbcType="VARCHAR" />
+		<result column="CarStyleid" property="carstyleid" jdbcType="INTEGER" />
+		<result column="UserTel" property="usertel" jdbcType="VARCHAR" />
+		<result column="UserAddress" property="useraddress" jdbcType="VARCHAR" />
+		<result column="UserMemo" property="usermemo" jdbcType="VARCHAR" />
+		<result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+		<result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+		<result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+		<result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+		<result column="CarCode3" property="carcode3" jdbcType="VARCHAR" />
+		<result column="CarCode4" property="carcode4" jdbcType="VARCHAR" />
+		<result column="IsUpload" property="isupload" jdbcType="BIT" />
+		<result column="IsWhiteList" property="iswhitelist" jdbcType="INTEGER" />
+		<result column="Balance" property="balance" jdbcType="DECIMAL" />
+		<result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="IsFixed" property="isfixed" jdbcType="INTEGER" />
+		<result column="ChannelIds" property="channelids" jdbcType="VARCHAR" />
+		<result column="DataSource" property="datasource" jdbcType="VARCHAR" />
+		<result column="SourceId" property="sourceid" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.reformer.cloudpark.model.Tc_userinfo"
+		extends="BaseResultMap">
+		<result column="CarCodes" property="carcodes" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RecordID, UserNo, UserName, ParkingLot, CarCode, CarCode1,
+		CarCode2,
+		ChargeRuleID,
+		UserPropertiy, Bgndt, Enddt, CarLabel, CarColor,
+		CarStyleid, UserTel, UserAddress,
+		UserMemo, CreatePeople, CreateDate,
+		UpdatePeople, UpdateDate,
+		CarCode3, CarCode4,
+		IsUpload, IsWhiteList,
+		Balance, ParkingLotNo, IsFixed, ChannelIds, DataSource,
+		SourceId
+	</sql>
+	<sql id="Blob_Column_List">
+		CarCodes
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tc_userinfo
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tc_userinfo
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.reformer.cloudpark.model.Tc_userinfo"
+		useGeneratedKeys="true" keyProperty="recordid">
+		insert into tc_userinfo
+		(RecordID,
+		UserNo, UserName,
+		ParkingLot, CarCode, CarCode1,
+		CarCode2,
+		ChargeRuleID,
+		UserPropertiy,
+		Bgndt, Enddt, CarLabel,
+		CarColor,
+		CarStyleid, UserTel,
+		UserAddress, UserMemo, CreatePeople,
+		CreateDate,
+		UpdatePeople,
+		UpdateDate,
+		CarCode3, CarCode4, IsUpload,
+		IsWhiteList,
+		Balance,
+		ParkingLotNo,
+		IsFixed, ChannelIds, DataSource,
+		SourceId,
+		CarCodes)
+		values
+		(#{recordid,jdbcType=INTEGER},
+		#{userno,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+		#{parkinglot,jdbcType=INTEGER},
+		#{carcode,jdbcType=VARCHAR},
+		#{carcode1,jdbcType=VARCHAR},
+		#{carcode2,jdbcType=VARCHAR},
+		#{chargeruleid,jdbcType=INTEGER},
+		#{userpropertiy,jdbcType=INTEGER},
+		#{bgndt,jdbcType=TIMESTAMP},
+		#{enddt,jdbcType=TIMESTAMP},
+		#{carlabel,jdbcType=VARCHAR},
+		#{carcolor,jdbcType=VARCHAR},
+		#{carstyleid,jdbcType=INTEGER},
+		#{usertel,jdbcType=VARCHAR},
+		#{useraddress,jdbcType=VARCHAR},
+		#{usermemo,jdbcType=VARCHAR},
+		#{createpeople,jdbcType=INTEGER},
+		#{createdate,jdbcType=TIMESTAMP},
+		#{updatepeople,jdbcType=INTEGER},
+		#{updatedate,jdbcType=TIMESTAMP},
+		#{carcode3,jdbcType=VARCHAR},
+		#{carcode4,jdbcType=VARCHAR},
+		#{isupload,jdbcType=BIT},
+		#{iswhitelist,jdbcType=INTEGER},
+		#{balance,jdbcType=DECIMAL},
+		#{parkinglotno,jdbcType=VARCHAR},
+		#{isfixed,jdbcType=INTEGER},
+		#{channelids,jdbcType=VARCHAR},
+		#{datasource,jdbcType=VARCHAR},
+		#{sourceid,jdbcType=VARCHAR},
+		#{carcodes,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.reformer.cloudpark.model.Tc_userinfo">
+		insert into tc_userinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				RecordID,
+			</if>
+			<if test="userno != null">
+				UserNo,
+			</if>
+			<if test="username != null">
+				UserName,
+			</if>
+			<if test="parkinglot != null">
+				ParkingLot,
+			</if>
+			<if test="carcode != null">
+				CarCode,
+			</if>
+			<if test="carcode1 != null">
+				CarCode1,
+			</if>
+			<if test="carcode2 != null">
+				CarCode2,
+			</if>
+			<if test="chargeruleid != null">
+				ChargeRuleID,
+			</if>
+			<if test="userpropertiy != null">
+				UserPropertiy,
+			</if>
+			<if test="bgndt != null">
+				Bgndt,
+			</if>
+			<if test="enddt != null">
+				Enddt,
+			</if>
+			<if test="carlabel != null">
+				CarLabel,
+			</if>
+			<if test="carcolor != null">
+				CarColor,
+			</if>
+			<if test="carstyleid != null">
+				CarStyleid,
+			</if>
+			<if test="usertel != null">
+				UserTel,
+			</if>
+			<if test="useraddress != null">
+				UserAddress,
+			</if>
+			<if test="usermemo != null">
+				UserMemo,
+			</if>
+			<if test="createpeople != null">
+				CreatePeople,
+			</if>
+			<if test="createdate != null">
+				CreateDate,
+			</if>
+			<if test="updatepeople != null">
+				UpdatePeople,
+			</if>
+			<if test="updatedate != null">
+				UpdateDate,
+			</if>
+			<if test="carcode3 != null">
+				CarCode3,
+			</if>
+			<if test="carcode4 != null">
+				CarCode4,
+			</if>
+			<if test="isupload != null">
+				IsUpload,
+			</if>
+			<if test="iswhitelist != null">
+				IsWhiteList,
+			</if>
+			<if test="balance != null">
+				Balance,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+			<if test="isfixed != null">
+				IsFixed,
+			</if>
+			<if test="channelids != null">
+				ChannelIds,
+			</if>
+			<if test="datasource != null">
+				DataSource,
+			</if>
+			<if test="sourceid != null">
+				SourceId,
+			</if>
+			<if test="carcodes != null">
+				CarCodes,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				#{recordid,jdbcType=INTEGER},
+			</if>
+			<if test="userno != null">
+				#{userno,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="parkinglot != null">
+				#{parkinglot,jdbcType=INTEGER},
+			</if>
+			<if test="carcode != null">
+				#{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode1 != null">
+				#{carcode1,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode2 != null">
+				#{carcode2,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeruleid != null">
+				#{chargeruleid,jdbcType=INTEGER},
+			</if>
+			<if test="userpropertiy != null">
+				#{userpropertiy,jdbcType=INTEGER},
+			</if>
+			<if test="bgndt != null">
+				#{bgndt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enddt != null">
+				#{enddt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="carlabel != null">
+				#{carlabel,jdbcType=VARCHAR},
+			</if>
+			<if test="carcolor != null">
+				#{carcolor,jdbcType=VARCHAR},
+			</if>
+			<if test="carstyleid != null">
+				#{carstyleid,jdbcType=INTEGER},
+			</if>
+			<if test="usertel != null">
+				#{usertel,jdbcType=VARCHAR},
+			</if>
+			<if test="useraddress != null">
+				#{useraddress,jdbcType=VARCHAR},
+			</if>
+			<if test="usermemo != null">
+				#{usermemo,jdbcType=VARCHAR},
+			</if>
+			<if test="createpeople != null">
+				#{createpeople,jdbcType=INTEGER},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatepeople != null">
+				#{updatepeople,jdbcType=INTEGER},
+			</if>
+			<if test="updatedate != null">
+				#{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="carcode3 != null">
+				#{carcode3,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode4 != null">
+				#{carcode4,jdbcType=VARCHAR},
+			</if>
+			<if test="isupload != null">
+				#{isupload,jdbcType=BIT},
+			</if>
+			<if test="iswhitelist != null">
+				#{iswhitelist,jdbcType=INTEGER},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="isfixed != null">
+				#{isfixed,jdbcType=INTEGER},
+			</if>
+			<if test="channelids != null">
+				#{channelids,jdbcType=VARCHAR},
+			</if>
+			<if test="datasource != null">
+				#{datasource,jdbcType=VARCHAR},
+			</if>
+			<if test="sourceid != null">
+				#{sourceid,jdbcType=VARCHAR},
+			</if>
+			<if test="carcodes != null">
+				#{carcodes,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.reformer.cloudpark.model.Tc_userinfo">
+		update tc_userinfo
+		<set>
+			<if test="userno != null">
+				UserNo = #{userno,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				UserName = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="parkinglot != null">
+				ParkingLot = #{parkinglot,jdbcType=INTEGER},
+			</if>
+			<if test="carcode != null">
+				CarCode = #{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode1 != null">
+				CarCode1 = #{carcode1,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode2 != null">
+				CarCode2 = #{carcode2,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeruleid != null">
+				ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+			</if>
+			<if test="userpropertiy != null">
+				UserPropertiy = #{userpropertiy,jdbcType=INTEGER},
+			</if>
+			<if test="bgndt != null">
+				Bgndt = #{bgndt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enddt != null">
+				Enddt = #{enddt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="carlabel != null">
+				CarLabel = #{carlabel,jdbcType=VARCHAR},
+			</if>
+			<if test="carcolor != null">
+				CarColor = #{carcolor,jdbcType=VARCHAR},
+			</if>
+			<if test="carstyleid != null">
+				CarStyleid = #{carstyleid,jdbcType=INTEGER},
+			</if>
+			<if test="usertel != null">
+				UserTel = #{usertel,jdbcType=VARCHAR},
+			</if>
+			<if test="useraddress != null">
+				UserAddress = #{useraddress,jdbcType=VARCHAR},
+			</if>
+			<if test="usermemo != null">
+				UserMemo = #{usermemo,jdbcType=VARCHAR},
+			</if>
+			<if test="createpeople != null">
+				CreatePeople = #{createpeople,jdbcType=INTEGER},
+			</if>
+			<if test="createdate != null">
+				CreateDate = #{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatepeople != null">
+				UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+			</if>
+			<if test="updatedate != null">
+				UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="carcode3 != null">
+				CarCode3 = #{carcode3,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode4 != null">
+				CarCode4 = #{carcode4,jdbcType=VARCHAR},
+			</if>
+			<if test="isupload != null">
+				IsUpload = #{isupload,jdbcType=BIT},
+			</if>
+			<if test="iswhitelist != null">
+				IsWhiteList = #{iswhitelist,jdbcType=INTEGER},
+			</if>
+			<if test="balance != null">
+				Balance = #{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="isfixed != null">
+				IsFixed = #{isfixed,jdbcType=INTEGER},
+			</if>
+			<if test="channelids != null">
+				ChannelIds = #{channelids,jdbcType=VARCHAR},
+			</if>
+			<if test="datasource != null">
+				DataSource = #{datasource,jdbcType=VARCHAR},
+			</if>
+			<if test="sourceid != null">
+				SourceId = #{sourceid,jdbcType=VARCHAR},
+			</if>
+			<if test="carcodes != null">
+				CarCodes = #{carcodes,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.reformer.cloudpark.model.Tc_userinfo">
+		update
+		tc_userinfo
+		set UserNo = #{userno,jdbcType=VARCHAR},
+		UserName =
+		#{username,jdbcType=VARCHAR},
+		ParkingLot =
+		#{parkinglot,jdbcType=INTEGER},
+		CarCode = #{carcode,jdbcType=VARCHAR},
+		CarCode1 = #{carcode1,jdbcType=VARCHAR},
+		CarCode2 =
+		#{carcode2,jdbcType=VARCHAR},
+		ChargeRuleID =
+		#{chargeruleid,jdbcType=INTEGER},
+		UserPropertiy =
+		#{userpropertiy,jdbcType=INTEGER},
+		Bgndt = #{bgndt,jdbcType=TIMESTAMP},
+		Enddt = #{enddt,jdbcType=TIMESTAMP},
+		CarLabel =
+		#{carlabel,jdbcType=VARCHAR},
+		CarColor = #{carcolor,jdbcType=VARCHAR},
+		CarStyleid = #{carstyleid,jdbcType=INTEGER},
+		UserTel =
+		#{usertel,jdbcType=VARCHAR},
+		UserAddress =
+		#{useraddress,jdbcType=VARCHAR},
+		UserMemo =
+		#{usermemo,jdbcType=VARCHAR},
+		CreatePeople =
+		#{createpeople,jdbcType=INTEGER},
+		CreateDate =
+		#{createdate,jdbcType=TIMESTAMP},
+		UpdatePeople =
+		#{updatepeople,jdbcType=INTEGER},
+		UpdateDate =
+		#{updatedate,jdbcType=TIMESTAMP},
+		CarCode3 =
+		#{carcode3,jdbcType=VARCHAR},
+		CarCode4 = #{carcode4,jdbcType=VARCHAR},
+		IsUpload = #{isupload,jdbcType=BIT},
+		IsWhiteList =
+		#{iswhitelist,jdbcType=INTEGER},
+		Balance = #{balance,jdbcType=DECIMAL},
+		ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+		IsFixed =
+		#{isfixed,jdbcType=INTEGER},
+		ChannelIds =
+		#{channelids,jdbcType=VARCHAR},
+		DataSource =
+		#{datasource,jdbcType=VARCHAR},
+		SourceId =
+		#{sourceid,jdbcType=VARCHAR},
+		CarCodes =
+		#{carcodes,jdbcType=LONGVARCHAR}
+		where RecordID =
+		#{recordid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.reformer.cloudpark.model.Tc_userinfo">
+		update tc_userinfo
+		set UserNo = #{userno,jdbcType=VARCHAR},
+		UserName =
+		#{username,jdbcType=VARCHAR},
+		ParkingLot =
+		#{parkinglot,jdbcType=INTEGER},
+		CarCode = #{carcode,jdbcType=VARCHAR},
+		CarCode1 = #{carcode1,jdbcType=VARCHAR},
+		CarCode2 =
+		#{carcode2,jdbcType=VARCHAR},
+		ChargeRuleID =
+		#{chargeruleid,jdbcType=INTEGER},
+		UserPropertiy =
+		#{userpropertiy,jdbcType=INTEGER},
+		Bgndt = #{bgndt,jdbcType=TIMESTAMP},
+		Enddt = #{enddt,jdbcType=TIMESTAMP},
+		CarLabel =
+		#{carlabel,jdbcType=VARCHAR},
+		CarColor = #{carcolor,jdbcType=VARCHAR},
+		CarStyleid = #{carstyleid,jdbcType=INTEGER},
+		UserTel =
+		#{usertel,jdbcType=VARCHAR},
+		UserAddress =
+		#{useraddress,jdbcType=VARCHAR},
+		UserMemo =
+		#{usermemo,jdbcType=VARCHAR},
+		CreatePeople =
+		#{createpeople,jdbcType=INTEGER},
+		CreateDate =
+		#{createdate,jdbcType=TIMESTAMP},
+		UpdatePeople =
+		#{updatepeople,jdbcType=INTEGER},
+		UpdateDate =
+		#{updatedate,jdbcType=TIMESTAMP},
+		CarCode3 =
+		#{carcode3,jdbcType=VARCHAR},
+		CarCode4 = #{carcode4,jdbcType=VARCHAR},
+		IsUpload = #{isupload,jdbcType=BIT},
+		IsWhiteList =
+		#{iswhitelist,jdbcType=INTEGER},
+		Balance = #{balance,jdbcType=DECIMAL},
+		ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+		IsFixed =
+		#{isfixed,jdbcType=INTEGER},
+		ChannelIds =
+		#{channelids,jdbcType=VARCHAR},
+		DataSource =
+		#{datasource,jdbcType=VARCHAR},
+		SourceId = #{sourceid,jdbcType=VARCHAR}
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</update>
+
+
+	<select id="selectBylicensePlateNumber" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tc_userinfo
+		where (CarCode = #{carcode} or CarCode1 = #{carcode}
+		or CarCode2 = #{carcode} or CarCode3 = #{carcode}
+		or CarCode4=
+		#{carcode} ) and ParkingLotNo = #{parkinglotno}
+		and <![CDATA[ Bgndt<=]]>
+		#{datetime}
+		and <![CDATA[ Enddt >=]]>
+		#{datetime}
+
+		limit 1
+	</select>
+
+	<select id="selectByParkCodeAndEnddt" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tc_userinfo
+		where (CarCode = #{carcode} or CarCode1 = #{carcode}
+		or CarCode2 = #{carcode} or CarCode3 = #{carcode}
+		or CarCode4=
+		#{carcode} ) and ParkingLotNo = #{parkinglotno}
+		and <![CDATA[ Enddt >=]]>
+		#{datetime}
+		limit 1
+	</select>
+
+
+	<select id="selectByParkinglotno" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tc_userinfo
+		where ParkingLotNo = #{ParkingLotNo,jdbcType=VARCHAR}
+	</select>
+
+
+	<select id="selectByCarCodeAndParkingLotNo" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tc_userinfo
+		where (CarCode = #{carcode} or CarCode1 = #{carcode}
+		or CarCode2 = #{carcode} or CarCode3 = #{carcode}
+		or CarCode4=
+		#{carcode} ) and ParkingLotNo = #{parkinglotno}
+		limit 1
+	</select>
+
+	<select id="selectByUserNoAndParkingLotNo" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tc_userinfo
+		where ((CarCode = #{carcode} and CarCode1=#{carcode1}
+		and
+		CarCode2=#{carcode2}) or
+		(CarCode = #{carcode} and
+		CarCode1=#{carcode2} and CarCode2=#{carcode1}) or
+		(CarCode =
+		#{carcode1} and CarCode1=#{carcode} and
+		CarCode2=#{carcode2}) or
+		(CarCode = #{carcode1} and CarCode1=#{carcode2} and
+		CarCode2=#{carcode}) or
+		(CarCode = #{carcode2} and CarCode1=#{carcode}
+		and
+		CarCode2=#{carcode1}) or
+		(CarCode = #{carcode2} and
+		CarCode1=#{carcode1} and CarCode2=#{carcode}))
+		and ParkingLotNo =
+		#{parkinglotno}
+		limit 1
+	</select>
+
+	<select id="selectByDataSourceAndParkingLotNo" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tc_userinfo
+		where DataSource=#{datasource} and
+		SourceId=#{sourceid} and ParkingLotNo = #{parkinglotno}
+		limit 1
+	</select>
+
+
+</mapper>

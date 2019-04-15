@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_channelMapper">
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_channel">
+		<id column="ChannelID" property="channelid" jdbcType="INTEGER" />
+		<result column="ChannelName" property="channelname" jdbcType="VARCHAR" />
+		<result column="ChannelType" property="channeltype" jdbcType="INTEGER" />
+		<result column="MStationNo" property="mstationno" jdbcType="INTEGER" />
+		<result column="InOrOut" property="inorout" jdbcType="INTEGER" />
+		<result column="IsRepeatInOut" property="isrepeatinout"
+			jdbcType="BIT" />
+		<result column="IsChannelControl" property="ischannelcontrol"
+			jdbcType="BIT" />
+		<result column="ParkingChannelID" property="parkingchannelid"
+			jdbcType="INTEGER" />
+		<result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="ChargeRuleID" property="chargeruleid" jdbcType="INTEGER" />
+		<result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+		<result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+		<result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+		<result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+		<result column="IsDelete" property="isdelete" jdbcType="BIT" />
+		<result column="DeletePeople" property="deletepeople" jdbcType="INTEGER" />
+		<result column="DeleteDate" property="deletedate" jdbcType="TIMESTAMP" />
+		<result column="CameraID" property="cameraid" jdbcType="INTEGER" />
+		<result column="CameraID2" property="cameraid2" jdbcType="INTEGER" />
+		<result column="ParkingAreaID" property="parkingareaid"
+			jdbcType="INTEGER" />
+		<result column="GateID" property="gateid" jdbcType="INTEGER" />
+		<result column="ChannelControl" property="channelcontrol"
+			jdbcType="VARCHAR" />
+		<result column="IsUploadRecord" property="isuploadrecord"
+			jdbcType="BIT" />
+		<result column="IsSendNotice" property="issendnotice" jdbcType="BIT" />
+		<result column="InsideOrOutside" property="insideoroutside"
+			jdbcType="INTEGER" />
+		<result column="IsAllIn" property="isallin" jdbcType="BIT" />
+		<result column="IsCharge" property="ischarge" jdbcType="BIT" />
+		<result column="NextAreaID" property="nextareaid" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ChannelID, ChannelName, ChannelType, MStationNo, InOrOut,
+		IsRepeatInOut,
+		IsChannelControl,
+		ParkingChannelID, ParkingLotNo,
+		ChargeRuleID, CreatePeople, CreateDate, UpdatePeople,
+		UpdateDate,
+		IsDelete, DeletePeople, DeleteDate, CameraID, CameraID2,
+		ParkingAreaID,
+		GateID,ChannelControl,IsUploadRecord,IsSendNotice,InsideOrOutside,IsAllIn,IsCharge,NextAreaID
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tc_channel
+		where ChannelID = #{channelid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tc_channel
+		where ChannelID = #{channelid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_channel">
+		insert into tc_channel
+		(ChannelID, ChannelName, ChannelType,
+		MStationNo, InOrOut,
+		IsRepeatInOut,
+		IsChannelControl, ParkingChannelID, ParkingLotNo,
+		ChargeRuleID, CreatePeople, CreateDate,
+		UpdatePeople, UpdateDate,
+		IsDelete,
+		DeletePeople, DeleteDate, CameraID,
+		CameraID2, ParkingAreaID,
+		GateID,ChannelControl,IsUploadRecord,IsSendNotice,InsideOrOutside,IsAllIn,IsCharge,NextAreaID
+		)
+		values
+		(#{channelid,jdbcType=INTEGER},
+		#{channelname,jdbcType=VARCHAR},
+		#{channeltype,jdbcType=INTEGER},
+		#{mstationno,jdbcType=INTEGER},
+		#{inorout,jdbcType=INTEGER},
+		#{isrepeatinout,jdbcType=BIT},
+		#{ischannelcontrol,jdbcType=BIT},
+		#{parkingchannelid,jdbcType=INTEGER},
+		#{parkinglotno,jdbcType=VARCHAR},
+		#{chargeruleid,jdbcType=INTEGER},
+		#{createpeople,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP},
+		#{updatepeople,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP},
+		#{isdelete,jdbcType=BIT},
+		#{deletepeople,jdbcType=INTEGER},
+		#{deletedate,jdbcType=TIMESTAMP}, #{cameraid,jdbcType=INTEGER},
+		#{cameraid2,jdbcType=INTEGER}, #{parkingareaid,jdbcType=INTEGER},
+		#{gateid,jdbcType=INTEGER},#{channelcontrol,jdbcType=VARCHAR},
+		#{isuploadrecord,jdbcType=BIT},#{issendnotice,jdbcType=BIT},
+		#{insideorout,jdbcType=INTEGER},
+		#{isallin,jdbcType=BIT},#{ischarge,jdbcType=BIT},#{nextareaid,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_channel">
+		insert into tc_channel
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="channelid != null">
+				ChannelID,
+			</if>
+			<if test="channelname != null">
+				ChannelName,
+			</if>
+			<if test="channeltype != null">
+				ChannelType,
+			</if>
+			<if test="mstationno != null">
+				MStationNo,
+			</if>
+			<if test="inorout != null">
+				InOrOut,
+			</if>
+			<if test="isrepeatinout != null">
+				IsRepeatInOut,
+			</if>
+			<if test="ischannelcontrol != null">
+				IsChannelControl,
+			</if>
+			<if test="parkingchannelid != null">
+				ParkingChannelID,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+			<if test="chargeruleid != null">
+				ChargeRuleID,
+			</if>
+			<if test="createpeople != null">
+				CreatePeople,
+			</if>
+			<if test="createdate != null">
+				CreateDate,
+			</if>
+			<if test="updatepeople != null">
+				UpdatePeople,
+			</if>
+			<if test="updatedate != null">
+				UpdateDate,
+			</if>
+			<if test="isdelete != null">
+				IsDelete,
+			</if>
+			<if test="deletepeople != null">
+				DeletePeople,
+			</if>
+			<if test="deletedate != null">
+				DeleteDate,
+			</if>
+			<if test="cameraid != null">
+				CameraID,
+			</if>
+			<if test="cameraid2 != null">
+				CameraID2,
+			</if>
+			<if test="parkingareaid != null">
+				ParkingAreaID,
+			</if>
+			<if test="gateid != null">
+				GateID,
+			</if>
+			<if test="channelcontrol != null">
+				ChannelControl,
+			</if>
+			<if test="isuploadrecord != null">
+				IsUploadRecord,
+			</if>
+			<if test="issendnotice != null">
+				IsSendNotice,
+			</if>
+			<if test="insideoroutside != null">
+				InsideOrOutside,
+			</if>
+			<if test="isallin != null">
+				IsAllIn,
+			</if>
+			<if test="ischarge != null">
+				IsCharge,
+			</if>
+			<if test="nextareaid != null">
+				NextAreaID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="channelid != null">
+				#{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="channelname != null">
+				#{channelname,jdbcType=VARCHAR},
+			</if>
+			<if test="channeltype != null">
+				#{channeltype,jdbcType=INTEGER},
+			</if>
+			<if test="mstationno != null">
+				#{mstationno,jdbcType=INTEGER},
+			</if>
+			<if test="inorout != null">
+				#{inorout,jdbcType=INTEGER},
+			</if>
+			<if test="isrepeatinout != null">
+				#{isrepeatinout,jdbcType=BIT},
+			</if>
+			<if test="ischannelcontrol != null">
+				#{ischannelcontrol,jdbcType=BIT},
+			</if>
+			<if test="parkingchannelid != null">
+				#{parkingchannelid,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeruleid != null">
+				#{chargeruleid,jdbcType=INTEGER},
+			</if>
+			<if test="createpeople != null">
+				#{createpeople,jdbcType=INTEGER},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatepeople != null">
+				#{updatepeople,jdbcType=INTEGER},
+			</if>
+			<if test="updatedate != null">
+				#{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isdelete != null">
+				#{isdelete,jdbcType=BIT},
+			</if>
+			<if test="deletepeople != null">
+				#{deletepeople,jdbcType=INTEGER},
+			</if>
+			<if test="deletedate != null">
+				#{deletedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cameraid != null">
+				#{cameraid,jdbcType=INTEGER},
+			</if>
+			<if test="cameraid2 != null">
+				#{cameraid2,jdbcType=INTEGER},
+			</if>
+			<if test="parkingareaid != null">
+				#{parkingareaid,jdbcType=INTEGER},
+			</if>
+			<if test="gateid != null">
+				#{gateid,jdbcType=INTEGER},
+			</if>
+			<if test="channelcontrol != null">
+				#{channelcontrol,jdbcType=VARCHAR},
+			</if>
+
+			<if test="isuploadrecord != null">
+				#{isuploadrecord,jdbcType=BIT},
+			</if>
+			<if test="issendnotice != null">
+				#{issendnotice,jdbcType=BIT},
+			</if>
+			<if test="insideoroutside != null">
+				#{insideoroutside,jdbcType=INTEGER},
+			</if>
+			<if test="isallin != null">
+				#{isallin,jdbcType=BIT},
+			</if>
+			<if test="ischarge != null">
+				#{ischarge,jdbcType=BIT},
+			</if>
+			<if test="nextareaid != null">
+				#{nextareaid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_channel">
+		update tc_channel
+		<set>
+			<if test="channelname != null">
+				ChannelName = #{channelname,jdbcType=VARCHAR},
+			</if>
+			<if test="channeltype != null">
+				ChannelType = #{channeltype,jdbcType=INTEGER},
+			</if>
+			<if test="mstationno != null">
+				MStationNo = #{mstationno,jdbcType=INTEGER},
+			</if>
+			<if test="inorout != null">
+				InOrOut = #{inorout,jdbcType=INTEGER},
+			</if>
+			<if test="isrepeatinout != null">
+				IsRepeatInOut = #{isrepeatinout,jdbcType=BIT},
+			</if>
+			<if test="ischannelcontrol != null">
+				IsChannelControl = #{ischannelcontrol,jdbcType=BIT},
+			</if>
+			<if test="parkingchannelid != null">
+				ParkingChannelID = #{parkingchannelid,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeruleid != null">
+				ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+			</if>
+			<if test="createpeople != null">
+				CreatePeople = #{createpeople,jdbcType=INTEGER},
+			</if>
+			<if test="createdate != null">
+				CreateDate = #{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatepeople != null">
+				UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+			</if>
+			<if test="updatedate != null">
+				UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isdelete != null">
+				IsDelete = #{isdelete,jdbcType=BIT},
+			</if>
+			<if test="deletepeople != null">
+				DeletePeople = #{deletepeople,jdbcType=INTEGER},
+			</if>
+			<if test="deletedate != null">
+				DeleteDate = #{deletedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cameraid != null">
+				CameraID = #{cameraid,jdbcType=INTEGER},
+			</if>
+			<if test="cameraid2 != null">
+				CameraID2 = #{cameraid2,jdbcType=INTEGER},
+			</if>
+			<if test="parkingareaid != null">
+				ParkingAreaID = #{parkingareaid,jdbcType=INTEGER},
+			</if>
+			<if test="gateid != null">
+				GateID = #{gateid,jdbcType=INTEGER},
+			</if>
+			<if test="channelcontrol != null">
+				ChannelControl = #{channelcontrol,jdbcType=VARCHAR},
+			</if>
+
+			<if test="isuploadrecord != null">
+				IsUploadRecord = #{isuploadrecord,jdbcType=BIT},
+			</if>
+			<if test="issendnotice != null">
+				IsSendNotice = #{issendnotice,jdbcType=BIT},
+			</if>
+			<if test="insideoroutside != null">
+				InsideOrOutside = #{insideoroutside,jdbcType=INTEGER},
+			</if>
+			<if test="isallin != null">
+				IsAllIn = #{isallin,jdbcType=BIT},
+			</if>
+			<if test="ischarge != null">
+				IsCharge = #{ischarge,jdbcType=BIT},
+			</if>
+			<if test="nextareaid != null">
+				NextAreaID = #{nextareaid,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ChannelID = #{channelid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_channel">
+		update tc_channel
+		set ChannelName = #{channelname,jdbcType=VARCHAR},
+		ChannelType =
+		#{channeltype,jdbcType=INTEGER},
+		MStationNo =
+		#{mstationno,jdbcType=INTEGER},
+		InOrOut = #{inorout,jdbcType=INTEGER},
+		IsRepeatInOut = #{isrepeatinout,jdbcType=BIT},
+		IsChannelControl =
+		#{ischannelcontrol,jdbcType=BIT},
+		ParkingChannelID =
+		#{parkingchannelid,jdbcType=INTEGER},
+		ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR},
+		ChargeRuleID =
+		#{chargeruleid,jdbcType=INTEGER},
+		CreatePeople =
+		#{createpeople,jdbcType=INTEGER},
+		CreateDate =
+		#{createdate,jdbcType=TIMESTAMP},
+		UpdatePeople =
+		#{updatepeople,jdbcType=INTEGER},
+		UpdateDate =
+		#{updatedate,jdbcType=TIMESTAMP},
+		IsDelete = #{isdelete,jdbcType=BIT},
+		DeletePeople = #{deletepeople,jdbcType=INTEGER},
+		DeleteDate =
+		#{deletedate,jdbcType=TIMESTAMP},
+		CameraID =
+		#{cameraid,jdbcType=INTEGER},
+		CameraID2 =
+		#{cameraid2,jdbcType=INTEGER},
+		ParkingAreaID =
+		#{parkingareaid,jdbcType=INTEGER},
+		GateID = #{gateid,jdbcType=INTEGER},
+		ChannelControl = #{channelcontrol,jdbcType=VARCHAR},
+		IsUploadRecord =
+		#{isuploadrecord,jdbcType=BIT},
+		IsSendNotice =
+		#{issendnotice,jdbcType=BIT}
+		where ChannelID =
+		#{channelid,jdbcType=INTEGER},InsideOrOutside =
+		#{insideoroutside,jdbcType=INTEGER},IsAllIn =
+		#{isallin,jdbcType=BIT},IsCharge = #{ischarge,jdbcType=BIT},NextAreaID
+		= #{nextareaid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectByParkingChannelID" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tc_channel
+		where IsDelete=0 and ParkingChannelID =
+		#{parkingchannelid,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByMStationno" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tc_channel
+		where MStationNo = #{mstationno,jdbcType=INTEGER} and IsDelete = 0
+	</select>
+
+	<select id="selectStationIDByParkingChannelID" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		distinct MStationNo
+		from tc_channel
+		where IsDelete=0 and ParkingChannelID =
+		#{parkingchannelid,jdbcType=INTEGER}
+	</select>
+
+</mapper>

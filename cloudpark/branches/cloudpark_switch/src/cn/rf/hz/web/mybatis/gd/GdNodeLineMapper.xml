@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.GdNodeLineMapper" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="cn.rf.hz.web.bean.gd.AreaNodeLine" >
+	<result column="recordId" property="recordId"/>
+	<result column="oldRecordId" property="oldRecordId"/>
+	<result column="nodeId1" property="nodeId1"/>
+	<result column="nodeId2" property="nodeId2"/>
+	<result column="areaId" property="areaId"/>
+	<result column="updTime" property="updTime"/>
+	<result column="carParkId" property="carParkId"/>
+</resultMap>
+       
+<!-- gd_node_line table all fields -->
+<sql id="Base_Column_List" >
+	 recordId,oldRecordId,nodeId1,nodeId2,areaId,updTime,carParkId
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="recordId != null" >
+	    and recordId =  #{recordId}
+	</if>
+	<if test="oldRecordId != null" >
+	    and oldRecordId =  #{oldRecordId}
+	</if>
+	<if test="nodeId1 != null" >
+	    and nodeId1 =  #{nodeId1}
+	</if>
+	<if test="nodeId2 != null" >
+	    and nodeId2 =  #{nodeId2}
+	</if>
+	<if test="areaId != null" >
+	    and areaId =  #{areaId}
+	</if>
+	<if test="updTime != null" >
+	    and updTime =  #{updTime}
+	</if>
+	<if test="carParkId != null" >
+	    and carParkId =  #{carParkId}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_node_line(recordId,oldRecordId,nodeId1,nodeId2,areaId,updTime,carParkId)
+ values(#{recordId},#{oldRecordId},#{nodeId1},#{nodeId2},#{areaId},#{updTime},#{carParkId})
+</insert>
+<insert id="save" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_node_line(recordId,oldRecordId,nodeId1,nodeId2,areaId,updTime,carParkId)
+ values(#{recordId},#{oldRecordId},#{nodeId1},#{nodeId2},#{areaId},#{updTime},#{carParkId})
+</insert>
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update gd_node_line set oldRecordId=#{oldRecordId},nodeId1=#{nodeId1},nodeId2=#{nodeId2},areaId=#{areaId},updTime=#{updTime},carParkId=#{carParkId} where recordId=#{recordId}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update gd_node_line set 
+	<trim  suffixOverrides="," >
+	<if test="nodeId1 != null  ">
+		nodeId1=#{nodeId1},
+	</if>
+	<if test="nodeId2 != null  ">
+		nodeId2=#{nodeId2},
+	</if>
+	<if test="areaId != null  ">
+		areaId=#{areaId},
+	</if>
+	<if test="updTime != null  ">
+		updTime=#{updTime},
+	</if>
+	</trim> where oldRecordId=#{oldRecordId} and carParkId=#{carParkId}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from gd_node_line where recordId = #{recordId}
+</delete>
+ 
+<!-- 根据id查询 页面 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from gd_node_line where recordId = #{recordId}
+</select>
+
+
+<select id="findById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from gd_node_line where oldRecordId = #{oldRecordId} and  carParkId = #{carParkId}
+</select>
+<!-- 根据区域 查询范围 所有节点连线详细信息 -->
+<select id="findAllByAreaId"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from gd_node_line where areaId = #{areaId} and  carParkId = #{carParkId}
+</select>
+		  
+<!-- 页面 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from gd_node_line 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询页面列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from gd_node_line 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

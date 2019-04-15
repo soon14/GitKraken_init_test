@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_recognitioncameraMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_recognitioncamera" >
+    <id column="CameraID" property="cameraid" jdbcType="INTEGER" />
+    <result column="CameraName" property="cameraname" jdbcType="VARCHAR" />
+    <result column="CameraIP" property="cameraip" jdbcType="VARCHAR" />
+    <result column="CameraPort" property="cameraport" jdbcType="INTEGER" />
+    <result column="CameraUserName" property="camerausername" jdbcType="VARCHAR" />
+    <result column="CameraUserPwd" property="camerauserpwd" jdbcType="VARCHAR" />
+    <result column="CameraType" property="cameratype" jdbcType="INTEGER" />
+    <result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="IsStartWhite" property="isstartwhite" jdbcType="INTEGER" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <result column="StationID" property="stationid" jdbcType="INTEGER" />
+    <result column="SerialNumber" jdbcType="VARCHAR" property="serialnumber" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CameraID, CameraName, CameraIP, CameraPort, CameraUserName, CameraUserPwd, CameraType, 
+    CreatePeople, CreateDate, UpdatePeople, UpdateDate, IsStartWhite, ParkingLotNo, StationID,SerialNumber
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_recognitioncamera
+    where CameraID = #{cameraid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_recognitioncamera
+    where CameraID = #{cameraid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_recognitioncamera" >
+    insert into tc_recognitioncamera (CameraID, CameraName, CameraIP, 
+      CameraPort, CameraUserName, CameraUserPwd, 
+      CameraType, CreatePeople, CreateDate, 
+      UpdatePeople, UpdateDate, IsStartWhite, 
+      ParkingLotNo, StationID,SerialNumber)
+    values (#{cameraid,jdbcType=INTEGER}, #{cameraname,jdbcType=VARCHAR}, #{cameraip,jdbcType=VARCHAR}, 
+      #{cameraport,jdbcType=INTEGER}, #{camerausername,jdbcType=VARCHAR}, #{camerauserpwd,jdbcType=VARCHAR}, 
+      #{cameratype,jdbcType=INTEGER}, #{createpeople,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{updatepeople,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP}, #{isstartwhite,jdbcType=INTEGER}, 
+      #{parkinglotno,jdbcType=VARCHAR}, #{stationid,jdbcType=INTEGER},#{serialnumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_recognitioncamera" >
+    insert into tc_recognitioncamera
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cameraid != null" >
+        CameraID,
+      </if>
+      <if test="cameraname != null" >
+        CameraName,
+      </if>
+      <if test="cameraip != null" >
+        CameraIP,
+      </if>
+      <if test="cameraport != null" >
+        CameraPort,
+      </if>
+      <if test="camerausername != null" >
+        CameraUserName,
+      </if>
+      <if test="camerauserpwd != null" >
+        CameraUserPwd,
+      </if>
+      <if test="cameratype != null" >
+        CameraType,
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+      <if test="isstartwhite != null" >
+        IsStartWhite,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="stationid != null" >
+        StationID,
+      </if>
+       <if test="serialnumber != null">
+        SerialNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cameraid != null" >
+        #{cameraid,jdbcType=INTEGER},
+      </if>
+      <if test="cameraname != null" >
+        #{cameraname,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraip != null" >
+        #{cameraip,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraport != null" >
+        #{cameraport,jdbcType=INTEGER},
+      </if>
+      <if test="camerausername != null" >
+        #{camerausername,jdbcType=VARCHAR},
+      </if>
+      <if test="camerauserpwd != null" >
+        #{camerauserpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cameratype != null" >
+        #{cameratype,jdbcType=INTEGER},
+      </if>
+      <if test="createpeople != null" >
+        #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isstartwhite != null" >
+        #{isstartwhite,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="stationid != null" >
+        #{stationid,jdbcType=INTEGER},
+      </if>
+       <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_recognitioncamera" >
+    update tc_recognitioncamera
+    <set >
+      <if test="cameraname != null" >
+        CameraName = #{cameraname,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraip != null" >
+        CameraIP = #{cameraip,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraport != null" >
+        CameraPort = #{cameraport,jdbcType=INTEGER},
+      </if>
+      <if test="camerausername != null" >
+        CameraUserName = #{camerausername,jdbcType=VARCHAR},
+      </if>
+      <if test="camerauserpwd != null" >
+        CameraUserPwd = #{camerauserpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cameratype != null" >
+        CameraType = #{cameratype,jdbcType=INTEGER},
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople = #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isstartwhite != null" >
+        IsStartWhite = #{isstartwhite,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="stationid != null" >
+        StationID = #{stationid,jdbcType=INTEGER},
+      </if>
+       <if test="serialnumber != null">
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where CameraID = #{cameraid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_recognitioncamera" >
+    update tc_recognitioncamera
+    set CameraName = #{cameraname,jdbcType=VARCHAR},
+      CameraIP = #{cameraip,jdbcType=VARCHAR},
+      CameraPort = #{cameraport,jdbcType=INTEGER},
+      CameraUserName = #{camerausername,jdbcType=VARCHAR},
+      CameraUserPwd = #{camerauserpwd,jdbcType=VARCHAR},
+      CameraType = #{cameratype,jdbcType=INTEGER},
+      CreatePeople = #{createpeople,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      IsStartWhite = #{isstartwhite,jdbcType=INTEGER},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      StationID = #{stationid,jdbcType=INTEGER},
+       SerialNumber = #{serialnumber,jdbcType=VARCHAR}
+    where CameraID = #{cameraid,jdbcType=INTEGER}
+  </update>
+</mapper>

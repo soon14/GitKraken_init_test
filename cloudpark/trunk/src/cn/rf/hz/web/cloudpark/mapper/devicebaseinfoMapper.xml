@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.devicebaseinfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.devicebaseinfo" >
+    <id column="RecordID" property="recordid" jdbcType="INTEGER" />
+    <result column="DeviceType" property="devicetype" jdbcType="VARCHAR" />
+    <result column="SerialNumber" property="serialnumber" jdbcType="VARCHAR" />
+    <result column="EncryptCode" property="encryptcode" jdbcType="VARCHAR" />
+    <result column="DeviceIp" property="deviceip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordID, DeviceType, SerialNumber, EncryptCode, DeviceIp
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from devicebaseinfo
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from devicebaseinfo
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.devicebaseinfo" >
+    insert into devicebaseinfo (RecordID, DeviceType, SerialNumber, 
+      EncryptCode, DeviceIp)
+    values (#{recordid,jdbcType=INTEGER}, #{devicetype,jdbcType=VARCHAR}, #{serialnumber,jdbcType=VARCHAR}, 
+      #{encryptcode,jdbcType=VARCHAR}, #{deviceip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.devicebaseinfo" >
+    insert into devicebaseinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordID,
+      </if>
+      <if test="devicetype != null" >
+        DeviceType,
+      </if>
+      <if test="serialnumber != null" >
+        SerialNumber,
+      </if>
+      <if test="encryptcode != null" >
+        EncryptCode,
+      </if>
+      <if test="deviceip != null" >
+        DeviceIp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="devicetype != null" >
+        #{devicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptcode != null" >
+        #{encryptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceip != null" >
+        #{deviceip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.devicebaseinfo" >
+    update devicebaseinfo
+    <set >
+      <if test="devicetype != null" >
+        DeviceType = #{devicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptcode != null" >
+        EncryptCode = #{encryptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceip != null" >
+        DeviceIp = #{deviceip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.devicebaseinfo" >
+    update devicebaseinfo
+    set DeviceType = #{devicetype,jdbcType=VARCHAR},
+      SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      EncryptCode = #{encryptcode,jdbcType=VARCHAR},
+      DeviceIp = #{deviceip,jdbcType=VARCHAR}
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectMaxSerialNumber" resultType="java.lang.String" parameterType="java.lang.String" >
+    select SerialNumber 
+    from devicebaseinfo
+    where DeviceType = #{devicetype,jdbcType=VARCHAR} order by RecordID desc limit 1;
+  </select>
+  
+</mapper>

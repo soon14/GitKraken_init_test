@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.ParkingMapper">
+
+
+	<insert id="save" parameterType="Object">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into gd_parking(recordId,parkingId
+		,parkingNo ,areaId
+		,reserveTime ,isReserve ,groupId ,updTime
+		,carParkId )
+		values(#{recordId},#{parkingId}
+		,#{parkingNo} ,#{areaId}
+		,#{reserveTime} ,#{isReserve} ,#{groupId} ,now()
+		,#{carParkId})
+	</insert>
+
+
+	<insert id="savePiliang" parameterType="Object">
+		<![CDATA[
+		insert into gd_parking(parkingId
+		,parkingNo ,areaId ,reserveTime ,isReserve ,groupId ,updTime
+		,carParkId ) VALUE
+		]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.parkingId},#{item.parkingNo},#{item.areaId},#{item.reserveTime},
+			#{item.isReserve},#{item.groupId},now(),#{item.carParkId})
+		</foreach>
+	</insert>
+
+	<delete id="delete" parameterType="Object">
+		delete from
+		gd_parking where
+		carParkId = #{carParkId}
+	</delete>
+	 
+<!-- 根据id查询 页面 -->
+<select id="queryById"  resultType="com.alibaba.fastjson.JSONObject" parameterType="Object">
+	select *
+	 from gd_parking where parkingId = #{parkingId} and carParkId = #{carParkId}
+</select>
+	
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="update" parameterType="Object" >
+	update gd_parking set updTime= now(),
+	<trim  suffixOverrides="," >
+	<if test="parkingNo != parkingNo  ">
+		parkingNo=#{parkingNo},
+	</if>
+	<if test="areaId != null  and areaId != '' ">
+		areaId=#{areaId},
+	</if>
+	<if test="reserveTime != null  and reserveTime != '' ">
+		reserveTime=#{reserveTime},
+	</if>
+	<if test="isReserve != null  ">
+		isReserve=#{isReserve},
+	</if>
+	<if test="groupId != null  and groupId != '' ">
+		groupId=#{groupId},
+	</if>
+	
+	</trim> where parkingId = #{parkingId} and carParkId = #{carParkId}
+</update>
+
+</mapper>   

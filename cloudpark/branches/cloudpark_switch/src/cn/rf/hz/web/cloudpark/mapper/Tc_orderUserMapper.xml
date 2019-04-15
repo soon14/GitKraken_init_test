@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_orderUserMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_orderUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parkId" property="parkid" jdbcType="VARCHAR" />
+    <result column="licensePlateNumber" property="licenseplatenumber" jdbcType="VARCHAR" />
+    <result column="parkingNumber" property="parkingnumber" jdbcType="VARCHAR" />
+    <result column="act" property="act" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="VARCHAR" />
+    <result column="endTime" property="endtime" jdbcType="VARCHAR" />
+    <result column="xbindex" property="xbindex" jdbcType="VARCHAR" />
+    <result column="xbcallback" property="xbcallback" jdbcType="VARCHAR" />
+    <result column="ordertime" property="ordertime" jdbcType="VARCHAR" />
+    <result column="lastintime" property="lastintime" jdbcType="VARCHAR" />
+    <result column="lastouttime" property="lastouttime" jdbcType="VARCHAR" />
+    <result column="xbtype" property="xbtype" jdbcType="VARCHAR" />
+    <result column="tip" property="tip" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="chargingRuleId" property="chargingruleid" jdbcType="VARCHAR" />
+    <result column="reserve1" property="reserve1" jdbcType="VARCHAR" />
+    <result column="reserve2" property="reserve2" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parkId, licensePlateNumber,parkingNumber, act, startTime, endTime, xbindex, xbcallback, ordertime, 
+    lastintime, lastouttime, xbtype, tip, price, chargingRuleId, reserve1, reserve2, 
+    createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_orderuser
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_orderuser
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_orderUser" >
+    insert into tc_orderuser (id, parkId, licensePlateNumber, parkingNumber,
+      act, startTime, endTime, 
+      xbindex, xbcallback, ordertime, 
+      lastintime, lastouttime, xbtype, 
+      tip, price, chargingRuleId, 
+      reserve1, reserve2, createtime
+      )
+    values (#{id,jdbcType=INTEGER}, #{parkid,jdbcType=VARCHAR}, #{licenseplatenumber,jdbcType=VARCHAR}, #{parkingNumber,jdbcType=VARCHAR}, 
+      #{act,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, 
+      #{xbindex,jdbcType=VARCHAR}, #{xbcallback,jdbcType=VARCHAR}, #{ordertime,jdbcType=VARCHAR}, 
+      #{lastintime,jdbcType=VARCHAR}, #{lastouttime,jdbcType=VARCHAR}, #{xbtype,jdbcType=VARCHAR}, 
+      #{tip,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{chargingruleid,jdbcType=VARCHAR}, 
+      #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_orderUser" >
+    insert into tc_orderuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parkid != null" >
+        parkId,
+      </if>
+      <if test="licenseplatenumber != null" >
+        licensePlateNumber,
+      </if>
+      <if test="act != null" >
+        act,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="xbindex != null" >
+        xbindex,
+      </if>
+      <if test="xbcallback != null" >
+        xbcallback,
+      </if>
+      <if test="ordertime != null" >
+        ordertime,
+      </if>
+      <if test="lastintime != null" >
+        lastintime,
+      </if>
+      <if test="lastouttime != null" >
+        lastouttime,
+      </if>
+      <if test="xbtype != null" >
+        xbtype,
+      </if>
+      <if test="tip != null" >
+        tip,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="chargingruleid != null" >
+        chargingRuleId,
+      </if>
+      <if test="reserve1 != null" >
+        reserve1,
+      </if>
+      <if test="reserve2 != null" >
+        reserve2,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parkid != null" >
+        #{parkid,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseplatenumber != null" >
+        #{licenseplatenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="act != null" >
+        #{act,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="xbindex != null" >
+        #{xbindex,jdbcType=VARCHAR},
+      </if>
+      <if test="xbcallback != null" >
+        #{xbcallback,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastintime != null" >
+        #{lastintime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastouttime != null" >
+        #{lastouttime,jdbcType=VARCHAR},
+      </if>
+      <if test="xbtype != null" >
+        #{xbtype,jdbcType=VARCHAR},
+      </if>
+      <if test="tip != null" >
+        #{tip,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingruleid != null" >
+        #{chargingruleid,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null" >
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null" >
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_orderUser" >
+    update tc_orderuser
+    <set >
+      <if test="parkid != null" >
+        parkId = #{parkid,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseplatenumber != null" >
+        licensePlateNumber = #{licenseplatenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="act != null" >
+        act = #{act,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="xbindex != null" >
+        xbindex = #{xbindex,jdbcType=VARCHAR},
+      </if>
+      <if test="xbcallback != null" >
+        xbcallback = #{xbcallback,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        ordertime = #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastintime != null" >
+        lastintime = #{lastintime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastouttime != null" >
+        lastouttime = #{lastouttime,jdbcType=VARCHAR},
+      </if>
+      <if test="xbtype != null" >
+        xbtype = #{xbtype,jdbcType=VARCHAR},
+      </if>
+      <if test="tip != null" >
+        tip = #{tip,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingruleid != null" >
+        chargingRuleId = #{chargingruleid,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null" >
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null" >
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_orderUser" >
+    update tc_orderuser
+    set parkId = #{parkid,jdbcType=VARCHAR},
+      licensePlateNumber = #{licenseplatenumber,jdbcType=VARCHAR},
+      act = #{act,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=VARCHAR},
+      endTime = #{endtime,jdbcType=VARCHAR},
+      xbindex = #{xbindex,jdbcType=VARCHAR},
+      xbcallback = #{xbcallback,jdbcType=VARCHAR},
+      ordertime = #{ordertime,jdbcType=VARCHAR},
+      lastintime = #{lastintime,jdbcType=VARCHAR},
+      lastouttime = #{lastouttime,jdbcType=VARCHAR},
+      xbtype = #{xbtype,jdbcType=VARCHAR},
+      tip = #{tip,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      chargingRuleId = #{chargingruleid,jdbcType=VARCHAR},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+      <insert id="insertorderuserinfo" parameterType="Object" >
+    insert into tc_orderuser ( parkId, licensePlateNumber, parkingNumber,
+      act, startTime, endTime, 
+      xbindex, xbcallback, ordertime, 
+      lastintime, lastouttime, xbtype, 
+      tip, price,
+      reserve1, reserve2
+      )
+    values ( #{parkinglotno}, #{carcode}, #{parkingnumber},  #{act}, #{startTime}, #{endtime}, 
+      #{index}, #{callback}, #{ordertime}, #{lastintime}, #{lastouttime}, #{type}, 
+      #{tip}, #{price}, #{reserve1}, #{reserve2} )
+  </insert>
+  
+    <delete id="deleteorderuserinfo" parameterType="Object" >
+    delete from  tc_orderuser where 
+    parkId =#{parkId} and licensePlateNumber=#{licensePlateNumber}
+
+  </delete>
+  
+  
+ <delete id="deleteorderuserinfobycarcode" parameterType="Object" >
+    delete from  tc_orderuser where  licensePlateNumber=#{licensePlateNumber}
+
+  </delete>
+  
+  <select id="queryorderuser"  resultType= "java.util.Map"  parameterType="Object" >
+		select endtime,parkingnumber,xbindex,licensePlateNumber as carcode,ordertime,act,xbtype as type,parkId as parkinglotno from tc_orderuser
+		where parkId = #{ParkingLotNo}
+  </select>
+  
+  
+  
+  
+</mapper>

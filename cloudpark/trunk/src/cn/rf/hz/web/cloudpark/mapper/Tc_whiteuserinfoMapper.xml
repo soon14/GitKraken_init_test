@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_whiteuserinfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_whiteuserinfo" >
+    <id column="recordID" property="recordid" jdbcType="INTEGER" />
+    <result column="licensePlateNumber" property="licenseplatenumber" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTine" property="endtine" jdbcType="TIMESTAMP" />
+    <result column="useCount" property="usecount" jdbcType="INTEGER" />
+    <result column="remarks1" property="remarks1" jdbcType="VARCHAR" />
+    <result column="whiteType" property="whitetype" jdbcType="INTEGER" />
+    <result column="ParkingNo" property="parkingno" jdbcType="VARCHAR" />
+    <result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    recordID, licensePlateNumber, startTime, endTine, useCount, remarks1, whiteType, 
+    ParkingNo, CreatePeople, CreateDate, UpdatePeople, UpdateDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_whiteuserinfo
+    where recordID = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_whiteuserinfo
+    where recordID = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_whiteuserinfo" >
+    insert into tc_whiteuserinfo (recordID, licensePlateNumber, startTime, 
+      endTine, useCount, remarks1, 
+      whiteType, ParkingNo, CreatePeople, 
+      CreateDate, UpdatePeople, UpdateDate
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{licenseplatenumber,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtine,jdbcType=TIMESTAMP}, #{usecount,jdbcType=INTEGER}, #{remarks1,jdbcType=VARCHAR}, 
+      #{whitetype,jdbcType=INTEGER}, #{parkingno,jdbcType=VARCHAR}, #{createpeople,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updatepeople,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_whiteuserinfo" >
+    insert into tc_whiteuserinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        recordID,
+      </if>
+      <if test="licenseplatenumber != null" >
+        licensePlateNumber,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtine != null" >
+        endTine,
+      </if>
+      <if test="usecount != null" >
+        useCount,
+      </if>
+      <if test="remarks1 != null" >
+        remarks1,
+      </if>
+      <if test="whitetype != null" >
+        whiteType,
+      </if>
+      <if test="parkingno != null" >
+        ParkingNo,
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="licenseplatenumber != null" >
+        #{licenseplatenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtine != null" >
+        #{endtine,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usecount != null" >
+        #{usecount,jdbcType=INTEGER},
+      </if>
+      <if test="remarks1 != null" >
+        #{remarks1,jdbcType=VARCHAR},
+      </if>
+      <if test="whitetype != null" >
+        #{whitetype,jdbcType=INTEGER},
+      </if>
+      <if test="parkingno != null" >
+        #{parkingno,jdbcType=VARCHAR},
+      </if>
+      <if test="createpeople != null" >
+        #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_whiteuserinfo" >
+    update tc_whiteuserinfo
+    <set >
+      <if test="licenseplatenumber != null" >
+        licensePlateNumber = #{licenseplatenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtine != null" >
+        endTine = #{endtine,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usecount != null" >
+        useCount = #{usecount,jdbcType=INTEGER},
+      </if>
+      <if test="remarks1 != null" >
+        remarks1 = #{remarks1,jdbcType=VARCHAR},
+      </if>
+      <if test="whitetype != null" >
+        whiteType = #{whitetype,jdbcType=INTEGER},
+      </if>
+      <if test="parkingno != null" >
+        ParkingNo = #{parkingno,jdbcType=VARCHAR},
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople = #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where recordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_whiteuserinfo" >
+    update tc_whiteuserinfo
+    set licensePlateNumber = #{licenseplatenumber,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTine = #{endtine,jdbcType=TIMESTAMP},
+      useCount = #{usecount,jdbcType=INTEGER},
+      remarks1 = #{remarks1,jdbcType=VARCHAR},
+      whiteType = #{whitetype,jdbcType=INTEGER},
+      ParkingNo = #{parkingno,jdbcType=VARCHAR},
+      CreatePeople = #{createpeople,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where recordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByParkingNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_whiteuserinfo
+    where ParkingNo = #{ParkingLotNo,jdbcType=VARCHAR}
+  </select>
+  
+    <select id="orderuser_Is_blackuser" resultMap="BaseResultMap" parameterType="Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_whiteuserinfo
+    where ParkingNo = #{parkinglotno} and licensePlateNumber=#{carcode} and <![CDATA[ startTime<]]> #{datetime} and <![CDATA[ endTine>]]> #{datetime}  limit 1
+  </select>
+  
+    <select id="selectByParkNoAndCarCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_whiteuserinfo
+    where 
+    	ParkingNo = #{parkNo,jdbcType=VARCHAR}
+    and
+    	licensePlateNumber=#{carCode,jdbcType=VARCHAR} limit 1
+  </select>
+</mapper>

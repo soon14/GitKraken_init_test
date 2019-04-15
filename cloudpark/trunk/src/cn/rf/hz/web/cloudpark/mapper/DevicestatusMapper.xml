@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.DevicestatusMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Devicestatus" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="devno" property="devno" jdbcType="VARCHAR" />
+    <result column="channelid" property="channelid" jdbcType="VARCHAR" />
+    <result column="parkNo" property="parkno" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="devtype" property="devtype" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, devno, channelid, parkNo, ip, status, devtype, createtime, updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_devicestatus
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tc_devicestatus
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Devicestatus" >
+    insert into tc_devicestatus (id, devno, channelid, 
+      parkNo, ip, status, 
+      devtype, createtime, updatetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{devno,jdbcType=VARCHAR}, #{channelid,jdbcType=VARCHAR}, 
+      #{parkno,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{devtype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Devicestatus" >
+    insert into tc_devicestatus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devno != null" >
+        devno,
+      </if>
+      <if test="channelid != null" >
+        channelid,
+      </if>
+      <if test="parkno != null" >
+        parkNo,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="devtype != null" >
+        devtype,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="devno != null" >
+        #{devno,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="parkno != null" >
+        #{parkno,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="devtype != null" >
+        #{devtype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Devicestatus" >
+    update tc_devicestatus
+    <set >
+      <if test="devno != null" >
+        devno = #{devno,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        channelid = #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="parkno != null" >
+        parkNo = #{parkno,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="devtype != null" >
+        devtype = #{devtype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Devicestatus" >
+    update tc_devicestatus
+    set devno = #{devno,jdbcType=VARCHAR},
+      channelid = #{channelid,jdbcType=VARCHAR},
+      parkNo = #{parkno,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      devtype = #{devtype,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  	<insert id="batchInsertdevicestatus" parameterType="java.util.List">
+		insert into tc_devicestatus
+		 (devno, channelid, parkNo,ip,status, devtype,createtime, updatetime)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.devno},#{item.channelid},#{item.parkno},#{item.ip},#{item.status}
+			,#{item.devtype},#{item.createtime}
+			,#{item.updatetime}
+			)
+		</foreach>
+	</insert>
+  
+</mapper>
