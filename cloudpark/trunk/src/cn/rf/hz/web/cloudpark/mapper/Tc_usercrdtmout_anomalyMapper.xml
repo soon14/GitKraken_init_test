@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_usercrdtmout_anomalyMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtmout_anomaly" >
+    <id column="RecordID" property="recordid" jdbcType="INTEGER" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="CarCode" property="carcode" jdbcType="VARCHAR" />
+    <result column="ChargeRuleID" property="chargeruleid" jdbcType="INTEGER" />
+    <result column="CarLabel" property="carlabel" jdbcType="VARCHAR" />
+    <result column="CarColor" property="carcolor" jdbcType="VARCHAR" />
+    <result column="CarStyleid" property="carstyleid" jdbcType="INTEGER" />
+    <result column="OutCrdtm" property="outcrdtm" jdbcType="TIMESTAMP" />
+    <result column="ChannelID" property="channelid" jdbcType="INTEGER" />
+    <result column="ImagePath" property="imagepath" jdbcType="VARCHAR" />
+    <result column="InTime" property="intime" jdbcType="TIMESTAMP" />
+    <result column="ChargeMoney" property="chargemoney" jdbcType="REAL" />
+    <result column="IsUpload" property="isupload" jdbcType="BIT" />
+    <result column="OperatorID" property="operatorid" jdbcType="INTEGER" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordID, UserName, CarCode, ChargeRuleID, CarLabel, CarColor, CarStyleid, OutCrdtm, 
+    ChannelID, ImagePath, InTime, ChargeMoney, IsUpload, OperatorID, ParkingLotNo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_usercrdtmout_anomaly
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_usercrdtmout_anomaly
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtmout_anomaly" >
+    insert into tc_usercrdtmout_anomaly (RecordID, UserName, CarCode, 
+      ChargeRuleID, CarLabel, CarColor, 
+      CarStyleid, OutCrdtm, ChannelID, 
+      ImagePath, InTime, ChargeMoney, 
+      IsUpload, OperatorID, ParkingLotNo
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{carcode,jdbcType=VARCHAR}, 
+      #{chargeruleid,jdbcType=INTEGER}, #{carlabel,jdbcType=VARCHAR}, #{carcolor,jdbcType=VARCHAR}, 
+      #{carstyleid,jdbcType=INTEGER}, #{outcrdtm,jdbcType=TIMESTAMP}, #{channelid,jdbcType=INTEGER}, 
+      #{imagepath,jdbcType=VARCHAR}, #{intime,jdbcType=TIMESTAMP}, #{chargemoney,jdbcType=REAL}, 
+      #{isupload,jdbcType=BIT}, #{operatorid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtmout_anomaly" >
+    insert into tc_usercrdtmout_anomaly
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordID,
+      </if>
+      <if test="username != null" >
+        UserName,
+      </if>
+      <if test="carcode != null" >
+        CarCode,
+      </if>
+      <if test="chargeruleid != null" >
+        ChargeRuleID,
+      </if>
+      <if test="carlabel != null" >
+        CarLabel,
+      </if>
+      <if test="carcolor != null" >
+        CarColor,
+      </if>
+      <if test="carstyleid != null" >
+        CarStyleid,
+      </if>
+      <if test="outcrdtm != null" >
+        OutCrdtm,
+      </if>
+      <if test="channelid != null" >
+        ChannelID,
+      </if>
+      <if test="imagepath != null" >
+        ImagePath,
+      </if>
+      <if test="intime != null" >
+        InTime,
+      </if>
+      <if test="chargemoney != null" >
+        ChargeMoney,
+      </if>
+      <if test="isupload != null" >
+        IsUpload,
+      </if>
+      <if test="operatorid != null" >
+        OperatorID,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="carcode != null" >
+        #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeruleid != null" >
+        #{chargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="carlabel != null" >
+        #{carlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="carcolor != null" >
+        #{carcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="carstyleid != null" >
+        #{carstyleid,jdbcType=INTEGER},
+      </if>
+      <if test="outcrdtm != null" >
+        #{outcrdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="imagepath != null" >
+        #{imagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null" >
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargemoney != null" >
+        #{chargemoney,jdbcType=REAL},
+      </if>
+      <if test="isupload != null" >
+        #{isupload,jdbcType=BIT},
+      </if>
+      <if test="operatorid != null" >
+        #{operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtmout_anomaly" >
+    update tc_usercrdtmout_anomaly
+    <set >
+      <if test="username != null" >
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="carcode != null" >
+        CarCode = #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeruleid != null" >
+        ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="carlabel != null" >
+        CarLabel = #{carlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="carcolor != null" >
+        CarColor = #{carcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="carstyleid != null" >
+        CarStyleid = #{carstyleid,jdbcType=INTEGER},
+      </if>
+      <if test="outcrdtm != null" >
+        OutCrdtm = #{outcrdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelid != null" >
+        ChannelID = #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="imagepath != null" >
+        ImagePath = #{imagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null" >
+        InTime = #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargemoney != null" >
+        ChargeMoney = #{chargemoney,jdbcType=REAL},
+      </if>
+      <if test="isupload != null" >
+        IsUpload = #{isupload,jdbcType=BIT},
+      </if>
+      <if test="operatorid != null" >
+        OperatorID = #{operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtmout_anomaly" >
+    update tc_usercrdtmout_anomaly
+    set UserName = #{username,jdbcType=VARCHAR},
+      CarCode = #{carcode,jdbcType=VARCHAR},
+      ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+      CarLabel = #{carlabel,jdbcType=VARCHAR},
+      CarColor = #{carcolor,jdbcType=VARCHAR},
+      CarStyleid = #{carstyleid,jdbcType=INTEGER},
+      OutCrdtm = #{outcrdtm,jdbcType=TIMESTAMP},
+      ChannelID = #{channelid,jdbcType=INTEGER},
+      ImagePath = #{imagepath,jdbcType=VARCHAR},
+      InTime = #{intime,jdbcType=TIMESTAMP},
+      ChargeMoney = #{chargemoney,jdbcType=REAL},
+      IsUpload = #{isupload,jdbcType=BIT},
+      OperatorID = #{operatorid,jdbcType=INTEGER},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="batchInsertusercrdtmout_anomaly" parameterType="java.util.List" >  
+    insert into tc_usercrdtmout_anomaly (CarCode, 
+      ChargeRuleID, 
+      CarStyleid, OutCrdtm, ChannelID, 
+      ImagePath, InTime, ChargeMoney, 
+      OperatorID, ParkingLotNo
+      )
+    VALUES   
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.carcode},#{item.chargeruleid}
+        ,#{item.carstyleid},#{item.outcrdtm}
+        ,#{item.channelid},#{item.imagepath}
+         ,#{item.intime},#{item.chargemoney}
+         ,#{item.operatorid}
+        ,#{item.parkinglotno}
+        )  
+    </foreach>  
+</insert> 
+
+  <delete id="deleteByLotNoAndCarcode" >
+    delete from tc_usercrdtmout_anomaly
+    <where>
+			<if test="parkinglotno != null">
+				AND ParkingLotNo=#{parkinglotno,jdbcType=VARCHAR} 
+			</if>
+			<if test="carcode != null">
+				AND CarCode = #{carcode,jdbcType=VARCHAR}
+			</if>
+			<if test="intime != null" >
+				AND InTime = #{intime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+  </delete>
+  
+<!--   
+  <sql id="out_update_condition">
+		<where>
+			<if test="oldRecordId != null">
+				AND oldRecordId=#{oldRecordId}
+			</if>
+			<if test="carParkId != null">
+				AND carParkId = #{carParkId}
+			</if>
+			<if test="licensePlateNumber != null and licensePlateNumber != ''">
+				AND recognitionNumber = #{licensePlateNumber}
+			</if>
+		</where>
+	</sql> -->
+  
+  
+  
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.GdAreaMapper" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="cn.rf.hz.web.bean.gd.Area" >
+	<result column="recordId" property="recordId"/>
+	<result column="areaId" property="areaId"/>
+	<result column="areaName" property="areaName"/>
+	<result column="picPath" property="picPath"/>
+	<result column="carParkId" property="carParkId"/>
+	<result column="updTime" property="updTime"/>
+	<result column="floor" property="floor"/>
+	<result column="parkingNum" property="parkingNum"/>
+	<result column="poiX" property="poiX"/>
+	<result column="poiY" property="poiY"/>
+</resultMap>
+       
+<!-- gd_area table all fields -->
+<sql id="Base_Column_List" >
+	 recordId,areaId,areaName,picPath,carParkId,updTime,floor,parkingNum,poiX,poiY
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="recordId != null" >
+	    and recordId =  #{recordId}
+	</if>
+	<if test="areaId != null" >
+	    and areaId =  #{areaId}
+	</if>
+	 	<if test="areaName != null and areaName != ''" >
+	    and areaName =  #{areaName}
+	</if>
+	 	<if test="picPath != null and picPath != ''" >
+	    and picPath =  #{picPath}
+	</if>
+	<if test="carParkId != null" >
+	    and carParkId =  #{carParkId}
+	</if>
+	<if test="updTime != null" >
+	    and updTime =  #{updTime}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_area(recordId,areaId,areaName,picPath,carParkId,updTime)
+ values(#{recordId},#{areaId},#{areaName},#{picPath},#{carParkId},#{updTime})
+</insert>
+<!-- 插入记录 -->
+<insert id="save" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+</selectKey>
+  insert into gd_area(recordId,areaId,areaName,picPath,carParkId,updTime,floor,parkingNum)
+ values(#{recordId},#{areaId},#{areaName},#{picPath},#{carParkId},#{updTime},#{floor},#{parkingNum})
+</insert>
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update gd_area set areaId=#{areaId},areaName=#{areaName},picPath=#{picPath},carParkId=#{carParkId},updTime=#{updTime} where recordId=#{recordId}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update gd_area set 
+	<trim  suffixOverrides="," >
+	<if test="areaId != null  ">
+		areaId=#{areaId},
+	</if>
+	<if test="areaName != null  and areaName != '' ">
+		areaName=#{areaName},
+	</if>
+	<if test="picPath != null  and picPath != '' ">
+		picPath=#{picPath},
+	</if>
+	<if test="updTime != null  ">
+		updTime=#{updTime},
+	</if>
+	<if test="floor != null  and floor != '' ">
+		floor=#{floor},
+	</if>
+	<if test="parkingNum != null  ">
+		parkingNum=#{parkingNum},
+	</if>
+	</trim> where areaId=#{areaId} and carParkId=#{carParkId}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from gd_area where recordId = #{recordId}
+</delete>
+ 
+<!-- 根据id查询 页面 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from gd_area where recordId = #{recordId}
+</select>
+
+<select id="findById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from gd_area where areaId = #{areaId} and carParkId = #{carParkId}
+</select>
+<!-- 根据区域节点ID和所属停车场, 查询 区域详细信息 -->
+<select id="findByNodeId" resultMap="BaseResultMap"   parameterType="Object">
+	SELECT A.recordId, A.areaId, A.areaName, A.picPath, A.carParkId, A.updTime
+	FROM
+	gd_area AS A LEFT JOIN gd_area_node AS N ON A.areaId = N.areaId
+	WHERE N.nodeId=#{parkingId} AND A.carParkId=#{carParkId} AND A.carParkId =
+	N.carParkId GROUP BY A.areaId
+</select>	 
+<!-- 页面 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from gd_area 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询页面列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from gd_area 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

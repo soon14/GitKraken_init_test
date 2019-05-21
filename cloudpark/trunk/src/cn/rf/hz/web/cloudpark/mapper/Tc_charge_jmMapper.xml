@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_charge_jmMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_charge_jm" >
+    <id column="JMTypeId" property="jmtypeid" jdbcType="INTEGER" />
+    <result column="JMTypeName" property="jmtypename" jdbcType="VARCHAR" />
+    <result column="JMCode" property="jmcode" jdbcType="INTEGER" />
+    <result column="JMKind" property="jmkind" jdbcType="INTEGER" />
+    <result column="JMMoney" property="jmmoney" jdbcType="DECIMAL" />
+    <result column="JMTime" property="jmtime" jdbcType="REAL" />
+    <result column="JMDiscount" property="jmdiscount" jdbcType="REAL" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="JMOrder" property="jmorder" jdbcType="INTEGER" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <result column="JMType" property="jmtype" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JMTypeId, JMTypeName, JMCode, JMKind, JMMoney, JMTime, JMDiscount, Remark, JMOrder, 
+    ParkingLotNo, JMType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_charge_jm
+    where JMTypeId = #{jmtypeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_charge_jm
+    where JMTypeId = #{jmtypeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_charge_jm" >
+    insert into tc_charge_jm (JMTypeId, JMTypeName, JMCode, 
+      JMKind, JMMoney, JMTime, 
+      JMDiscount, Remark, JMOrder, 
+      ParkingLotNo, JMType)
+    values (#{jmtypeid,jdbcType=INTEGER}, #{jmtypename,jdbcType=VARCHAR}, #{jmcode,jdbcType=INTEGER}, 
+      #{jmkind,jdbcType=INTEGER}, #{jmmoney,jdbcType=DECIMAL}, #{jmtime,jdbcType=REAL}, 
+      #{jmdiscount,jdbcType=REAL}, #{remark,jdbcType=VARCHAR}, #{jmorder,jdbcType=INTEGER}, 
+      #{parkinglotno,jdbcType=VARCHAR}, #{jmtype,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_charge_jm" >
+    insert into tc_charge_jm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jmtypeid != null" >
+        JMTypeId,
+      </if>
+      <if test="jmtypename != null" >
+        JMTypeName,
+      </if>
+      <if test="jmcode != null" >
+        JMCode,
+      </if>
+      <if test="jmkind != null" >
+        JMKind,
+      </if>
+      <if test="jmmoney != null" >
+        JMMoney,
+      </if>
+      <if test="jmtime != null" >
+        JMTime,
+      </if>
+      <if test="jmdiscount != null" >
+        JMDiscount,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="jmorder != null" >
+        JMOrder,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="jmtype != null" >
+        JMType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jmtypeid != null" >
+        #{jmtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="jmtypename != null" >
+        #{jmtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="jmcode != null" >
+        #{jmcode,jdbcType=INTEGER},
+      </if>
+      <if test="jmkind != null" >
+        #{jmkind,jdbcType=INTEGER},
+      </if>
+      <if test="jmmoney != null" >
+        #{jmmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="jmtime != null" >
+        #{jmtime,jdbcType=REAL},
+      </if>
+      <if test="jmdiscount != null" >
+        #{jmdiscount,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="jmorder != null" >
+        #{jmorder,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="jmtype != null" >
+        #{jmtype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_charge_jm" >
+    update tc_charge_jm
+    <set >
+      <if test="jmtypename != null" >
+        JMTypeName = #{jmtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="jmcode != null" >
+        JMCode = #{jmcode,jdbcType=INTEGER},
+      </if>
+      <if test="jmkind != null" >
+        JMKind = #{jmkind,jdbcType=INTEGER},
+      </if>
+      <if test="jmmoney != null" >
+        JMMoney = #{jmmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="jmtime != null" >
+        JMTime = #{jmtime,jdbcType=REAL},
+      </if>
+      <if test="jmdiscount != null" >
+        JMDiscount = #{jmdiscount,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="jmorder != null" >
+        JMOrder = #{jmorder,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="jmtype != null" >
+        JMType = #{jmtype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where JMTypeId = #{jmtypeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_charge_jm" >
+    update tc_charge_jm
+    set JMTypeName = #{jmtypename,jdbcType=VARCHAR},
+      JMCode = #{jmcode,jdbcType=INTEGER},
+      JMKind = #{jmkind,jdbcType=INTEGER},
+      JMMoney = #{jmmoney,jdbcType=DECIMAL},
+      JMTime = #{jmtime,jdbcType=REAL},
+      JMDiscount = #{jmdiscount,jdbcType=REAL},
+      Remark = #{remark,jdbcType=VARCHAR},
+      JMOrder = #{jmorder,jdbcType=INTEGER},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      JMType = #{jmtype,jdbcType=INTEGER}
+    where JMTypeId = #{jmtypeid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByparkinglotno" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_charge_jm
+    where ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+  </select>
+</mapper>

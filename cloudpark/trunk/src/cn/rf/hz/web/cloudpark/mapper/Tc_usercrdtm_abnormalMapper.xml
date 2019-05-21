@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.sharding.dao.Tc_usercrdtm_abnormalMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_abnormal" >
+    <id column="RecordID" property="recordid" jdbcType="BIGINT" />
+    <id column="partitionID" property="partitionid" jdbcType="INTEGER" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="CarCode" property="carcode" jdbcType="VARCHAR" />
+    <result column="ChargeRuleID" property="chargeruleid" jdbcType="INTEGER" />
+    <result column="CarLabel" property="carlabel" jdbcType="VARCHAR" />
+    <result column="CarColor" property="carcolor" jdbcType="VARCHAR" />
+    <result column="CarStyleid" property="carstyleid" jdbcType="INTEGER" />
+    <result column="Crdtm" property="crdtm" jdbcType="TIMESTAMP" />
+    <result column="ChannelID" property="channelid" jdbcType="INTEGER" />
+    <result column="ImagePath" property="imagepath" jdbcType="VARCHAR" />
+    <result column="RecognizeCarCode" property="recognizecarcode" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="CarCode2" property="carcode2" jdbcType="VARCHAR" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <result column="Parkinglocation" property="parkinglocation" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="LastoutTime" property="lastouttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordID, partitionID, UserName, CarCode, ChargeRuleID, CarLabel, CarColor, CarStyleid, 
+    Crdtm, ChannelID, ImagePath, RecognizeCarCode, Note, CarCode2, ParkingLotNo, Parkinglocation, 
+    createTime, LastoutTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_abnormalKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_usercrdtm_abnormal
+    where RecordID = #{recordid,jdbcType=BIGINT}
+      and partitionID = #{partitionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_abnormalKey" >
+    delete from tc_usercrdtm_abnormal
+    where RecordID = #{recordid,jdbcType=BIGINT}
+      and partitionID = #{partitionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_abnormal" >
+    insert into tc_usercrdtm_abnormal (RecordID, partitionID, UserName, 
+      CarCode, ChargeRuleID, CarLabel, 
+      CarColor, CarStyleid, Crdtm, 
+      ChannelID, ImagePath, RecognizeCarCode, 
+      Note, CarCode2, ParkingLotNo, 
+      Parkinglocation, createTime, LastoutTime
+      )
+    values (#{recordid,jdbcType=BIGINT}, #{partitionid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{carcode,jdbcType=VARCHAR}, #{chargeruleid,jdbcType=INTEGER}, #{carlabel,jdbcType=VARCHAR}, 
+      #{carcolor,jdbcType=VARCHAR}, #{carstyleid,jdbcType=INTEGER}, #{crdtm,jdbcType=TIMESTAMP}, 
+      #{channelid,jdbcType=INTEGER}, #{imagepath,jdbcType=VARCHAR}, #{recognizecarcode,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{carcode2,jdbcType=VARCHAR}, #{parkinglotno,jdbcType=VARCHAR}, 
+      #{parkinglocation,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastouttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_abnormal" >
+    insert into tc_usercrdtm_abnormal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordID,
+      </if>
+      <if test="partitionid != null" >
+        partitionID,
+      </if>
+      <if test="username != null" >
+        UserName,
+      </if>
+      <if test="carcode != null" >
+        CarCode,
+      </if>
+      <if test="chargeruleid != null" >
+        ChargeRuleID,
+      </if>
+      <if test="carlabel != null" >
+        CarLabel,
+      </if>
+      <if test="carcolor != null" >
+        CarColor,
+      </if>
+      <if test="carstyleid != null" >
+        CarStyleid,
+      </if>
+      <if test="crdtm != null" >
+        Crdtm,
+      </if>
+      <if test="channelid != null" >
+        ChannelID,
+      </if>
+      <if test="imagepath != null" >
+        ImagePath,
+      </if>
+      <if test="recognizecarcode != null" >
+        RecognizeCarCode,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="carcode2 != null" >
+        CarCode2,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="parkinglocation != null" >
+        Parkinglocation,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="lastouttime != null" >
+        LastoutTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=BIGINT},
+      </if>
+      <if test="partitionid != null" >
+        #{partitionid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="carcode != null" >
+        #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeruleid != null" >
+        #{chargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="carlabel != null" >
+        #{carlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="carcolor != null" >
+        #{carcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="carstyleid != null" >
+        #{carstyleid,jdbcType=INTEGER},
+      </if>
+      <if test="crdtm != null" >
+        #{crdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="imagepath != null" >
+        #{imagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizecarcode != null" >
+        #{recognizecarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="carcode2 != null" >
+        #{carcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="parkinglocation != null" >
+        #{parkinglocation,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastouttime != null" >
+        #{lastouttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_abnormal" >
+    update tc_usercrdtm_abnormal
+    <set >
+      <if test="username != null" >
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="carcode != null" >
+        CarCode = #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeruleid != null" >
+        ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="carlabel != null" >
+        CarLabel = #{carlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="carcolor != null" >
+        CarColor = #{carcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="carstyleid != null" >
+        CarStyleid = #{carstyleid,jdbcType=INTEGER},
+      </if>
+      <if test="crdtm != null" >
+        Crdtm = #{crdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelid != null" >
+        ChannelID = #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="imagepath != null" >
+        ImagePath = #{imagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizecarcode != null" >
+        RecognizeCarCode = #{recognizecarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="carcode2 != null" >
+        CarCode2 = #{carcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="parkinglocation != null" >
+        Parkinglocation = #{parkinglocation,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastouttime != null" >
+        LastoutTime = #{lastouttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RecordID = #{recordid,jdbcType=BIGINT}
+      and partitionID = #{partitionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercrdtm_abnormal" >
+    update tc_usercrdtm_abnormal
+    set UserName = #{username,jdbcType=VARCHAR},
+      CarCode = #{carcode,jdbcType=VARCHAR},
+      ChargeRuleID = #{chargeruleid,jdbcType=INTEGER},
+      CarLabel = #{carlabel,jdbcType=VARCHAR},
+      CarColor = #{carcolor,jdbcType=VARCHAR},
+      CarStyleid = #{carstyleid,jdbcType=INTEGER},
+      Crdtm = #{crdtm,jdbcType=TIMESTAMP},
+      ChannelID = #{channelid,jdbcType=INTEGER},
+      ImagePath = #{imagepath,jdbcType=VARCHAR},
+      RecognizeCarCode = #{recognizecarcode,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      CarCode2 = #{carcode2,jdbcType=VARCHAR},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      Parkinglocation = #{parkinglocation,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      LastoutTime = #{lastouttime,jdbcType=TIMESTAMP}
+    where RecordID = #{recordid,jdbcType=BIGINT}
+      and partitionID = #{partitionid,jdbcType=INTEGER}
+  </update>
+  
+  
+    <insert id="insertabnomal" parameterType="Object" >
+    insert into tc_usercrdtm_abnormal (RecordID, partitionID, UserName, 
+      CarCode, ChargeRuleID, CarLabel, 
+      CarColor, CarStyleid, Crdtm, 
+      ChannelID, ImagePath, RecognizeCarCode, 
+      Note, CarCode2, ParkingLotNo, 
+      Parkinglocation, LastoutTime
+      )
+    values (#{recordid}, #{partitionid}, #{username}, 
+      #{carcode}, #{chargeruleid}, #{carlabel}, 
+      #{carcolor}, #{carstyleid}, #{crdtm}, 
+      #{channelid}, #{imagepath}, #{recognizecarcode}, 
+      #{note}, #{carcode2}, #{parkinglotno}, 
+      #{parkinglocation}, #{lastouttime}
+      )
+  </insert>
+  
+</mapper>

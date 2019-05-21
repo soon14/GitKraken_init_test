@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_ledinfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_ledinfo" >
+    <id column="RecordId" property="recordid" jdbcType="INTEGER" />
+    <result column="LedType" property="ledtype" jdbcType="INTEGER" />
+    <result column="LedNo" property="ledno" jdbcType="INTEGER" />
+    <result column="LedName" property="ledname" jdbcType="VARCHAR" />
+    <result column="LedIp" property="ledip" jdbcType="VARCHAR" />
+    <result column="Port" property="port" jdbcType="INTEGER" />
+    <result column="Mac" property="mac" jdbcType="VARCHAR" />
+    <result column="SerialNumber" property="serialnumber" jdbcType="VARCHAR" />
+    <result column="SubnetMask" property="subnetmask" jdbcType="VARCHAR" />
+    <result column="DefaultGateway" property="defaultgateway" jdbcType="VARCHAR" />
+    <result column="FirstDNS" property="firstdns" jdbcType="VARCHAR" />
+    <result column="SecondDNS" property="seconddns" jdbcType="VARCHAR" />
+    <result column="Version" property="version" jdbcType="VARCHAR" />
+    <result column="ChannelID" property="channelid" jdbcType="INTEGER" />
+    <result column="ParkingChannelID" property="parkingchannelid" jdbcType="INTEGER" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <result column="RunState" property="runstate" jdbcType="INTEGER" />
+    <result column="LedNumNo" property="lednumno" jdbcType="VARCHAR" />
+    <result column="StationID" property="stationid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordId, LedType, LedNo, LedName, LedIp, Port, Mac, SerialNumber, SubnetMask, DefaultGateway, 
+    FirstDNS, SecondDNS, Version, ChannelID, ParkingChannelID, ParkingLotNo, RunState, 
+    LedNumNo, StationID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_ledinfo
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_ledinfo
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_ledinfo" >
+    insert into tc_ledinfo (RecordId, LedType, LedNo, 
+      LedName, LedIp, Port, 
+      Mac, SerialNumber, SubnetMask, 
+      DefaultGateway, FirstDNS, SecondDNS, 
+      Version, ChannelID, ParkingChannelID, 
+      ParkingLotNo, RunState, LedNumNo, 
+      StationID)
+    values (#{recordid,jdbcType=INTEGER}, #{ledtype,jdbcType=INTEGER}, #{ledno,jdbcType=INTEGER}, 
+      #{ledname,jdbcType=VARCHAR}, #{ledip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, 
+      #{mac,jdbcType=VARCHAR}, #{serialnumber,jdbcType=VARCHAR}, #{subnetmask,jdbcType=VARCHAR}, 
+      #{defaultgateway,jdbcType=VARCHAR}, #{firstdns,jdbcType=VARCHAR}, #{seconddns,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{channelid,jdbcType=INTEGER}, #{parkingchannelid,jdbcType=INTEGER}, 
+      #{parkinglotno,jdbcType=VARCHAR}, #{runstate,jdbcType=INTEGER}, #{lednumno,jdbcType=VARCHAR}, 
+      #{stationid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_ledinfo" >
+    insert into tc_ledinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordId,
+      </if>
+      <if test="ledtype != null" >
+        LedType,
+      </if>
+      <if test="ledno != null" >
+        LedNo,
+      </if>
+      <if test="ledname != null" >
+        LedName,
+      </if>
+      <if test="ledip != null" >
+        LedIp,
+      </if>
+      <if test="port != null" >
+        Port,
+      </if>
+      <if test="mac != null" >
+        Mac,
+      </if>
+      <if test="serialnumber != null" >
+        SerialNumber,
+      </if>
+      <if test="subnetmask != null" >
+        SubnetMask,
+      </if>
+      <if test="defaultgateway != null" >
+        DefaultGateway,
+      </if>
+      <if test="firstdns != null" >
+        FirstDNS,
+      </if>
+      <if test="seconddns != null" >
+        SecondDNS,
+      </if>
+      <if test="version != null" >
+        Version,
+      </if>
+      <if test="channelid != null" >
+        ChannelID,
+      </if>
+      <if test="parkingchannelid != null" >
+        ParkingChannelID,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="runstate != null" >
+        RunState,
+      </if>
+      <if test="lednumno != null" >
+        LedNumNo,
+      </if>
+      <if test="stationid != null" >
+        StationID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="ledtype != null" >
+        #{ledtype,jdbcType=INTEGER},
+      </if>
+      <if test="ledno != null" >
+        #{ledno,jdbcType=INTEGER},
+      </if>
+      <if test="ledname != null" >
+        #{ledname,jdbcType=VARCHAR},
+      </if>
+      <if test="ledip != null" >
+        #{ledip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=INTEGER},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subnetmask != null" >
+        #{subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultgateway != null" >
+        #{defaultgateway,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdns != null" >
+        #{firstdns,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddns != null" >
+        #{seconddns,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="parkingchannelid != null" >
+        #{parkingchannelid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="runstate != null" >
+        #{runstate,jdbcType=INTEGER},
+      </if>
+      <if test="lednumno != null" >
+        #{lednumno,jdbcType=VARCHAR},
+      </if>
+      <if test="stationid != null" >
+        #{stationid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_ledinfo" >
+    update tc_ledinfo
+    <set >
+      <if test="ledtype != null" >
+        LedType = #{ledtype,jdbcType=INTEGER},
+      </if>
+      <if test="ledno != null" >
+        LedNo = #{ledno,jdbcType=INTEGER},
+      </if>
+      <if test="ledname != null" >
+        LedName = #{ledname,jdbcType=VARCHAR},
+      </if>
+      <if test="ledip != null" >
+        LedIp = #{ledip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        Port = #{port,jdbcType=INTEGER},
+      </if>
+      <if test="mac != null" >
+        Mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subnetmask != null" >
+        SubnetMask = #{subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultgateway != null" >
+        DefaultGateway = #{defaultgateway,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdns != null" >
+        FirstDNS = #{firstdns,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddns != null" >
+        SecondDNS = #{seconddns,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        Version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        ChannelID = #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="parkingchannelid != null" >
+        ParkingChannelID = #{parkingchannelid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="runstate != null" >
+        RunState = #{runstate,jdbcType=INTEGER},
+      </if>
+      <if test="lednumno != null" >
+        LedNumNo = #{lednumno,jdbcType=VARCHAR},
+      </if>
+      <if test="stationid != null" >
+        StationID = #{stationid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_ledinfo" >
+    update tc_ledinfo
+    set LedType = #{ledtype,jdbcType=INTEGER},
+      LedNo = #{ledno,jdbcType=INTEGER},
+      LedName = #{ledname,jdbcType=VARCHAR},
+      LedIp = #{ledip,jdbcType=VARCHAR},
+      Port = #{port,jdbcType=INTEGER},
+      Mac = #{mac,jdbcType=VARCHAR},
+      SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      SubnetMask = #{subnetmask,jdbcType=VARCHAR},
+      DefaultGateway = #{defaultgateway,jdbcType=VARCHAR},
+      FirstDNS = #{firstdns,jdbcType=VARCHAR},
+      SecondDNS = #{seconddns,jdbcType=VARCHAR},
+      Version = #{version,jdbcType=VARCHAR},
+      ChannelID = #{channelid,jdbcType=INTEGER},
+      ParkingChannelID = #{parkingchannelid,jdbcType=INTEGER},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      RunState = #{runstate,jdbcType=INTEGER},
+      LedNumNo = #{lednumno,jdbcType=VARCHAR},
+      StationID = #{stationid,jdbcType=INTEGER}
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByChannelID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_ledinfo
+    where ChannelID = #{channelid,jdbcType=INTEGER}
+  </select>
+  
+   <select id="selectByStationID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_ledinfo
+    where StationID = #{stationid,jdbcType=INTEGER}
+  </select>
+  
+</mapper>

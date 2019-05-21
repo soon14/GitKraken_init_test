@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.dao.Gd_entrance_recognizeMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Gd_entrance_recognize" >
+    <id column="recordId" property="recordid" jdbcType="INTEGER" />
+    <id column="partitionID" property="partitionid" jdbcType="INTEGER" />
+    <result column="oldRecordId" property="oldrecordid" jdbcType="INTEGER" />
+    <result column="carParkId" property="carparkid" jdbcType="INTEGER" />
+    <result column="licensePlateNumber" property="licenseplatenumber" jdbcType="VARCHAR" />
+    <result column="imgName" property="imgname" jdbcType="VARCHAR" />
+    <result column="inTime" property="intime" jdbcType="TIMESTAMP" />
+    <result column="discountRate" property="discountrate" jdbcType="INTEGER" />
+    <result column="discountTime" property="discounttime" jdbcType="INTEGER" />
+    <result column="discountMoney" property="discountmoney" jdbcType="INTEGER" />
+    <result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="mark" property="mark" jdbcType="INTEGER" />
+    <result column="IsRecognition" property="isrecognition" jdbcType="INTEGER" />
+    <result column="recognitionNumber" property="recognitionnumber" jdbcType="VARCHAR" />
+    <result column="groupId" property="groupid" jdbcType="INTEGER" />
+    <result column="mallId" property="mallid" jdbcType="INTEGER" />
+    <result column="hashcode" property="hashcode" jdbcType="BIGINT" />
+    <result column="test_sign" property="testSign" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    recordId, partitionID, oldRecordId, carParkId, licensePlateNumber, imgName, inTime, 
+    discountRate, discountTime, discountMoney, addTime, mark, IsRecognition, recognitionNumber, 
+    groupId, mallId, hashcode, test_sign
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.rf.hz.web.cloudpark.moder.Gd_entrance_recognizeKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from gd_entrance_recognize
+    where recordId = #{recordid,jdbcType=INTEGER}
+      and partitionID = #{partitionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Gd_entrance_recognizeKey" >
+    delete from gd_entrance_recognize
+    where recordId = #{recordid,jdbcType=INTEGER}
+      and partitionID = #{partitionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Gd_entrance_recognize" >
+    insert into gd_entrance_recognize (recordId, partitionID, oldRecordId, 
+      carParkId, licensePlateNumber, imgName, 
+      inTime, discountRate, discountTime, 
+      discountMoney, addTime, mark, 
+      IsRecognition, recognitionNumber, groupId, 
+      mallId, hashcode, test_sign
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{partitionid,jdbcType=INTEGER}, #{oldrecordid,jdbcType=INTEGER}, 
+      #{carparkid,jdbcType=INTEGER}, #{licenseplatenumber,jdbcType=VARCHAR}, #{imgname,jdbcType=VARCHAR}, 
+      #{intime,jdbcType=TIMESTAMP}, #{discountrate,jdbcType=INTEGER}, #{discounttime,jdbcType=INTEGER}, 
+      #{discountmoney,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{mark,jdbcType=INTEGER}, 
+      #{isrecognition,jdbcType=INTEGER}, #{recognitionnumber,jdbcType=VARCHAR}, #{groupid,jdbcType=INTEGER}, 
+      #{mallid,jdbcType=INTEGER}, #{hashcode,jdbcType=BIGINT}, #{testSign,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Gd_entrance_recognize" >
+    insert into gd_entrance_recognize
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        recordId,
+      </if>
+      <if test="partitionid != null" >
+        partitionID,
+      </if>
+      <if test="oldrecordid != null" >
+        oldRecordId,
+      </if>
+      <if test="carparkid != null" >
+        carParkId,
+      </if>
+      <if test="licenseplatenumber != null" >
+        licensePlateNumber,
+      </if>
+      <if test="imgname != null" >
+        imgName,
+      </if>
+      <if test="intime != null" >
+        inTime,
+      </if>
+      <if test="discountrate != null" >
+        discountRate,
+      </if>
+      <if test="discounttime != null" >
+        discountTime,
+      </if>
+      <if test="discountmoney != null" >
+        discountMoney,
+      </if>
+      <if test="addtime != null" >
+        addTime,
+      </if>
+      <if test="mark != null" >
+        mark,
+      </if>
+      <if test="isrecognition != null" >
+        IsRecognition,
+      </if>
+      <if test="recognitionnumber != null" >
+        recognitionNumber,
+      </if>
+      <if test="groupid != null" >
+        groupId,
+      </if>
+      <if test="mallid != null" >
+        mallId,
+      </if>
+      <if test="hashcode != null" >
+        hashcode,
+      </if>
+      <if test="testSign != null" >
+        test_sign,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="partitionid != null" >
+        #{partitionid,jdbcType=INTEGER},
+      </if>
+      <if test="oldrecordid != null" >
+        #{oldrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="carparkid != null" >
+        #{carparkid,jdbcType=INTEGER},
+      </if>
+      <if test="licenseplatenumber != null" >
+        #{licenseplatenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="imgname != null" >
+        #{imgname,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null" >
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discountrate != null" >
+        #{discountrate,jdbcType=INTEGER},
+      </if>
+      <if test="discounttime != null" >
+        #{discounttime,jdbcType=INTEGER},
+      </if>
+      <if test="discountmoney != null" >
+        #{discountmoney,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=INTEGER},
+      </if>
+      <if test="isrecognition != null" >
+        #{isrecognition,jdbcType=INTEGER},
+      </if>
+      <if test="recognitionnumber != null" >
+        #{recognitionnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="mallid != null" >
+        #{mallid,jdbcType=INTEGER},
+      </if>
+      <if test="hashcode != null" >
+        #{hashcode,jdbcType=BIGINT},
+      </if>
+      <if test="testSign != null" >
+        #{testSign,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Gd_entrance_recognize" >
+    update gd_entrance_recognize
+    <set >
+      <if test="oldrecordid != null" >
+        oldRecordId = #{oldrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="carparkid != null" >
+        carParkId = #{carparkid,jdbcType=INTEGER},
+      </if>
+      <if test="licenseplatenumber != null" >
+        licensePlateNumber = #{licenseplatenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="imgname != null" >
+        imgName = #{imgname,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null" >
+        inTime = #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discountrate != null" >
+        discountRate = #{discountrate,jdbcType=INTEGER},
+      </if>
+      <if test="discounttime != null" >
+        discountTime = #{discounttime,jdbcType=INTEGER},
+      </if>
+      <if test="discountmoney != null" >
+        discountMoney = #{discountmoney,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mark != null" >
+        mark = #{mark,jdbcType=INTEGER},
+      </if>
+      <if test="isrecognition != null" >
+        IsRecognition = #{isrecognition,jdbcType=INTEGER},
+      </if>
+      <if test="recognitionnumber != null" >
+        recognitionNumber = #{recognitionnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        groupId = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="mallid != null" >
+        mallId = #{mallid,jdbcType=INTEGER},
+      </if>
+      <if test="hashcode != null" >
+        hashcode = #{hashcode,jdbcType=BIGINT},
+      </if>
+      <if test="testSign != null" >
+        test_sign = #{testSign,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where recordId = #{recordid,jdbcType=INTEGER}
+      and partitionID = #{partitionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Gd_entrance_recognize" >
+    update gd_entrance_recognize
+    set oldRecordId = #{oldrecordid,jdbcType=INTEGER},
+      carParkId = #{carparkid,jdbcType=INTEGER},
+      licensePlateNumber = #{licenseplatenumber,jdbcType=VARCHAR},
+      imgName = #{imgname,jdbcType=VARCHAR},
+      inTime = #{intime,jdbcType=TIMESTAMP},
+      discountRate = #{discountrate,jdbcType=INTEGER},
+      discountTime = #{discounttime,jdbcType=INTEGER},
+      discountMoney = #{discountmoney,jdbcType=INTEGER},
+      addTime = #{addtime,jdbcType=TIMESTAMP},
+      mark = #{mark,jdbcType=INTEGER},
+      IsRecognition = #{isrecognition,jdbcType=INTEGER},
+      recognitionNumber = #{recognitionnumber,jdbcType=VARCHAR},
+      groupId = #{groupid,jdbcType=INTEGER},
+      mallId = #{mallid,jdbcType=INTEGER},
+      hashcode = #{hashcode,jdbcType=BIGINT},
+      test_sign = #{testSign,jdbcType=VARCHAR}
+    where recordId = #{recordid,jdbcType=INTEGER}
+      and partitionID = #{partitionid,jdbcType=INTEGER}
+  </update>
+  
+    <insert id="saveGdEntranceRecognize" parameterType="Object" >
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    insert into gd_entrance_recognize (partitionID, oldRecordId, 
+      carParkId, licensePlateNumber, imgName, 
+      inTime, discountRate, discountTime, 
+      discountMoney, addTime, mark, 
+      IsRecognition, recognitionNumber
+      )
+    values (#{partitionid}, #{oldRecordId}, #{carParkId}, #{licensePlateNumber}, #{imgname}, 
+      #{intime}, #{discountrate}, #{discounttime}, 
+      #{discountmoney}, #{addtime}, #{mark}, 
+      #{isrecognition}, #{recognitionnumber}
+      )
+  </insert>
+
+    <select id="queryEntrance_recognize"  resultType= "java.util.Map"  parameterType="Object" >
+
+    select  *
+    from gd_entrance_recognize
+    where  partitionID = #{partitionid} and carParkId=#{carparkid}
+
+  </select>
+
+
+</mapper>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_charge_jmrecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_charge_jmrecord" >
+    <id column="Recordid" property="recordid" jdbcType="INTEGER" />
+    <result column="Sysno" property="sysno" jdbcType="CHAR" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="Serial" property="serial" jdbcType="VARCHAR" />
+    <result column="CarCode" property="carcode" jdbcType="VARCHAR" />
+    <result column="InTime" property="intime" jdbcType="TIMESTAMP" />
+    <result column="UserTypeID" property="usertypeid" jdbcType="INTEGER" />
+    <result column="DeviceSysID" property="devicesysid" jdbcType="INTEGER" />
+    <result column="JMTypeId" property="jmtypeid" jdbcType="INTEGER" />
+    <result column="JMNum" property="jmnum" jdbcType="INTEGER" />
+    <result column="JMMoney" property="jmmoney" jdbcType="DECIMAL" />
+    <result column="JMTime" property="jmtime" jdbcType="REAL" />
+    <result column="JMDiscount" property="jmdiscount" jdbcType="REAL" />
+    <result column="JMDept" property="jmdept" jdbcType="INTEGER" />
+    <result column="JMCodes" property="jmcodes" jdbcType="VARCHAR" />
+    <result column="OperatorId" property="operatorid" jdbcType="VARCHAR" />
+    <result column="OperatorDate" property="operatordate" jdbcType="TIMESTAMP" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Recordid, Sysno, UserName, Serial, CarCode, InTime, UserTypeID, DeviceSysID, JMTypeId, 
+    JMNum, JMMoney, JMTime, JMDiscount, JMDept, JMCodes, OperatorId, OperatorDate, ParkingLotNo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_charge_jmrecord
+    where Recordid = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_charge_jmrecord
+    where Recordid = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_charge_jmrecord" >
+    insert into tc_charge_jmrecord (Recordid, Sysno, UserName, 
+      Serial, CarCode, InTime, 
+      UserTypeID, DeviceSysID, JMTypeId, 
+      JMNum, JMMoney, JMTime, 
+      JMDiscount, JMDept, JMCodes, 
+      OperatorId, OperatorDate, ParkingLotNo
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{sysno,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
+      #{serial,jdbcType=VARCHAR}, #{carcode,jdbcType=VARCHAR}, #{intime,jdbcType=TIMESTAMP}, 
+      #{usertypeid,jdbcType=INTEGER}, #{devicesysid,jdbcType=INTEGER}, #{jmtypeid,jdbcType=INTEGER}, 
+      #{jmnum,jdbcType=INTEGER}, #{jmmoney,jdbcType=DECIMAL}, #{jmtime,jdbcType=REAL}, 
+      #{jmdiscount,jdbcType=REAL}, #{jmdept,jdbcType=INTEGER}, #{jmcodes,jdbcType=VARCHAR}, 
+      #{operatorid,jdbcType=VARCHAR}, #{operatordate,jdbcType=TIMESTAMP}, #{parkinglotno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_charge_jmrecord" >
+    insert into tc_charge_jmrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        Recordid,
+      </if>
+      <if test="sysno != null" >
+        Sysno,
+      </if>
+      <if test="username != null" >
+        UserName,
+      </if>
+      <if test="serial != null" >
+        Serial,
+      </if>
+      <if test="carcode != null" >
+        CarCode,
+      </if>
+      <if test="intime != null" >
+        InTime,
+      </if>
+      <if test="usertypeid != null" >
+        UserTypeID,
+      </if>
+      <if test="devicesysid != null" >
+        DeviceSysID,
+      </if>
+      <if test="jmtypeid != null" >
+        JMTypeId,
+      </if>
+      <if test="jmnum != null" >
+        JMNum,
+      </if>
+      <if test="jmmoney != null" >
+        JMMoney,
+      </if>
+      <if test="jmtime != null" >
+        JMTime,
+      </if>
+      <if test="jmdiscount != null" >
+        JMDiscount,
+      </if>
+      <if test="jmdept != null" >
+        JMDept,
+      </if>
+      <if test="jmcodes != null" >
+        JMCodes,
+      </if>
+      <if test="operatorid != null" >
+        OperatorId,
+      </if>
+      <if test="operatordate != null" >
+        OperatorDate,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="sysno != null" >
+        #{sysno,jdbcType=CHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="serial != null" >
+        #{serial,jdbcType=VARCHAR},
+      </if>
+      <if test="carcode != null" >
+        #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null" >
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usertypeid != null" >
+        #{usertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="devicesysid != null" >
+        #{devicesysid,jdbcType=INTEGER},
+      </if>
+      <if test="jmtypeid != null" >
+        #{jmtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="jmnum != null" >
+        #{jmnum,jdbcType=INTEGER},
+      </if>
+      <if test="jmmoney != null" >
+        #{jmmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="jmtime != null" >
+        #{jmtime,jdbcType=REAL},
+      </if>
+      <if test="jmdiscount != null" >
+        #{jmdiscount,jdbcType=REAL},
+      </if>
+      <if test="jmdept != null" >
+        #{jmdept,jdbcType=INTEGER},
+      </if>
+      <if test="jmcodes != null" >
+        #{jmcodes,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorid != null" >
+        #{operatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="operatordate != null" >
+        #{operatordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_charge_jmrecord" >
+    update tc_charge_jmrecord
+    <set >
+      <if test="sysno != null" >
+        Sysno = #{sysno,jdbcType=CHAR},
+      </if>
+      <if test="username != null" >
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="serial != null" >
+        Serial = #{serial,jdbcType=VARCHAR},
+      </if>
+      <if test="carcode != null" >
+        CarCode = #{carcode,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null" >
+        InTime = #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usertypeid != null" >
+        UserTypeID = #{usertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="devicesysid != null" >
+        DeviceSysID = #{devicesysid,jdbcType=INTEGER},
+      </if>
+      <if test="jmtypeid != null" >
+        JMTypeId = #{jmtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="jmnum != null" >
+        JMNum = #{jmnum,jdbcType=INTEGER},
+      </if>
+      <if test="jmmoney != null" >
+        JMMoney = #{jmmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="jmtime != null" >
+        JMTime = #{jmtime,jdbcType=REAL},
+      </if>
+      <if test="jmdiscount != null" >
+        JMDiscount = #{jmdiscount,jdbcType=REAL},
+      </if>
+      <if test="jmdept != null" >
+        JMDept = #{jmdept,jdbcType=INTEGER},
+      </if>
+      <if test="jmcodes != null" >
+        JMCodes = #{jmcodes,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorid != null" >
+        OperatorId = #{operatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="operatordate != null" >
+        OperatorDate = #{operatordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_charge_jmrecord" >
+    update tc_charge_jmrecord
+    set Sysno = #{sysno,jdbcType=CHAR},
+      UserName = #{username,jdbcType=VARCHAR},
+      Serial = #{serial,jdbcType=VARCHAR},
+      CarCode = #{carcode,jdbcType=VARCHAR},
+      InTime = #{intime,jdbcType=TIMESTAMP},
+      UserTypeID = #{usertypeid,jdbcType=INTEGER},
+      DeviceSysID = #{devicesysid,jdbcType=INTEGER},
+      JMTypeId = #{jmtypeid,jdbcType=INTEGER},
+      JMNum = #{jmnum,jdbcType=INTEGER},
+      JMMoney = #{jmmoney,jdbcType=DECIMAL},
+      JMTime = #{jmtime,jdbcType=REAL},
+      JMDiscount = #{jmdiscount,jdbcType=REAL},
+      JMDept = #{jmdept,jdbcType=INTEGER},
+      JMCodes = #{jmcodes,jdbcType=VARCHAR},
+      OperatorId = #{operatorid,jdbcType=VARCHAR},
+      OperatorDate = #{operatordate,jdbcType=TIMESTAMP},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+    where Recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+</mapper>

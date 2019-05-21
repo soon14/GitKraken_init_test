@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Pb_stationMapper">
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Pb_station">
+		<id column="RecordID" property="recordid" jdbcType="INTEGER" />
+		<result column="StationNo" property="stationno" jdbcType="CHAR" />
+		<result column="StationName" property="stationname" jdbcType="VARCHAR" />
+		<result column="StationIp" property="stationip" jdbcType="VARCHAR" />
+		<result column="Port" property="port" jdbcType="INTEGER" />
+		<result column="ServerIp" property="serverip" jdbcType="VARCHAR" />
+		<result column="Mac" property="mac" jdbcType="VARCHAR" />
+		<result column="SubnetMask" property="subnetmask" jdbcType="VARCHAR" />
+		<result column="DefaultGateway" property="defaultgateway"
+			jdbcType="VARCHAR" />
+		<result column="FirstDNS" property="firstdns" jdbcType="VARCHAR" />
+		<result column="SecondDNS" property="seconddns" jdbcType="VARCHAR" />
+		<result column="Version" property="version" jdbcType="VARCHAR" />
+		<result column="SerialNumber" property="serialnumber" jdbcType="VARCHAR" />
+		<result column="ServerPort" property="serverport" jdbcType="INTEGER" />
+		<result column="StationDesc" property="stationdesc" jdbcType="VARCHAR" />
+		<result column="ChannelID" property="channelid" jdbcType="INTEGER" />
+		<result column="StationType" property="stationtype" jdbcType="CHAR" />
+		<result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="LastUpdateTime" property="lastupdatetime"
+			jdbcType="TIMESTAMP" />
+		<result column="RunState" property="runstate" jdbcType="INTEGER" />
+		<result column="IsDelete" property="isdelete" jdbcType="BIT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RecordID, StationNo, StationName, StationIp, Port,
+		ServerIp, Mac, SubnetMask,
+		DefaultGateway,
+		FirstDNS, SecondDNS, Version,
+		SerialNumber, ServerPort, StationDesc, ChannelID,
+		StationType,
+		ParkingLotNo, LastUpdateTime, RunState, IsDelete
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from pb_station
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		pb_station
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_station">
+		insert into pb_station
+		(RecordID, StationNo, StationName,
+		StationIp, Port, ServerIp,
+		Mac,
+		SubnetMask, DefaultGateway,
+		FirstDNS, SecondDNS, Version,
+		SerialNumber,
+		ServerPort, StationDesc,
+		ChannelID, StationType, ParkingLotNo,
+		LastUpdateTime, RunState, IsDelete
+		)
+		values
+		(#{recordid,jdbcType=INTEGER}, #{stationno,jdbcType=CHAR},
+		#{stationname,jdbcType=VARCHAR},
+		#{stationip,jdbcType=VARCHAR},
+		#{port,jdbcType=INTEGER}, #{serverip,jdbcType=VARCHAR},
+		#{mac,jdbcType=VARCHAR}, #{subnetmask,jdbcType=VARCHAR},
+		#{defaultgateway,jdbcType=VARCHAR},
+		#{firstdns,jdbcType=VARCHAR},
+		#{seconddns,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR},
+		#{serialnumber,jdbcType=VARCHAR}, #{serverport,jdbcType=INTEGER},
+		#{stationdesc,jdbcType=VARCHAR},
+		#{channelid,jdbcType=INTEGER},
+		#{stationtype,jdbcType=CHAR}, #{parkinglotno,jdbcType=VARCHAR},
+		#{lastupdatetime,jdbcType=TIMESTAMP}, #{runstate,jdbcType=INTEGER},
+		#{isdelete,jdbcType=BIT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_station">
+		insert into pb_station
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				RecordID,
+			</if>
+			<if test="stationno != null">
+				StationNo,
+			</if>
+			<if test="stationname != null">
+				StationName,
+			</if>
+			<if test="stationip != null">
+				StationIp,
+			</if>
+			<if test="port != null">
+				Port,
+			</if>
+			<if test="serverip != null">
+				ServerIp,
+			</if>
+			<if test="mac != null">
+				Mac,
+			</if>
+			<if test="subnetmask != null">
+				SubnetMask,
+			</if>
+			<if test="defaultgateway != null">
+				DefaultGateway,
+			</if>
+			<if test="firstdns != null">
+				FirstDNS,
+			</if>
+			<if test="seconddns != null">
+				SecondDNS,
+			</if>
+			<if test="version != null">
+				Version,
+			</if>
+			<if test="serialnumber != null">
+				SerialNumber,
+			</if>
+			<if test="serverport != null">
+				ServerPort,
+			</if>
+			<if test="stationdesc != null">
+				StationDesc,
+			</if>
+			<if test="channelid != null">
+				ChannelID,
+			</if>
+			<if test="stationtype != null">
+				StationType,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+			<if test="lastupdatetime != null">
+				LastUpdateTime,
+			</if>
+			<if test="runstate != null">
+				RunState,
+			</if>
+			<if test="isdelete != null">
+				IsDelete,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				#{recordid,jdbcType=INTEGER},
+			</if>
+			<if test="stationno != null">
+				#{stationno,jdbcType=CHAR},
+			</if>
+			<if test="stationname != null">
+				#{stationname,jdbcType=VARCHAR},
+			</if>
+			<if test="stationip != null">
+				#{stationip,jdbcType=VARCHAR},
+			</if>
+			<if test="port != null">
+				#{port,jdbcType=INTEGER},
+			</if>
+			<if test="serverip != null">
+				#{serverip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="subnetmask != null">
+				#{subnetmask,jdbcType=VARCHAR},
+			</if>
+			<if test="defaultgateway != null">
+				#{defaultgateway,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdns != null">
+				#{firstdns,jdbcType=VARCHAR},
+			</if>
+			<if test="seconddns != null">
+				#{seconddns,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=VARCHAR},
+			</if>
+			<if test="serialnumber != null">
+				#{serialnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="serverport != null">
+				#{serverport,jdbcType=INTEGER},
+			</if>
+			<if test="stationdesc != null">
+				#{stationdesc,jdbcType=VARCHAR},
+			</if>
+			<if test="channelid != null">
+				#{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="stationtype != null">
+				#{stationtype,jdbcType=CHAR},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="lastupdatetime != null">
+				#{lastupdatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="runstate != null">
+				#{runstate,jdbcType=INTEGER},
+			</if>
+			<if test="isdelete != null">
+				#{isdelete,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_station">
+		update pb_station
+		<set>
+			<if test="stationno != null">
+				StationNo = #{stationno,jdbcType=CHAR},
+			</if>
+			<if test="stationname != null">
+				StationName = #{stationname,jdbcType=VARCHAR},
+			</if>
+			<if test="stationip != null">
+				StationIp = #{stationip,jdbcType=VARCHAR},
+			</if>
+			<if test="port != null">
+				Port = #{port,jdbcType=INTEGER},
+			</if>
+			<if test="serverip != null">
+				ServerIp = #{serverip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				Mac = #{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="subnetmask != null">
+				SubnetMask = #{subnetmask,jdbcType=VARCHAR},
+			</if>
+			<if test="defaultgateway != null">
+				DefaultGateway = #{defaultgateway,jdbcType=VARCHAR},
+			</if>
+			<if test="firstdns != null">
+				FirstDNS = #{firstdns,jdbcType=VARCHAR},
+			</if>
+			<if test="seconddns != null">
+				SecondDNS = #{seconddns,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				Version = #{version,jdbcType=VARCHAR},
+			</if>
+			<if test="serialnumber != null">
+				SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="serverport != null">
+				ServerPort = #{serverport,jdbcType=INTEGER},
+			</if>
+			<if test="stationdesc != null">
+				StationDesc = #{stationdesc,jdbcType=VARCHAR},
+			</if>
+			<if test="channelid != null">
+				ChannelID = #{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="stationtype != null">
+				StationType = #{stationtype,jdbcType=CHAR},
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="lastupdatetime != null">
+				LastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="runstate != null">
+				RunState = #{runstate,jdbcType=INTEGER},
+			</if>
+			<if test="isdelete != null">
+				IsDelete = #{isdelete,jdbcType=BIT},
+			</if>
+		</set>
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_station">
+		update pb_station
+		set StationNo = #{stationno,jdbcType=CHAR},
+		StationName =
+		#{stationname,jdbcType=VARCHAR},
+		StationIp =
+		#{stationip,jdbcType=VARCHAR},
+		Port = #{port,jdbcType=INTEGER},
+		ServerIp = #{serverip,jdbcType=VARCHAR},
+		Mac = #{mac,jdbcType=VARCHAR},
+		SubnetMask = #{subnetmask,jdbcType=VARCHAR},
+		DefaultGateway =
+		#{defaultgateway,jdbcType=VARCHAR},
+		FirstDNS =
+		#{firstdns,jdbcType=VARCHAR},
+		SecondDNS =
+		#{seconddns,jdbcType=VARCHAR},
+		Version = #{version,jdbcType=VARCHAR},
+		SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+		ServerPort =
+		#{serverport,jdbcType=INTEGER},
+		StationDesc =
+		#{stationdesc,jdbcType=VARCHAR},
+		ChannelID =
+		#{channelid,jdbcType=INTEGER},
+		StationType =
+		#{stationtype,jdbcType=CHAR},
+		ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR},
+		LastUpdateTime =
+		#{lastupdatetime,jdbcType=TIMESTAMP},
+		RunState =
+		#{runstate,jdbcType=INTEGER},
+		IsDelete = #{isdelete,jdbcType=BIT}
+		where
+		RecordID = #{recordid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectBySerialNumber" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from pb_station
+		where IsDelete=0 and SerialNumber =
+		#{SerialNumber,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByChannelID" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from pb_station
+		where IsDelete=0 and ChannelID =
+		#{channelid,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectMaxSerialNumber" resultType="java.lang.String"
+		parameterType="java.lang.Integer">
+		select
+		SerialNumber
+		from pb_station
+		where IsDelete=0 and
+		SerialNumber is not null and
+		SerialNumber!='' and SerialNumber like
+		'%50414430%' order by SerialNumber desc limit 1;
+	</select>
+
+	<select id="selectMaxSerialNumberByParkingLotNo" resultType="java.lang.String"
+		parameterType="java.lang.Integer">
+		select
+		SerialNumber
+		from pb_station
+		where IsDelete=0 and
+		SerialNumber is
+		not null and
+		SerialNumber!='' and SerialNumber like
+		'%50414430%' and <![CDATA[ cast(ParkingLotNo as unsigned)<#{parkinglotno} ]]>
+		order by SerialNumber desc limit 1;
+	</select>
+</mapper>

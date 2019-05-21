@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.GdExportRecognizeMapper" > 
+<!-- Result Map-->
+<resultMap type="cn.rf.hz.web.bean.gd.ParkingExportRecord" id="BaseResultMap">
+	<result column="recordId" property="recordId" />
+	<result column="oldRecordId" property="oldRecordId" />
+	<result column="carParkId" property="carParkId" />
+	<result column="licensePlateNumber" property="licensePlateNumber" />
+	<result column="imgName" property="imgName" />
+	<result column="inTime" property="inTime" />
+	<result column="addTime" property="addTime" />
+</resultMap>
+
+	
+<!-- gd_entrance_recognize table all fields -->
+<sql id="Base_Column_List" >
+	 recordId,oldRecordId ,   carParkId ,   licensePlateNumber ,   imgName ,   inTime ,   addTime 
+</sql>
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  INSERT INTO    gd_export_recognize  (recordId,oldRecordId ,   carParkId ,   licensePlateNumber ,   imgName ,   inTime ,   addTime  ) 
+  values (#{recordId},#{oldRecordId},#{carParkId},#{licensePlateNumber},#{imgName},#{inTime},#{addTime} )
+</insert>
+<insert id="save" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  INSERT INTO    gd_export_recognize  (recordId,oldRecordId ,   carParkId ,   licensePlateNumber ,   imgName ,   inTime ,   addTime,
+  parkingNo,channelId,channelName,remarks1) VALUE 
+  (#{recordId},#{oldRecordId},#{carParkId},#{licensePlateNumber},#{imgName},#{outTime},now(),
+  #{parkingNo},#{channelId},#{channelName},#{remarks1})
+  
+</insert>
+
+
+<insert id="save1" parameterType="Object" >
+<![CDATA[
+INSERT INTO    gd_export_recognize  (oldRecordId ,   carParkId ,   licensePlateNumber ,   imgName ,   inTime ,   addTime,
+parkingNo,channelId,channelName,remarks1) VALUE
+]]>
+  <foreach collection="list" item="item" index="index" separator="," >
+  (#{item.oldRecordId},#{item.carParkId},#{item.licensePlateNumber},#{item.imgName},#{item.outTime},now(),
+  #{item.parkingNo},#{item.channelId},#{item.channelName},#{item.remarks1})
+  </foreach>
+</insert>
+
+<select id="findById"  resultMap="BaseResultMap" parameterType="Object">
+	select *
+	 from `gd_export_recognize`  
+	 WHERE oldRecordId= #{oldRecordId} AND carParkId= #{carParkId} and inTime = #{inTime}
+</select>
+
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="update" parameterType="Object" >
+	update gd_export_recognize set 
+	<trim  suffixOverrides="," >
+	<if test="oldRecordId != null  ">
+		oldRecordId=#{oldRecordId},
+	</if>
+	<if test="carParkId != null  and carParkId != '' ">
+		carParkId=#{carParkId},
+	</if>
+	<if test="licensePlateNumber != null  and licensePlateNumber != '' ">
+		licensePlateNumber=#{licensePlateNumber},
+	</if>
+	<if test="imgName != null  ">
+		imgName=#{imgName},
+	</if>
+	<if test="inTime != null  and inTime != '' ">
+		inTime=#{inTime},
+	</if>
+	<if test="addTime != null  ">
+		addTime=#{addTime},
+	</if>
+	</trim> where recordId=#{recordId}
+</update>
+
+</mapper>   
+

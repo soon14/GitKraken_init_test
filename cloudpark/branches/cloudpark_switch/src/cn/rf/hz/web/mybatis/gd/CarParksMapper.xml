@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.CarParksMapper" > 
+
+  <!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+  <!--   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> -->  
+  <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->  
+    
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="cn.rf.hz.web.bean.gd.CarParks" >
+    <result column="recordId" property="recordId"/>
+<!-- 	<result column="num" property="num"/> -->
+<!-- 	<result column="id" property="id"/> -->
+	<result column="companyName" property="companyName"/> <!-- 公司名称 -->
+	<result column="carParkName" property="carParkName"/>
+	<result column="parkPayType" property="parkPayType"/> <!-- 停车场支付类型-->
+	<result column="loginName" property="loginName"/>
+	<result column="loginPass" property="loginPass"/>
+	<result column="machineCode" property="machineCode"/>
+	<result column="parkingTotalNum" property="parkingTotalNum"/>
+	<result column="parkingEmptyNum" property="parkingEmptyNum"/>
+	
+	<result column="parkLocation" property="parkLocation"/> <!-- 停车场地址 -->
+	<result column="parkDesc1" property="parkDesc1"/> <!-- 停车场层级车位描述 -->
+	<result column="parkPrice" property="parkPrice"/> <!-- 收费价格，单位小时 -->
+	<result column="parkPriceDesc" property="parkPriceDesc"/> <!--收费价格描述  -->
+	
+	<result column="remarks" property="remarks"/>
+	<result column="disabled" property="disabled"/>
+	<result column="delFlag" property="delFlag"/>
+	<result column="settingPerDayTime" property="settingPerDayTime"/>
+	<result column="settingAreaPicScale" property="settingAreaPicScale"/>
+	<result column="settingCarNumberScale" property="settingCarNumberScale"/>
+	<result column="settingReadRecordInterval" property="settingReadRecordInterval"/>
+	<result column="latitude" property="latitude"/>
+	<result column="longitude" property="longitude"/>
+	<result column="province" property="province"/>
+	<result column="mycity" property="mycity"/>
+	<result column="city" property="city"/>
+	<result column="dist" property="dist"/>
+	<result column="address" property="address"/>
+	<result column="link" property="link"/>
+	<result column="type" property="type"/>
+	<result column="contactName" property="contactName"/>
+	<result column="telephone" property="telephone"/>
+	<result column="weixinId" property="weixinId"/>
+	<result column="picUrl" property="picUrl"/>
+	<result column="title" property="title"/>
+	<result column="description" property="description"/>
+	<result column="startDate" property="startDate"/>
+	<result column="endDate" property="endDate"/>
+	<result column="createDate" property="createDate"/>
+	<result column="updTime" property="updTime"/>
+	<result column="updateDate" property="updateDate"/>
+	
+	<result column="trait" property="trait"/>
+	<result column="bannerUrl" property="bannerUrl"/>
+	<result column="qrCodeUrl" property="qrCodeUrl"/>
+	<result column="isPayment" property="isPayment"/>
+	<result column="dataType" property="dataType"/>
+	<result column="isRecognition" property="isRecognition" />
+	<result column="parentId" property="parentId" />
+	<result column="aliPartner" property="aliPartner" />
+	
+	<result column="recordid" property="recordid" />
+	<result column="parkid" property="parkid" />
+	<result column="parkname" property="parkname" />
+	<result column="address" property="address" />
+	<result column="price" property="price" />
+	<result column="latitude" property="latitude" />
+	<result column="longitude" property="longitude" />
+	<result column="parkingEmptyNum" property="parkingEmptyNum" />
+	<result column="distance" property="distance" />
+	<result column="parkLocation" property="parkLocation" />
+	<result column="picUrl" property="picUrl" />
+	<result column="staffId" property="staffId"></result>
+</resultMap>
+       
+<!-- <resultMap id="CarParksVOResult" type="cn.rf.hz.web.bean.gd.vo.CarParksVO" extends="BaseResultMap"> -->
+<!-- 	<result property="hcount" column="hcount" /> -->
+<!-- 	<result property="subCount" column="subCount" /> -->
+<!-- </resultMap> -->
+<!-- <resultMap id="CarParksDetailVOResult" type="cn.rf.hz.web.bean.gd.vo.CarParksDetailVO" extends="BaseResultMap"> -->
+<!-- 	<result column="sprovince" property="sprovince"/> -->
+<!-- 	<result column="scity" property="scity"/> -->
+<!-- 	<result column="sdist" property="sdist"/> -->
+<!-- 	<result property="hcount" column="hcount" /> -->
+<!-- </resultMap> -->
+       
+<!-- gd_car_parks table all fields -->
+<sql id="Base_Column_List" >
+	 recordId,recordId as id,recordId as num,companyName,carParkName,loginName,loginPass,machineCode,parkingTotalNum,parkingEmptyNum,
+	 parkLocation,parkDesc1,parkPrice,parkPriceDesc,remarks,disabled,delFlag,updTime,settingPerDayTime,settingAreaPicScale,
+	 settingCarNumberScale,settingReadRecordInterval,latitude,longitude,province,mycity,city,dist,address,link,type,
+	 contactName,telephone,weixinId,picUrl,title,description,startDate,endDate,createDate,updateDate,trait,parkPayType,qrCodeUrl,bannerUrl,isPayment,dataType,isRecognition,parentId,aliPartner
+</sql>
+
+ <!-- gd_car_parks table all fields -->
+<sql id="VOBase_Column_List" >
+	 A.recordId,A.recordId as num,A.recordId as id,A.companyName,A.carParkName,A.loginName,A.loginPass,A.machineCode,A.parkingTotalNum,A.parkingEmptyNum,
+	 A.parkLocation,A.parkDesc1,A.parkPrice,A.parkPriceDesc,A.remarks,A.disabled,A.delFlag,A.updTime,A.settingPerDayTime,A.settingAreaPicScale,A.settingCarNumberScale,
+	 A.settingReadRecordInterval,A.latitude,A.longitude,A.province,A.mycity,A.city,A.dist,A.address,A.link,A.type,
+	 A.contactName,A.telephone,A.weixinId,A.picUrl,A.title,A.description,A.startDate,A.endDate,A.createDate,A.updateDate,A.trait,A.parkPayType,A.isPayment,A.dataType,A.isRecognition,A.parentId,
+	 B.hcount
+</sql>  
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="recordId != null" >
+	    and A.recordId =  #{recordId}
+	</if>
+	 	<if test="carParkName != null and carParkName != ''" >
+	    	and A.carParkName like '%${carParkName}%'
+		</if>
+	 	<if test="loginName != null and loginName != ''" >
+	    and A.loginName =  #{loginName}
+	</if>
+	 	<if test="loginPass != null and loginPass != ''" >
+	    and A.loginPass =  #{loginPass}
+	</if>
+	 	<if test="machineCode != null and machineCode != ''" >
+	    and A.machineCode =  #{machineCode}
+	</if>
+	<if test="parkingTotalNum != null" >
+	    and A.parkingTotalNum =  #{parkingTotalNum}
+	</if>
+	<if test="parkingEmptyNum != null" >
+	    and A.parkingEmptyNum =  #{parkingEmptyNum}
+	</if>
+	 	<if test="remarks != null and remarks != ''" >
+	    and A.remarks =  #{remarks}
+	</if>
+	<if test="disabled != null" >
+	    and A.disabled =  #{disabled}
+	</if>
+	<if test="delFlag != null" >
+	    and A.delFlag =  #{delFlag}
+	</if>
+	<if test="updTime != null" >
+	    and A.updTime =  #{updTime}
+	</if>
+	<if test="settingPerDayTime != null" >
+	    and A.settingPerDayTime =  #{settingPerDayTime}
+	</if>
+	<if test="settingAreaPicScale != null" >
+	    and A.settingAreaPicScale =  #{settingAreaPicScale}
+	</if>
+	<if test="settingCarNumberScale != null" >
+	    and A.settingCarNumberScale =  #{settingCarNumberScale}
+	</if>
+	<if test="settingReadRecordInterval != null" >
+	    and A.settingReadRecordInterval =  #{settingReadRecordInterval}
+	</if>
+	<if test="latitude != null" >
+	    and A.latitude =  #{latitude}
+	</if>
+	<if test="longitude != null" >
+	    and A.longitude =  #{longitude}
+	</if>
+	<if test="province != null" >
+	    and A.province =  #{province}
+	</if>
+	<if test="mycity != null" >
+	    and A.mycity =  #{mycity}
+	</if>
+	 	<if test="city != null and city != ''" >
+	    and A.city =  #{city}
+	</if>
+	<if test="dist != null" >
+	    and A.dist =  #{dist}
+	</if>
+	 	<if test="address != null and address != ''" >
+	    and A.address =  #{address}
+	</if>
+	 	<if test="link != null and link != ''" >
+	    and A.link =  #{link}
+	</if>
+	<if test="type != null" >
+	    and A.type =  #{type}
+	</if>
+	 	<if test="contactName != null and contactName != ''" >
+	    or A.contactName   =  #{contactName}
+	</if>
+	 	<if test="telephone != null and telephone != ''" >
+	    and A.telephone   =  #{telephone}
+	</if>
+	 	<if test="weixinId != null and weixinId != ''" >
+	    and A.weixinId  =  #{weixinId}
+	</if>
+	 	<if test="picUrl != null and picUrl != ''" >
+	    and A.picUrl =  #{picUrl}
+	</if>
+	 	<if test="title != null and title != ''" >
+	    and A.title =  #{title}
+	</if>
+	 	<if test="description != null and description != ''" >
+	    and A.description =  #{description}
+	</if>
+	<if test="startDate != null" >
+	    and A.startDate =  #{startDate}
+	</if>
+	<if test="endDate != null" >
+	    and A.endDate =  #{endDate}
+	</if>
+	<if test="createDate != null" >
+	    and A.createDate =  #{createDate}
+	</if>
+	<if test="updateDate != null" >
+	    and A.updateDate =  #{updateDate}
+	</if>
+	<if test="isPayment != null" >
+	    and A.isPayment =  #{isPayment}
+	</if>
+	<if test="dataType != null" >
+	    and A.dataType =  #{dataType}
+	</if>
+	<if test="isRecognition != null" >
+	    and A.isRecognition =  #{isRecognition}
+	</if>
+	<if test="parentId == null" >
+	    and A.parentId is null
+	</if>
+	<if test="parentId != null" >
+	    and A.parentId = #{parentId}
+	</if>
+	
+</trim>
+</sql>
+ <!-- 多字段模糊查询查询条件 -->
+<sql id="KEYVALUE_Example_Where_Clause">
+ where  1=1 
+ <if test="value != null and value != ''" >
+ and CONCAT(A.carParkName,A.contactName,A.telephone ) LIKE '%${value}%'
+ </if>
+
+</sql>  
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+ <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_car_parks(recordId,companyName,carParkName,loginName,loginPass,machineCode,parkingTotalNum,parkingEmptyNum,parkLocation,parkDesc1,parkPrice,parkPriceDesc,remarks,disabled,delFlag,updTime,settingPerDayTime,settingAreaPicScale,settingCarNumberScale,settingReadRecordInterval,latitude,longitude,province,mycity,city,dist,address,link,type,contactName,telephone,weixinId,picUrl,title,description,startDate,endDate,createDate,updateDate,trait,parkPayType,bannerUrl,qrCodeUrl,isPayment,dataType,isRecognition,parentId)
+ values(#{recordId},#{companyName},#{carParkName},#{loginName},#{loginPass},#{machineCode},#{parkingTotalNum},#{parkingEmptyNum},#{parkLocation},#{parkDesc1},#{parkPrice},#{parkPriceDesc},#{remarks},#{disabled},#{delFlag},#{updTime},#{settingPerDayTime},#{settingAreaPicScale},#{settingCarNumberScale},#{settingReadRecordInterval},#{latitude},#{longitude},#{province},#{mycity},#{city},#{dist},#{address},#{link},#{type},#{contactName},#{telephone},#{weixinId},#{picUrl},#{title},#{description},#{startDate},#{endDate},#{createDate},#{updateDate},#{trait},#{parkPayType},#{bannerUrl},#{qrCodeUrl},#{isPayment},#{dataType},#{isRecognition},#{parentId})
+</insert>
+<insert id="save" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_car_parks(recordId,companyName,carParkName,loginName,loginPass,machineCode,parkingTotalNum,parkingEmptyNum,parkLocation,parkDesc1,parkPrice,parkPriceDesc,remarks,disabled,delFlag,updTime,settingPerDayTime,settingAreaPicScale,settingCarNumberScale,settingReadRecordInterval,latitude,longitude,province,mycity,city,dist,address,link,type,contactName,telephone,weixinId,picUrl,title,description,startDate,endDate,createDate,updateDate,trait,parkPayType,bannerUrl,qrCodeUrl,isPayment,dataType,isRecognition,parentId)
+ values(#{recordId},#{companyName},#{carParkName},#{loginName},#{loginPass},#{machineCode},#{parkingTotalNum},#{parkingEmptyNum},#{parkLocation},#{parkDesc1},#{parkPrice},#{parkPriceDesc},#{remarks},#{disabled},#{delFlag},#{updTime},#{settingPerDayTime},#{settingAreaPicScale},#{settingCarNumberScale},#{settingReadRecordInterval},#{latitude},#{longitude},#{province},#{mycity},#{city},#{dist},#{address},#{link},#{type},#{contactName},#{telephone},#{weixinId},#{picUrl},#{title},#{description},#{startDate},#{endDate},#{createDate},#{updateDate},#{trait},#{parkPayType},#{bannerUrl},#{qrCodeUrl},#{isPayment},#{dataType},#{isRecognition},#{parentId})
+</insert>
+<!-- 根据id，修改记录-->
+ <update id="update" parameterType="Object" >
+  update gd_car_parks set  companyName=#{companyName},carParkName=#{carParkName},loginName=#{loginName},loginPass=#{loginPass},machineCode=#{machineCode},parkingTotalNum=#{parkingTotalNum},parkingEmptyNum=#{parkingEmptyNum},parkLocation=#{parkLocation},parkDesc1=#{parkDesc1},parkPrice=#{parkPrice},parkPriceDesc=#{parkPriceDesc},remarks=#{remarks},disabled=#{disabled},delFlag=#{delFlag},updTime=#{updTime},settingPerDayTime=#{settingPerDayTime},settingAreaPicScale=#{settingAreaPicScale},settingCarNumberScale=#{settingCarNumberScale},settingReadRecordInterval=#{settingReadRecordInterval},latitude=#{latitude},longitude=#{longitude},province=#{province},mycity=#{mycity},city=#{city},dist=#{dist},address=#{address},link=#{link},type=#{type},contactName=#{contactName},telephone=#{telephone},weixinId=#{weixinId},picUrl=#{picUrl},title=#{title},description=#{description},startDate=#{startDate},endDate=#{endDate},createDate=#{createDate},updateDate=#{updateDate},trait=#{trait},parkPayType=#{parkPayType},bannerUrl=#{bannerUrl},qrCodeUrl=#{qrCodeUrl},isPayment=#{isPayment},dataType=#{dataType},isRecognition=#{isRecognition},parentId=#{parentId} where recordId=#{recordId}
+ </update>
+ 
+ 
+ <!-- 根据id，修改记录-->
+ <update id="updateEmptyParkingNum" parameterType="Object" >
+  update gd_car_parks set   parkingInnerEmptyNum=#{parkingEmptyNum},updTime=now()  where recordId=#{recordId}
+ </update>
+ 
+ 
+<!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update gd_car_parks set 
+	<trim  suffixOverrides="," >
+	<if test="companyName != null  and companyName != '' ">
+		companyName=#{companyName},
+	</if>
+	<if test="carParkName != null  and carParkName != '' ">
+		carParkName=#{carParkName},
+	</if>
+	<if test="loginName != null  and loginName != '' ">
+		loginName=#{loginName},
+	</if>
+	<if test="loginPass != null  and loginPass != '' ">
+		loginPass=#{loginPass},
+	</if>
+	<if test="machineCode != null  and machineCode != '' ">
+		machineCode=#{machineCode},
+	</if>
+	<if test="parkingTotalNum != null  ">
+		parkingTotalNum=#{parkingTotalNum},
+	</if>
+	<if test="parkingEmptyNum != null  ">
+		parkingEmptyNum=#{parkingEmptyNum},
+	</if>
+	<if test="parkLocation != null  and parkLocation != '' ">
+		parkLocation=#{parkLocation},
+	</if>
+	<if test="parkDesc1 != null  and parkDesc1 != '' ">
+		parkDesc1=#{parkDesc1},
+	</if>
+	<if test="parkPrice != null  ">
+		parkPrice=#{parkPrice},
+	</if>
+	<if test="parkPriceDesc != null  and parkPriceDesc != '' ">
+		parkPriceDesc=#{parkPriceDesc},
+	</if>
+	<if test="updTime != null  ">
+		updTime=#{updTime},
+	</if>
+	<if test="settingPerDayTime != null  ">
+		settingPerDayTime=#{settingPerDayTime},
+	</if>
+	<if test="settingAreaPicScale != null  ">
+		settingAreaPicScale=#{settingAreaPicScale},
+	</if>
+	<if test="settingCarNumberScale != null  ">
+		settingCarNumberScale=#{settingCarNumberScale},
+	</if>
+	<if test="settingReadRecordInterval != null  ">
+		settingReadRecordInterval=#{settingReadRecordInterval},
+	</if>
+	<if test="latitude != null  ">
+		latitude=#{latitude},
+	</if>
+	<if test="longitude != null  ">
+		longitude=#{longitude},
+	</if>
+	<if test="province != null  ">
+		province=#{province},
+	</if>
+	<if test="mycity != null  ">
+		mycity=#{mycity},
+	</if>
+	<if test="city != null  and city != '' ">
+		city=#{city},
+	</if>
+	<if test="dist != null  ">
+		dist=#{dist},
+	</if>
+	<if test="address != null  and address != '' ">
+		address=#{address},
+	</if>
+	<if test="link != null  and link != '' ">
+		link=#{link},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="contactName != null  and contactName != '' ">
+		contactName=#{contactName},
+	</if>
+	<if test="telephone != null  and telephone != '' ">
+		telephone=#{telephone},
+	</if>
+	<if test="weixinId != null  and weixinId != '' ">
+		weixinId=#{weixinId},
+	</if>
+	<if test="picUrl != null  and picUrl != '' ">
+		picUrl=#{picUrl},
+	</if>
+	<if test="title != null  and title != '' ">
+		title=#{title},
+	</if>
+	<if test="remarks != null  and remarks != '' ">
+		remarks=#{remarks},
+	</if>
+	<if test="disabled != null  ">
+		disabled=#{disabled},
+	</if>
+	<if test="delFlag != null  ">
+		delFlag=#{delFlag},
+	</if>
+	<if test="description != null  and description != '' ">
+		description=#{description},
+	</if>
+	<if test="startDate != null  ">
+		startDate=#{startDate},
+	</if>
+	<if test="endDate != null  ">
+		endDate=#{endDate},
+	</if>
+	<if test="createDate != null  ">
+		createDate=#{createDate},
+	</if>
+	<if test="updateDate != null  ">
+		updateDate=#{updateDate},
+	</if>
+	<if test="trait != null  and trait != '' ">
+		trait=#{trait},
+	</if>
+	<if test="parkPayType != null ">
+		parkPayType=#{parkPayType},
+	</if>
+	<if test="bannerUrl != null  and bannerUrl != '' ">
+		bannerUrl=#{bannerUrl},
+	</if>
+	<if test="qrCodeUrl != null  and qrCodeUrl != '' ">
+		qrCodeUrl=#{qrCodeUrl},
+	</if>
+	<if test="isPayment != null" >
+	    isPayment =  #{isPayment},
+	</if>
+	<if test="dataType != null" >
+	    dataType =  #{dataType},
+	</if>
+	<if test="isRecognition != null" >
+	    isRecognition =  #{isRecognition},
+	</if>
+	<if test="parentId != null" >
+	    parentId =  #{parentId},
+	</if>
+	
+	</trim> where recordId=#{recordId}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from gd_car_parks where recordId = #{recordId}
+</delete>
+ 
+<!-- 根据id查询  查询停车场详细-->
+<select id="queryById"  resultType="java.util.Map" parameterType="Object">
+	select * 
+	 from gd_car_parks where recordId = #{recordId}
+</select>
+
+<!-- 全部停车场 -->
+<select id="findCarParkInfo"  resultType="java.util.Map" parameterType="Object">
+	select * 
+	 from gd_car_parks
+</select>
+
+<!-- 根据id查询 页面 -->
+<select id="getCarParkById" resultType="java.util.Map"  parameterType="Object">
+	select a.*,ifnull(b.starDevelopTime,'') as starDevelopTime,ifnull(b.endDevelopTime,'') as endDevelopTime
+	 from gd_car_parks  a left join gd_car_parks_Designer b on a.recordId = b.carParkId  where a.recordId = #{carParkId}
+</select>
+
+<!-- 根据id查询 页面 -->
+<select id="findParkingInfo" resultType="java.util.Map" parameterType="Object">
+	select *
+	 from gd_car_parks 
+	 
+	 <where>
+    recordId in <foreach collection="carParkId" item="item" index="index" 
+open="(" separator="," close=")">#{item}</foreach>
+</where>
+
+
+</select>
+<!--
+根据登录信息查询停车场
+findByWSLoginInfo
+-->
+<select id="findByWSLoginInfo"  resultMap="BaseResultMap" parameterType="Object">
+	select * 
+	 FROM gd_car_parks WHERE loginName=#{loginName} AND loginPass=#{loginPass} AND machineCode=#{machineCode} AND disabled=0 AND delFlag=0 
+	 
+</select>
+<!-- 页面 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from gd_car_parks  A
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询页面列表 -->
+<!-- <select id="queryByList" resultMap="CarParksDetailVOResult"  parameterType="Object"> -->
+<!-- 	select A.recordId,A.recordId as num,A.recordId as id,A.companyName,A.bannerUrl,A.qrCodeUrl,A.isPayment,A.dataType,A.isRecognition, -->
+<!-- 	A.carParkName,A.loginName,A.loginPass,A.machineCode,A.parkingTotalNum, -->
+<!-- 	A.parkingEmptyNum,A.parkLocation,A.parkDesc1,A.parkPrice,A.parkPriceDesc,A.remarks,A.disabled, -->
+<!-- 	A.delFlag,A.updTime,A.settingPerDayTime,A.settingAreaPicScale, -->
+<!-- 	A.settingCarNumberScale,A.settingReadRecordInterval,A.latitude,A.longitude, -->
+<!-- 	A.province,A.mycity,A.city,A.dist, -->
+<!-- 	(select B.region_name from region B	where B.region_id= A.province ) sprovince , -->
+<!-- 	(select B.region_name from	region B where B.region_id= A.mycity ) scity , -->
+<!-- 	(select B.region_name	from region B where B.region_id= A.dist ) sdist, -->
+<!-- 	A.address,A.link,A.type,A.contactName,A.telephone,A.weixinId,A.picUrl,A.title,A.description, -->
+<!-- 	A.startDate,A.endDate,A.createDate,A.updateDate,A.trait,A.parkPayType, -->
+<!-- 	(select count(id) from history C where C.customerId =A.recordId) hcount, -->
+<!-- 	(SELECT COUNT(*) FROM gd_car_parks c  WHERE c.parentId = A.recordId) AS subCount -->
+<!-- 	from gd_car_parks	A -->
+<!-- 	<include refid="Example_Where_Clause"/> -->
+<!-- 	<if test="pager.orderCondition != null and pager.orderCondition != ''" > -->
+<!--       ${pager.orderCondition} -->
+<!--     </if> -->
+<!--     <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" > -->
+<!--        ${pager.mysqlQueryCondition} -->
+<!--     </if> -->
+<!-- </select> -->
+  <!-- 页面 列表总数-->
+<select id="queryrenewListByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from gd_car_parks  A
+	<include refid="Example_Where_Clause"/>
+	<![CDATA[
+			 and 	 DATEDIFF(A.endDate,now())   BETWEEN 0 AND  #{renewDay}
+		]]>
+</select>
+
+<!-- 查询页面列表 -->
+<!-- <select id="queryrenewListByList" resultMap="CarParksDetailVOResult"  parameterType="Object"> -->
+<!-- 	select A.recordId,A.recordId as num,A.recordId as id,A.companyName,A.bannerUrl,A.qrCodeUrl,A.isPayment,A.dataType,A.isRecognition, -->
+<!-- 	A.carParkName,A.loginName,A.loginPass,A.machineCode,A.parkingTotalNum, -->
+<!-- 	A.parkingEmptyNum,A.parkLocation,A.parkDesc1,A.parkPrice,A.parkPriceDesc,A.remarks,A.disabled, -->
+<!-- 	A.delFlag,A.updTime,A.settingPerDayTime,A.settingAreaPicScale, -->
+<!-- 	A.settingCarNumberScale,A.settingReadRecordInterval,A.latitude,A.longitude, -->
+<!-- 	A.province,A.mycity,A.city,A.dist, -->
+<!-- 	(select B.region_name from region B	where B.region_id= A.province ) sprovince , -->
+<!-- 	(select B.region_name from	region B where B.region_id= A.mycity ) scity , -->
+<!-- 	(select B.region_name	from region B where B.region_id= A.dist ) sdist, -->
+<!-- 	A.address,A.link,A.type,A.contactName,A.telephone,A.weixinId,A.picUrl,A.title,A.description, -->
+<!-- 	A.startDate,A.endDate,A.createDate,A.updateDate,A.trait,A.parkPayType, -->
+<!-- 	(select count(id) from history C where C.customerId =A.recordId) hcount -->
+<!-- 	from gd_car_parks	A -->
+<!-- 	<include refid="Example_Where_Clause"/> -->
+<!-- 	<![CDATA[ -->
+<!-- 			 and 	 DATEDIFF(endDate,now())   BETWEEN 0 AND  #{renewDay} -->
+<!-- 		]]> -->
+<!-- 	<if test="pager.orderCondition != null and pager.orderCondition != ''" > -->
+<!--       ${pager.orderCondition} -->
+<!--     </if> -->
+<!--     <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" > -->
+<!--        ${pager.mysqlQueryCondition} -->
+<!--     </if> -->
+<!-- </select> -->
+ <!-- 页面 列表总数-->
+<select id="queryExpiredListByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from gd_car_parks  A
+	<include refid="Example_Where_Clause"/>
+	<![CDATA[
+			 and 	 DATEDIFF(A.endDate,now())   <#{renewDay}
+		]]>
+</select>
+  	
+<!-- 查询页面列表 -->
+<!-- <select id="queryExpiredListByList" resultMap="CarParksDetailVOResult"  parameterType="Object"> -->
+<!-- 	select A.recordId,A.recordId as num,A.recordId as id,A.companyName,A.bannerUrl,A.qrCodeUrl,A.isPayment,A.dataType,A.isRecognition, -->
+<!-- 	A.carParkName,A.loginName,A.loginPass,A.machineCode,A.parkingTotalNum, -->
+<!-- 	A.parkingEmptyNum,A.parkLocation,A.parkDesc1,A.parkPrice,A.parkPriceDesc,A.remarks,A.disabled, -->
+<!-- 	A.delFlag,A.updTime,A.settingPerDayTime,A.settingAreaPicScale, -->
+<!-- 	A.settingCarNumberScale,A.settingReadRecordInterval,A.latitude,A.longitude, -->
+<!-- 	A.province,A.mycity,A.city,A.dist, -->
+<!-- 	(select B.region_name from region B	where B.region_id= A.province ) sprovince , -->
+<!-- 	(select B.region_name from	region B where B.region_id= A.mycity ) scity , -->
+<!-- 	(select B.region_name	from region B where B.region_id= A.dist ) sdist, -->
+<!-- 	A.address,A.link,A.type,A.contactName,A.telephone,A.weixinId,A.picUrl,A.title,A.description, -->
+<!-- 	A.startDate,A.endDate,A.createDate,A.updateDate,A.trait,A.parkPayType, -->
+<!-- 	(select count(id) from history C where C.customerId =A.recordId) hcount -->
+<!-- 	from gd_car_parks	A -->
+<!-- 	<include refid="Example_Where_Clause"/> -->
+<!-- 	<![CDATA[ -->
+<!-- 			 and 	 DATEDIFF(endDate,now())   <#{renewDay} -->
+<!-- 		]]> -->
+<!-- 	<if test="pager.orderCondition != null and pager.orderCondition != ''" > -->
+<!--       ${pager.orderCondition} -->
+<!--     </if> -->
+<!--     <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" > -->
+<!--        ${pager.mysqlQueryCondition} -->
+<!--     </if> -->
+<!-- </select> -->
+
+<!--  查询信息用户（停车场）列表总数-->
+<select id="queryInfoListByListByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from gd_car_parks  A
+	<include refid="Example_Where_Clause"/>
+	<!-- type=2 表示是信息客户 -->
+	<![CDATA[
+			 and 	A.type=2
+		]]>
+</select>
+  	
+<!--  查询信息用户（停车场）列表 -->
+<!-- <select id="queryInfoListByList" resultMap="CarParksDetailVOResult"  parameterType="Object"> -->
+<!-- 	select A.recordId,A.recordId as num,A.recordId as id,A.companyName,A.bannerUrl,A.qrCodeUrl,A.isPayment,A.dataType,A.isRecognition, -->
+<!-- 	A.carParkName,A.loginName,A.loginPass,A.machineCode,A.parkingTotalNum, -->
+<!-- 	A.parkingEmptyNum,A.parkLocation,A.parkDesc1,A.parkPrice,A.parkPriceDesc,A.remarks,A.disabled, -->
+<!-- 	A.delFlag,A.updTime,A.settingPerDayTime,A.settingAreaPicScale, -->
+<!-- 	A.settingCarNumberScale,A.settingReadRecordInterval,A.latitude,A.longitude, -->
+<!-- 	A.province,A.mycity,A.city,A.dist, -->
+<!-- 	(select B.region_name from region B	where B.region_id= A.province ) sprovince , -->
+<!-- 	(select B.region_name from	region B where B.region_id= A.mycity ) scity , -->
+<!-- 	(select B.region_name	from region B where B.region_id= A.dist ) sdist, -->
+<!-- 	A.address,A.link,A.type,A.contactName,A.telephone,A.weixinId,A.picUrl,A.title,A.description, -->
+<!-- 	A.startDate,A.endDate,A.createDate,A.updateDate,A.trait,A.parkPayType, -->
+<!-- 	(select count(id) from history C where C.customerId =A.recordId) hcount -->
+<!-- 	from gd_car_parks	A -->
+<!-- 	<include refid="Example_Where_Clause"/> -->
+	<!-- type=2 表示是信息客户 -->
+<!-- 	<![CDATA[ -->
+<!-- 			 and 	A.type=2 -->
+<!-- 		]]> -->
+<!-- 	<if test="pager.orderCondition != null and pager.orderCondition != ''" > -->
+<!--       ${pager.orderCondition} -->
+<!--     </if> -->
+<!--     <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" > -->
+<!--        ${pager.mysqlQueryCondition} -->
+<!--     </if> -->
+<!-- </select> -->
+  	<!-- 最近一个月活跃用户 查询页面列表 day 30天 topNum 查询默认用户数量，默认15条-->
+<!-- <select id="findListByRecentDayAndTopNum" resultMap="CarParksVOResult"  parameterType="Object"> -->
+<!-- 	select -->
+<!-- 	* -->
+<!-- 	<![CDATA[ -->
+<!-- 	from gd_car_parks  A  -->
+<!-- 	left join ( -->
+<!-- 	select history.customerId, Count(history.id) as hcount ,gd_car_parks.* -->
+<!-- 	from history left join gd_car_parks on gd_car_parks.recordId=history.customerId -->
+<!-- 	where date_sub(curdate(), INTERVAL #{day}  DAY) <= date(accessTime) -->
+<!-- 	and gd_car_parks.recordId is not null -->
+<!-- 	group by history.customerId limit 0,#{topNum} -->
+<!-- 	) B on B.customerId=A.recordId where B.customerId is not null  -->
+<!-- 	]]> -->
+<!-- 	 <if test="companyIds != null  and companyIds != '' "> -->
+<!-- 		and find_in_set(A.recordId,#{companyIds}) -->
+<!-- 	</if> -->
+<!-- </select> -->
+<select id="queryAll"  resultMap="BaseResultMap" parameterType="Object">
+	select recordId,carParkName from gd_car_parks order by carParkName
+</select>
+<!-- 用于停车场通讯登录帐号检查 -->
+<select id="getUserCountByLoginName"  resultMap="BaseResultMap" parameterType="Object">
+	select * 
+	 from gd_car_parks where loginName=#{loginName}
+</select>
+
+ 	
+<!-- 查询页面列表 -->
+<!-- <select id="getParksByParentId" resultMap="CarParksDetailVOResult"  parameterType="Object"> -->
+<!-- 	select recordId,carParkName -->
+<!-- 	 from gd_car_parks where 1=1 -->
+<!-- 	 <if test="recordId != null" > -->
+<!-- 		 and recordId = #{recordId} or parentId = #{recordId} -->
+<!-- 	</if> -->
+<!-- </select> -->
+
+<!-- 页面 列表总数-->
+<select id="queryByParentIdCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from gd_car_parks  A
+	where 1=1
+	 <if test="recordId != null" >
+		 and A.recordId = #{recordId} or A.parentId = #{recordId}
+	</if>
+	<if test="carParkName != null  and carParkName != '' ">
+	  and A.carParkName='%${carParkName}%'
+	</if>
+</select>
+  	
+<!-- 查询页面列表 -->
+<!-- <select id="queryByParentIdList" resultMap="CarParksDetailVOResult"  parameterType="Object"> -->
+<!-- 	select A.recordId,A.recordId as num,A.recordId as id,A.companyName,A.bannerUrl,A.qrCodeUrl,A.isPayment,A.dataType,A.isRecognition, -->
+<!-- 	A.carParkName,A.loginName,A.loginPass,A.machineCode,A.parkingTotalNum, -->
+<!-- 	A.parkingEmptyNum,A.parkLocation,A.parkDesc1,A.parkPrice,A.parkPriceDesc,A.remarks,A.disabled, -->
+<!-- 	A.delFlag,A.updTime,A.settingPerDayTime,A.settingAreaPicScale, -->
+<!-- 	A.settingCarNumberScale,A.settingReadRecordInterval,A.latitude,A.longitude, -->
+<!-- 	A.province,A.mycity,A.city,A.dist, -->
+<!-- 	(select B.region_name from region B	where B.region_id= A.province ) sprovince , -->
+<!-- 	(select B.region_name from	region B where B.region_id= A.mycity ) scity , -->
+<!-- 	(select B.region_name	from region B where B.region_id= A.dist ) sdist, -->
+<!-- 	A.address,A.link,A.type,A.contactName,A.telephone,A.weixinId,A.picUrl,A.title,A.description, -->
+<!-- 	A.startDate,A.endDate,A.createDate,A.updateDate,A.trait,A.parkPayType, -->
+<!-- 	(select count(id) from history C where C.customerId =A.recordId) hcount, -->
+<!-- 	(SELECT COUNT(*) FROM gd_car_parks c  WHERE c.parentId = A.recordId) AS subCount -->
+<!-- 	from gd_car_parks	A -->
+<!-- 	where 1=1 -->
+<!-- 	 <if test="recordId != null" > -->
+<!-- 		 and A.recordId = #{recordId} or A.parentId = #{recordId} -->
+<!-- 	</if> -->
+<!-- 	<if test="carParkName != null  and carParkName != '' "> -->
+<!-- 	  and A.carParkName='%${carParkName}%' -->
+<!-- 	</if> -->
+	
+<!-- 	<if test="pager.orderCondition != null and pager.orderCondition != ''" > -->
+<!--       ${pager.orderCondition} -->
+<!--     </if> -->
+<!--     <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" > -->
+<!--        ${pager.mysqlQueryCondition} -->
+<!--     </if> -->
+<!-- </select> -->
+
+
+	
+<!-- APP经纬度 -->
+<select id="findLatitudeAndLongitude" resultType="java.util.Map"  parameterType="Object">
+	SELECT recordId as parkid,carParkName as parkname,parkLocation as address,parkPrice as price,latitude as latitude,
+	longitude as longitude,parkingEmptyNum as parkingEmptyNum,picUrl as picUrl,
+	(ASIN(SQRT(POW(SIN((latitude - ${latitude}) * 3.1415926 / 360),2) + COS(latitude * 3.1415926 / 180) * 
+	COS(${latitude} * 3.1415926 / 180) * POW(SIN((longitude - ${longitude}) * 3.1415926 / 360),2))) * 12756274) as distance 
+	FROM gd_car_parks WHERE (ASIN(SQRT(POW(SIN((latitude - ${latitude}) * 3.1415926 / 360),2) + COS(latitude * 3.1415926 / 180) * 
+	COS(${latitude} * 3.1415926 / 180) * POW(SIN((longitude - ${longitude}) * 3.1415926 / 360),2))) * 12756274) &lt; ${distance} 
+	ORDER BY (ASIN(SQRT(POW(SIN((latitude - ${latitude}) * 3.1415926 / 360),2) + COS(latitude * 3.1415926 / 180) * 
+	COS(${latitude} * 3.1415926 / 180) * POW(SIN((longitude - ${longitude}) * 3.1415926 / 360),2))) * 12756274) ASC,parkingEmptyNum ASC,parkPrice ASC
+	limit ${offset},${limit}
+</select>
+<!--  APP经纬度-->
+<select id="findLatitudeAndLongitudeCount" resultType="java.lang.Integer"  parameterType="Object">
+	SELECT count(recordid) FROM gd_car_parks WHERE (ASIN(SQRT(POW(SIN((latitude - ${latitude}) * 3.1415926 / 360),2) + COS(latitude * 3.1415926 / 180) * COS(${latitude} * 3.1415926 / 180) * POW(SIN((longitude - ${longitude}) * 3.1415926 / 360),2))) * 12756274) &lt; ${distance} 
+	ORDER BY (ASIN(SQRT(POW(SIN((latitude - ${latitude}) * 3.1415926 / 360),2) + COS(latitude * 3.1415926 / 180) * 
+	COS(${latitude} * 3.1415926 / 180) * POW(SIN((longitude - ${longitude}) * 3.1415926 / 360),2))) * 12756274) ASC,parkingEmptyNum ASC,parkPrice ASC
+	
+</select>
+<!-- 根据id查询 页面 -->
+<select id="getCarParkScoreById"  resultType="java.util.Map" parameterType="Object">
+	select CEIL(fraction/frequency) as rating
+	 from car_parks_score where carParkId = ${carParkId} 
+</select>
+
+
+	
+<select id="queryCarParkId"  resultType="java.util.Map" parameterType="Object">
+	SELECT recordid as carParkId FROM gd_car_parks a WHERE  (ASIN(SQRT(POW(SIN((a.latitude - ${latitude}) 
+	* 3.1415926 / 360),2) + COS(a.latitude * 3.1415926 / 180) * COS(${latitude} * 3.1415926 / 180) *
+	POW(SIN((a.longitude - ${longitude}) * 3.1415926 / 360),2))) * 12756274) &lt; ${distance} and shareMode = 1
+</select>
+
+<select id="findParkingEntranceRecordByid"  resultType="java.util.Map" parameterType="Object">
+	select a.* , b.carParkName as carParkName from gd_entrance_recognize a,gd_car_parks b  where a.recordid = ${recordId} and a.carParkId=b.recordId
+</select>
+
+<select id="findParkingEntranceRecordList"  resultType="java.util.Map" parameterType="Object">
+	select a.* , b.carParkName as carParkName,b.picUrl as picUrl  from gd_entrance_recognize a,gd_car_parks b  where a.recordid in ( ${recordId} ) and a.carParkId=b.recordId order by intime desc 
+</select>
+
+<!-- 更新停车场车位数 -->
+ <update id="updateCarParkTotalNum"   parameterType="Object" >
+  update gd_car_parks set  parkingTotalNum=#{parkSumNum} where recordId = #{carParkId}
+ </update>
+ 
+ <!-- 更新停车场空余车位数 -->
+ <update id="updateCarParkEmptyNum"    parameterType="Object" >
+  update gd_car_parks set  parkingEmptyNum=#{parkIdleNum}  where recordId = #{carParkId}
+ </update>
+ 
+  <!-- 更新停车场空总车位数、余车位数 -->
+ <update id="updateCarParkTotalNumAndEmptyNum"    parameterType="Object" >
+  update gd_car_parks set 
+  <trim  suffixOverrides="," >
+	<if test="parkIdleNum >= 0">
+		parkingEmptyNum=#{parkIdleNum},
+	</if>
+	<if test="parkSumNum >= 0 ">
+		parkingTotalNum=#{parkSumNum},
+	</if>
+	</trim>
+     where recordId = #{carParkId}
+ </update>
+ 
+  <update id="updateCarParkEmptyNumSubtract"    parameterType="Object" >
+  update gd_car_parks set  parkingEmptyNum= parkingEmptyNum-#{subtractNum}  where recordId = #{carParkId}
+ </update>
+ 
+   <update id="updateCarParkEmptyNumAdd"    parameterType="Object" >
+  update gd_car_parks set  parkingEmptyNum= parkingEmptyNum+#{addNum}  where recordId = #{carParkId}
+ </update>
+ 
+ 
+ <select id="findCarParkInfoName"  resultType="java.util.Map" parameterType="Object">
+	select *
+	 from gd_car_parks where carParkName like '%${carParkName}%'  
+</select>
+ <insert id="saveGdCarparkEvaluate" parameterType="Object" >
+ <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_carpark_evaluate(recordId,carParkId,userPhoneId,source,fraction,evaluate,addTime)
+ values(#{recordId},#{carParkId},#{userPhoneId},#{source},#{fraction},#{evaluate},now())
+</insert>
+
+<select id="saveOrUpdateCarParksScoreCountAll"  resultType="java.util.Map" parameterType="Object">
+	select * from car_parks_score where carParkId = #{carParkId}
+</select>
+
+<update id="saveOrUpdateCarParksScoreUpdate"    parameterType="Object" >
+  update car_parks_score set  fraction=fraction+#{fraction},frequency=frequency+1  where carParkId = #{carParkId}
+ </update>
+ 
+  <insert id="saveOrUpdateCarParksScoreSave" parameterType="Object" >
+ <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="carParkScoreId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into car_parks_score(carParkScoreId,carParkId,fraction,frequency,createTime)
+ values(#{carParkScoreId},#{carParkId},#{fraction},1,now())
+</insert>
+ 
+ 
+ <update id="updateCarParksGateInfo"    parameterType="Object" >
+  update gd_car_parks set  gateInfo=#{gateInfo} where recordId = #{carParkId}
+ </update>
+ 
+ <insert id="saveCarPark" parameterType="Object" useGeneratedKeys="true" keyProperty="recordId" >
+ <selectKey resultType="java.lang.Integer" order="AFTER"  keyProperty="recordId">
+	SELECT LAST_INSERT_ID() as recordId
+  </selectKey>
+  insert into gd_car_parks(recordId,companyName,carParkName,loginName,loginPass,machineCode,parkingTotalNum,
+  parkingEmptyNum,parkLocation,parkDesc1,parkPrice,parkPriceDesc,remarks,delFlag,updTime,settingPerDayTime,
+  settingAreaPicScale,settingCarNumberScale,settingReadRecordInterval,latitude,longitude,province,mycity,city,dist,
+  address,type,contactName,telephone,weixinId,picUrl,title,description,startDate,endDate,createDate,updateDate,
+  trait,parkPayType,bannerUrl,qrCodeUrl,isPayment,dataType,isRecognition,
+  parentId,aliPartner,groupId,mallId,createBy,updateBy,isShare,busyThreshold,
+  auditingStatus,propertie,tradeArea,companyId,state,isOutVideo,isBluetoothBox,isQrCode,isFieldVideo,parentParking)
+ values(#{recordId},#{companyName},#{carParkName},#{loginName},#{loginPass},#{machineCode},#{parkingTotalNum},#{parkingEmptyNum},
+ #{parkLocation},#{parkDesc1},#{parkPrice},#{parkPriceDesc},#{remarks},#{delFlag},#{updTime},#{settingPerDayTime},
+ #{settingAreaPicScale},#{settingCarNumberScale},#{settingReadRecordInterval},#{latitude},#{longitude},#{province},#{mycity},
+ #{city},#{dist},#{address},#{type},#{contactName},#{telephone},#{weixinId},#{picUrl},#{title},#{description},#{startDate},
+ #{endDate},now(),now(),#{trait},#{parkPayType},#{bannerUrl},#{qrCodeUrl},#{isPayment},#{dataType},#{isRecognition},
+ #{parentId}, #{aliPartner},#{groupId},#{mallId},#{createBy},#{updateBy},
+ #{isShare},#{busyThreshold},
+ #{auditingStatus},#{propertie},#{tradeArea},#{companyId},#{state},#{isOutVideo},#{isBluetoothBox},#{isQrCode},#{isFieldVideo},#{parentParking})
+</insert>
+
+  <update id="updateShareMode"    parameterType="Object" >
+  update gd_car_parks set  shareMode=#{shareMode} where recordId = #{carParkId}
+ </update>
+ 
+ 
+ 
+ <select id="findCarParkRule"  resultType="java.util.Map" parameterType="Object">
+	select * from gd_car_parks_desc where carParkId = #{parkId} and commentType='02'
+</select>
+
+ <select id="findArea"  resultType="java.util.Map" parameterType="Object">
+	select * from gd_area where carParkId = #{parkId} 
+	
+	<if test="floor != null and floor != '' ">
+		and floor=#{floor} 
+	</if>
+	<if test="areaName != null and areaName != ''">
+		and areaName=#{areaName} 
+	</if>
+	
+</select>
+
+
+ <select id="carParkReport"  resultType="java.util.Map" parameterType="Object">
+	SELECT COUNT(*) 'sumCount', -- 总停车场
+		IFNULL(CONVERT(SUM(IF(isOutVideo &lt;&gt; 1 AND isBluetoothBox &lt;&gt; 1 ,1,0)),SIGNED),0) AS 'notVideoNotBlue', -- 非视频、非蓝牙
+		IFNULL(CONVERT(SUM(IF(isOutVideo =  1 AND isBluetoothBox = 1 ,1,0)),SIGNED),0) AS 'videoBlue', -- 视频、蓝牙
+		IFNULL(CONVERT(SUM(IF(isBluetoothBox = 1 AND isOutVideo &lt;&gt; 1 ,1,0)),SIGNED),0) AS 'blueNotVideo', -- 蓝牙、非视频
+		IFNULL(CONVERT(SUM(IF(isOutVideo = 1 AND isBluetoothBox &lt;&gt; 1 ,1,0)),SIGNED),0) AS 'notBlueVideo', -- 视频 、 非蓝牙
+		IFNULL(CONVERT(SUM(IF(isOutVideo &lt;&gt; 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24 HOUR)) ,1,0)),SIGNED),0) AS 'notVideoNotBlue1',
+		IFNULL(CONVERT(SUM(IF(isOutVideo =  1 AND isBluetoothBox = 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24 HOUR)) ,1,0)),SIGNED),0) AS 'videoBlue1',
+		IFNULL(CONVERT(SUM(IF(isBluetoothBox = 1 AND isOutVideo &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24 HOUR)) ,1,0)),SIGNED),0) AS 'blueNotVideo1',
+		IFNULL(CONVERT(SUM(IF(isOutVideo = 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24 HOUR)) ,1,0)),SIGNED),0) AS 'notBlueVideo1',
+		IFNULL(CONVERT(SUM(IF(isOutVideo &lt;&gt; 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*2 HOUR)) ,1,0)),SIGNED),0) AS 'notVideoNotBlue2',
+		IFNULL(CONVERT(SUM(IF(isOutVideo =  1 AND isBluetoothBox = 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*2 HOUR)) ,1,0)),SIGNED),0) AS 'videoBlue2',
+		IFNULL(CONVERT(SUM(IF(isBluetoothBox = 1 AND isOutVideo &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*2 HOUR)) ,1,0)),SIGNED),0) AS 'blueNotVideo2',
+		IFNULL(CONVERT(SUM(IF(isOutVideo = 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*2 HOUR)) ,1,0)),SIGNED),0) AS 'notBlueVideo2',
+		
+		IFNULL(CONVERT(SUM(IF(isOutVideo &lt;&gt; 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*3 HOUR)) ,1,0)),SIGNED),0) AS 'notVideoNotBlue3',
+		IFNULL(CONVERT(SUM(IF(isOutVideo =  1 AND isBluetoothBox = 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*3 HOUR)) ,1,0)),SIGNED),0) AS 'videoBlue3',
+		IFNULL(CONVERT(SUM(IF(isBluetoothBox = 1 AND isOutVideo &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*3 HOUR)) ,1,0)),SIGNED),0) AS 'blueNotVideo3',
+		IFNULL(CONVERT(SUM(IF(isOutVideo = 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*3 HOUR)) ,1,0)),SIGNED),0) AS 'notBlueVideo3',
+		
+		IFNULL(CONVERT(SUM(IF(isOutVideo &lt;&gt; 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*4 HOUR)) ,1,0)),SIGNED),0) AS 'notVideoNotBlue4',
+		IFNULL(CONVERT(SUM(IF(isOutVideo =  1 AND isBluetoothBox = 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*4 HOUR)) ,1,0)),SIGNED),0) AS 'videoBlue4',
+		IFNULL(CONVERT(SUM(IF(isBluetoothBox = 1 AND isOutVideo &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*4 HOUR)) ,1,0)),SIGNED),0) AS 'blueNotVideo4',
+		IFNULL(CONVERT(SUM(IF(isOutVideo = 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*4 HOUR)) ,1,0)),SIGNED),0) AS 'notBlueVideo4',
+		
+		IFNULL(CONVERT(SUM(IF(isOutVideo &lt;&gt; 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*5 HOUR)) ,1,0)),SIGNED),0) AS 'notVideoNotBlue5',
+		IFNULL(CONVERT(SUM(IF(isOutVideo =  1 AND isBluetoothBox = 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*5 HOUR)) ,1,0)),SIGNED),0) AS 'videoBlue5',
+		IFNULL(CONVERT(SUM(IF(isBluetoothBox = 1 AND isOutVideo &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*5 HOUR)) ,1,0)),SIGNED),0) AS 'blueNotVideo5',
+		IFNULL(CONVERT(SUM(IF(isOutVideo = 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*5 HOUR)) ,1,0)),SIGNED),0) AS 'notBlueVideo5',
+		
+		IFNULL(CONVERT(SUM(IF(isOutVideo &lt;&gt; 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*6 HOUR)) ,1,0)),SIGNED),0) AS 'notVideoNotBlue6',
+		IFNULL(CONVERT(SUM(IF(isOutVideo =  1 AND isBluetoothBox = 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*6 HOUR)) ,1,0)),SIGNED),0) AS 'videoBlue6',
+		IFNULL(CONVERT(SUM(IF(isBluetoothBox = 1 AND isOutVideo &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*6 HOUR)) ,1,0)),SIGNED),0) AS 'blueNotVideo6',
+		IFNULL(CONVERT(SUM(IF(isOutVideo = 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*6 HOUR)) ,1,0)),SIGNED),0) AS 'notBlueVideo6',
+		
+		IFNULL(CONVERT(SUM(IF(isOutVideo &lt;&gt; 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*7 HOUR)) ,1,0)),SIGNED),0) AS 'notVideoNotBlue7',
+		IFNULL(CONVERT(SUM(IF(isOutVideo =  1 AND isBluetoothBox = 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*7 HOUR)) ,1,0)),SIGNED),0) AS 'videoBlue7',
+		IFNULL(CONVERT(SUM(IF(isBluetoothBox = 1 AND isOutVideo &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*7 HOUR)) ,1,0)),SIGNED),0) AS 'blueNotVideo7',
+		IFNULL(CONVERT(SUM(IF(isOutVideo = 1 AND isBluetoothBox &lt;&gt; 1 AND DATE(createdate) = DATE(DATE_ADD(NOW(), INTERVAL -24*7 HOUR)) ,1,0)),SIGNED),0) AS 'notBlueVideo7'
+		
+		 FROM gd_car_parks   WHERE 1 = 1 
+		<if test="province != null and province != '' ">
+			and province=#{province} 
+		</if>
+		<if test="mycity != null and mycity != ''">
+			and mycity=#{mycity} 
+		</if>
+		<if test="dist != null and dist != ''">
+			and mycity=#{dist} 
+		</if>
+</select>
+
+
+ <select id="getDisparkTime"  resultType="java.util.Map" parameterType="Object">
+	select * from gd_car_parks_Designer where carParkId = #{carParkId}
+</select>
+
+  <insert id="saveDisparkTime" parameterType="Object" >
+ <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="recordId">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into gd_car_parks_Designer(recordId,carParkId,starDevelopTime,endDevelopTime)
+ values(#{recordId},#{carParkId},#{starDevelopTime},#{endDevelopTime} )
+</insert>
+ 
+ 
+ <update id="updateDisparkTime"    parameterType="Object" >
+  update gd_car_parks_Designer set  
+  <trim  suffixOverrides="," >
+	<if test="starDevelopTime != null and starDevelopTime != '' ">
+		starDevelopTime=#{starDevelopTime}, 
+	</if>
+	
+	<if test="endDevelopTime != null and endDevelopTime != '' ">
+		endDevelopTime=#{endDevelopTime},
+	</if>
+	
+
+	</trim>
+	 where carParkId = #{carParkId}
+	 </update>
+
+
+</mapper>   

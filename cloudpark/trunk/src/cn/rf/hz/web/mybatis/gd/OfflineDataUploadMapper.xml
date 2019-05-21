@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.OfflineDataUploadingMapper" >
+
+	<!-- 上传异常出车记录 --> 
+	<insert id="uploadAnomalyOutRecords" parameterType="Object">
+		insert into gd_Anomaly_Out_Records(carparkId,oldRecordId,licensePlateNumber,inTime,
+		outTime,stopTime,chargeRuleId,chargeRuleName,channelId,channelName,amount,operatorId,operatorName,inRecordId,remarks1 )
+		values(#{parkId},#{record_id},#{licensePlateNumber},str_to_date(#{inTime}, '%Y-%m-%d %H:%i:%s'),
+		str_to_date(#{outTime}, '%Y-%m-%d %H:%i:%s'),#{stopTime},#{chargeRuleID},#{chargeRuleName},#{channelID},#{channelName},#{amount},#{operatorID},#{operatorName},
+		,#{inRecordId},#{remarks1})
+	</insert>
+	
+	
+	<!-- 上传异常出车记录(批量) --> 
+	<insert id="uploadAnomalyOutRecordsPiliang" parameterType="Object">
+		insert into gd_Anomaly_Out_Records(carparkId,oldRecordId,licensePlateNumber,inTime,
+		outTime,stopTime,chargeRuleId,chargeRuleName,channelId,channelName,amount,operatorId,operatorName,inRecordId,remarks1 )
+		values
+		  <foreach collection="list" item="item" index="index" separator="," >
+			(#{item.parkId},#{item.record_id},#{item.licensePlateNumber},#{item.inTime},
+			#{item.outTime},#{item.stopTime},#{item.chargeRuleID},#{item.chargeRuleName},#{item.channelID},#{item.channelName},
+			#{item.amount},#{item.operatorID},#{item.operatorName},#{item.inRecordId},#{item.remarks1})
+  		</foreach>
+	</insert>
+	
+	
+	
+	<!-- 上传设备报警记录 --> 
+	<insert id="uploadDeviceAnomalyRecords" parameterType="Object">
+		insert into gd_Device_Anomaly_Records(recordId,carparkId,oldRecordId,deviceId,deviceName,
+		alarmType,alarmDesc,eventTime,remarks1)
+		values(#{parkId},#{record_id},#{deviceID},#{deviceName},#{alarmType},#{alarmDesc},
+		str_to_date(#{eventTime}, '%Y-%m-%d %H:%i:%s'),#{remarks1})
+	</insert>
+	
+	<!-- 上传设备报警记录(批量) --> 
+	<insert id="uploadDeviceAnomalyRecordsPiLiang" parameterType="Object">
+		insert into gd_Device_Anomaly_Records(carparkId,oldRecordId,deviceId,deviceName,
+		alarmType,alarmDesc,eventTime,remarks1)
+		values
+		  <foreach collection="list" item="item" index="index" separator="," >
+			(#{item.parkId},#{item.record_id},#{item.deviceID},#{item.deviceName},#{item.alarmType},#{item.alarmDesc},
+			#{item.eventTime},#{item.remarks1})
+  		</foreach>
+	</insert>
+	
+	<!-- 上传开闸记录 --> 
+	<insert id="uploadOpenWayRecords" parameterType="Object">
+		insert into gd_Open_Way_Records(recordId,carparkId,oldRecordId,deviceId,deviceName,
+		openType,openWayName,eventTime,operatorID,operatorName,remarks1)
+		values(#{parkId},#{record_id},#{deviceID},#{deviceName},#{openType},#{openWayName},
+		str_to_date(#{eventTime}, '%Y-%m-%d %H:%i:%s'),#{operatorID},#{operatorName},#{remarks1})
+	</insert>
+	
+	<!-- 上传开闸记录  （批量）--> 
+	<insert id="uploadOpenWayRecordsPiLiang" parameterType="Object">
+		insert into gd_Open_Way_Records(carparkId,oldRecordId,deviceId,deviceName,
+		openType,openWayName,eventTime,operatorID,operatorName,remarks1)
+		values
+		  <foreach collection="list" item="item" index="index" separator="," >
+			(#{item.parkId},#{item.record_id},#{item.deviceID},#{item.deviceName},#{item.openType},#{item.openWayName},
+		#{item.eventTime},#{item.operatorID},#{item.operatorName},#{item.remarks1})
+  		</foreach>
+	</insert>
+   
+</mapper>   

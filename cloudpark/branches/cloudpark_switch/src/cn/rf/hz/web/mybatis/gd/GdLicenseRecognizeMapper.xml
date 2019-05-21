@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.GdLicenseRecognizeMapper">
+	<!-- Result Map -->
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.bean.gd.ParkingRecord">
+		<result column="recordId" property="recordId" />
+		<result column="parkingId" property="parkingId" />
+		<result column="oldRecordId" property="oldRecordId" />
+		<result column="licensePlateNumber" property="licensePlateNumber" />
+		<result column="inTime" property="inTime" />
+		<result column="imgName" property="imgName" />
+		<result column="groupId" property="groupId" />
+		<result column="mallId" property="mallId" />
+		<result column="carParkId" property="carParkId" />
+		<result column="addTime" property="addTime" />
+		<result column="mark" property="mark" />
+		<result column="realParkingId" property="realParkingId" />
+	</resultMap>
+
+	<!-- 停车记录 视图 -->
+<!-- 	<resultMap id="ParkingRecordVoResult" type="cn.rf.hz.web.bean.gd.vo.ParkingRecordVo" -->
+<!-- 		extends="BaseResultMap"> -->
+<!-- 		<result property="groupName" column="groupName" /> -->
+<!-- 		<result property="mallName" column="mallName" /> -->
+<!-- 		<result property="carParkName" column="carParkName" /> -->
+<!-- 	</resultMap> -->
+
+	<!-- gd_license_recognize table all fields -->
+	<sql id="Base_Column_List">
+		recordId,parkingId,oldRecordId,licensePlateNumber,inTime,imgName,groupId,mallId,carParkId,addTime,mark,realParkingId
+	</sql>
+
+
+	<!-- 查询条件 -->
+	<sql id="Example_Where_Clause">
+		where 1=1
+		<trim suffixOverrides=",">
+			<if test="recordId != null">
+				and recordId = #{recordId}
+			</if>
+			<if test="parkingId != null">
+				and parkingId = #{parkingId}
+			</if>
+			<if test="oldRecordId != null">
+				and oldRecordId = #{oldRecordId}
+			</if>
+			<if test="licensePlateNumber != null and licensePlateNumber != ''">
+				and licensePlateNumber = #{licensePlateNumber}
+			</if>
+			<if test="inTime != null">
+				and inTime = #{inTime}
+			</if>
+			<if test="imgName != null and imgName != ''">
+				and imgName = #{imgName}
+			</if>
+			<if test="groupId != null">
+				and groupId = #{groupId}
+			</if>
+			<if test="mallId != null">
+				and mallId = #{mallId}
+			</if>
+			<if test="carParkId != null">
+				and carParkId = #{carParkId}
+			</if>
+			<if test="addTime != null">
+				and addTime = #{addTime}
+			</if>
+			<if test="mark != null">
+				and mark = #{mark}
+			</if>
+
+		</trim>
+	</sql>
+
+	<!-- 查询条件 -->
+	<sql id="Filter_Example_Where_Clause">
+
+		<trim suffixOverrides=",">
+			<if test="recordId != null">
+				and L.recordId = #{recordId}
+			</if>
+			<if test="parkingId != null">
+				and L.parkingId = #{parkingId}
+			</if>
+			<if test="oldRecordId != null">
+				and L.oldRecordId = #{oldRecordId}
+			</if>
+			<if test="licensePlateNumber != null and licensePlateNumber != ''">
+				and L.licensePlateNumber like '%${licensePlateNumber}%'
+			</if>
+
+			<if test="inTime != null">
+				and L.inTime = #{inTime}
+			</if>
+			<if test="imgName != null and imgName != ''">
+				and L.imgName = #{imgName}
+			</if>
+			<if test="groupId != null">
+				and L.groupId = #{groupId}
+			</if>
+			<if test="mallId != null">
+				and L.mallId = #{mallId}
+			</if>
+			<if test="carParkId != null">
+				and L.carParkId = #{carParkId}
+			</if>
+			<if test="addTime != null">
+				and L.addTime = #{addTime}
+			</if>
+			<if test="mark != null">
+				and L.mark = #{mark}
+			</if>
+
+
+		</trim>
+	</sql>
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="Object">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		gd_license_recognize(recordId,parkingId,oldRecordId,licensePlateNumber,inTime,imgName,groupId,mallId,carParkId,addTime,mark)
+		values(#{recordId},#{parkingId},#{oldRecordId},#{licensePlateNumber},#{inTime},#{imgName},#{groupId},#{mallId},#{carParkId},#{addTime},#{mark})
+	</insert>
+	<insert id="save" parameterType="Object">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		gd_license_recognize(recordId,parkingId,oldRecordId,licensePlateNumber,inTime,imgName,groupId,mallId,carParkId,addTime,mark,realParkingId)
+		values(#{recordId},#{parkingId},#{oldRecordId},#{licensePlateNumber},#{inTime},#{imgName},#{groupId},#{mallId},#{carParkId},#{addTime},#{mark},#{realParkingId})
+	</insert>
+	
+	<insert id="saveGdLicenseRecognize" parameterType="Object">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		gd_license_recognize(parkingId,oldRecordId,licensePlateNumber,inTime,imgName,groupId,mallId,carParkId,addTime,mark,realParkingId)
+		values(#{parkingId},#{oldRecordId},#{licensePlateNumber},#{inTime},#{imgName},#{groupId},#{mallId},#{carParkId},#{addTime},#{mark},#{realParkingId})
+	</insert>
+
+	<!-- 根据id，修改记录 -->
+	<update id="update" parameterType="Object">
+		update gd_license_recognize
+		set
+		parkingId=#{parkingId},oldRecordId=#{oldRecordId},licensePlateNumber=#{licensePlateNumber},inTime=#{inTime},imgName=#{imgName},groupId=#{groupId},mallId=#{mallId},carParkId=#{carParkId},addTime=#{addTime},mark=#{mark}
+		where recordId=#{recordId}
+	</update>
+
+	<!-- 修改记录，只修改只不为空的字段 -->
+	<update id="updateBySelective" parameterType="Object">
+		update gd_license_recognize set
+		<trim suffixOverrides=",">
+			<if test="parkingId != null and parkingId != ''  ">
+				parkingId=#{parkingId},
+			</if>
+			<if test="oldRecordId != null and oldRecordId != ''  ">
+				oldRecordId=#{oldRecordId},
+			</if>
+			<if test="licensePlateNumber != null  and licensePlateNumber != '' ">
+				licensePlateNumber=#{licensePlateNumber},
+			</if>
+			<if test="inTime != null and inTime != ''  ">
+				inTime=#{inTime},
+			</if>
+			<if test="imgName != null  and imgName != '' ">
+				imgName=#{imgName},
+			</if>
+			<if test="carParkId != null and carParkId != ''  ">
+				carParkId=#{carParkId},
+			</if>
+			<if test="addTime != null and addTime != ''  ">
+				addTime=#{addTime},
+			</if>
+			<if test="mark != null and mark != ''   ">
+				mark=#{mark},
+			</if>
+			<if test="groupId != null and groupId != ''  ">
+				groupId=#{groupId},
+			</if>
+			<if test="mallId != null and mallId != ''   ">
+				mallId=#{mallId},
+			</if>
+
+		</trim>
+		where recordId=#{recordId}
+	</update>
+
+	<!-- 删除记录 -->
+	<delete id="delete" parameterType="Object">
+		delete from
+		gd_license_recognize where recordId = #{recordId}
+	</delete>
+
+	<!-- 根据id查询 页面 -->
+	<select id="queryById" resultMap="BaseResultMap" parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from gd_license_recognize where recordId=#{recordId}
+	</select>
+
+	<!-- 页面 列表总数 -->
+	<select id="queryByCount" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(1) from gd_license_recognize
+		<include refid="Example_Where_Clause" />
+	</select>
+
+	<!-- 查询页面列表 -->
+	<select id="queryByList" resultMap="BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from gd_license_recognize
+		<include refid="Example_Where_Clause" />
+		<if test="pager.orderCondition != null and pager.orderCondition != ''">
+			${pager.orderCondition}
+		</if>
+		<if
+			test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+			${pager.mysqlQueryCondition}
+		</if>
+	</select>
+	<!-- 根据车牌号查询停车记录总数 -->
+	<select id="findByFilterByCount" resultType="java.lang.Integer"
+		parameterType="Object">
+		SELECT COUNT(L.recordId) FROM gd_license_recognize AS L
+		RIGHT JOIN (
+
+		SELECT recordId AS recordId_1 from gd_license_recognize where 1=1
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+		and inTime in
+		( SELECT MAX(inTime) FROM gd_license_recognize
+		WHERE
+		licensePlateNumber
+
+		LIKE '%${licensePlateNumber}%'
+
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+
+		GROUP BY licensePlateNumber
+
+		)
+
+		) AS A
+		ON L.recordId = A.recordId_1
+		RIGHT
+		JOIN (
+		SELECT recordId AS recordId_2 from gd_license_recognize where
+		1=1
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+
+		and inTime in
+		( SELECT MAX(inTime) FROM gd_license_recognize
+		WHERE
+		licensePlateNumber
+
+		<choose>
+			<when test="isStart == true">
+				REGEXP '${licensePlateNumber}'
+			</when>
+			<otherwise>
+				LIKE '%${licensePlateNumber}%'
+			</otherwise>
+		</choose>
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+
+		GROUP BY parkingId
+
+		)
+		) AS B
+		ON L.recordId = B.recordId_2
+		RIGHT JOIN
+		gd_car_parks AS C ON L.carParkId = C.recordId
+		WHERE L.carParkId IS NOT
+		NULL
+		and L.imgName != '' and L.inTime > date_add(now(), interval -1
+		day)
+		<include refid="Filter_Example_Where_Clause" />
+	</select>
+	<!-- 根据车牌号查询停车记录 -->
+	<select id="findByFilter" resultMap="BaseResultMap"
+		parameterType="Object">
+		SELECT L.recordId, L.parkingId, L.oldRecordId, L.licensePlateNumber,
+		L.inTime, L.imgName, L.carParkId, L.addTime
+		FROM gd_license_recognize
+		AS L
+		RIGHT JOIN (
+
+		SELECT recordId AS recordId_1 from
+		gd_license_recognize where 1=1
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+		and inTime in
+		( SELECT MAX(inTime) FROM gd_license_recognize
+		WHERE
+		licensePlateNumber
+
+		LIKE '%${licensePlateNumber}%'
+
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+
+		GROUP BY licensePlateNumber
+
+		)
+		) AS A
+		ON L.recordId = A.recordId_1
+		RIGHT
+		JOIN (
+		SELECT recordId AS recordId_2 from gd_license_recognize where
+		1=1
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+		and inTime in
+		( SELECT MAX(inTime) FROM gd_license_recognize
+		WHERE
+		licensePlateNumber
+
+		<choose>
+			<when test="isStart == true">
+				REGEXP '${licensePlateNumber}'
+			</when>
+			<otherwise>
+				LIKE '%${licensePlateNumber}%'
+			</otherwise>
+		</choose>
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+
+		GROUP BY parkingId
+
+		)
+
+
+		) AS B
+		ON L.recordId = B.recordId_2
+		RIGHT JOIN
+		gd_car_parks AS C ON L.carParkId = C.recordId
+		WHERE L.carParkId IS NOT
+		NULL
+		and L.imgName != '' and L.inTime > date_add(now(), interval -1
+		day)
+		<include refid="Filter_Example_Where_Clause" />
+		order by L.inTime desc
+		<if test="pager.orderCondition != null and pager.orderCondition != ''">
+			${pager.orderCondition}
+		</if>
+		<if
+			test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+			${pager.mysqlQueryCondition}
+		</if>
+	</select>
+	<!-- 根据车牌号查询停车记录总数 -->
+	<select id="findByCarNoByCount" resultType="java.lang.Integer"
+		parameterType="Object">
+		SELECT COUNT(L.recordId) FROM gd_license_recognize AS L
+		RIGHT JOIN (SELECT MAX(recordId) AS recordId_1 FROM
+		gd_license_recognize
+		WHERE carParkId=#{carParkId} AND
+		licensePlateNumber LIKE
+		'%${licensePlateNumber}%' GROUP BY
+		licensePlateNumber) AS A
+		ON L.recordId = A.recordId_1
+		RIGHT JOIN (SELECT
+		MAX(recordId) AS recordId_2 FROM gd_license_recognize
+		WHERE
+		carParkId=#{carParkId} AND licensePlateNumber LIKE
+		'%${licensePlateNumber}%' GROUP BY parkingId) AS B
+		ON L.recordId =
+		B.recordId_2
+
+	</select>
+	<!-- 根据车牌号和停车场ID查询停车记录 -->
+	<select id="findByCarNo" resultMap="BaseResultMap"
+		parameterType="Object">
+		SELECT L.recordId, L.parkingId, L.oldRecordId, L.licensePlateNumber,
+		L.inTime, L.imgName, L.carParkId, L.addTime
+		FROM gd_license_recognize
+		AS L
+		RIGHT JOIN (SELECT MAX(recordId) AS recordId_1 FROM
+		gd_license_recognize
+		WHERE carParkId=#{carParkId} AND
+		licensePlateNumber LIKE
+		'%${licensePlateNumber}%' GROUP BY
+		licensePlateNumber) AS A
+		ON L.recordId = A.recordId_1
+		RIGHT JOIN (SELECT
+		MAX(recordId) AS recordId_2 FROM gd_license_recognize
+		WHERE
+		carParkId=#{carParkId} AND licensePlateNumber LIKE
+		'%${licensePlateNumber}%' GROUP BY parkingId) AS B
+		ON L.recordId =
+		B.recordId_2
+		ORDER BY L.recordId
+		WHERE L.carParkId IS NOT NULL
+		<if test="pager.orderCondition != null and pager.orderCondition != ''">
+			${pager.orderCondition}
+		</if>
+		<if
+			test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+			${pager.mysqlQueryCondition}
+		</if>
+	</select>
+
+	<!-- 页面 总数 -->
+	<select id="queryCountParkingRecord" resultType="java.lang.Integer"
+		parameterType="Object">
+		SELECT count(recordID)
+		FROM gd_license_recognize
+		WHERE 1=1
+		<trim suffixOverrides=",">
+			<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+			<if test="licensePlateNumber != null"> and licensePlateNumber LIKE
+				#{licensePlateNumber}
+			</if>
+		</trim>
+	</select>
+	<!-- 查询信息列表 -->
+<!-- 	<select id="queryParkingRecordLlist" resultMap="ParkingRecordVoResult" -->
+<!-- 		parameterType="Object"> -->
+<!-- 		SELECT -->
+<!-- 		l.recordId, l.oldRecordId, l.licensePlateNumber, l.inTime, -->
+<!-- 		l.imgName, -->
+<!-- 		l.carParkId, l.addTime, l.mark, c.carParkName -->
+<!-- 		,d.groupName,e.mallName -->
+<!-- 		FROM -->
+<!-- 		gd_license_recognize l LEFT JOIN gd_car_parks c ON -->
+<!-- 		l.carParkId=c.recordID left join gd_group d on -->
+<!-- 		d.recordId=l.groupId -->
+<!-- 		left join gd_mall e on e.recordId=l.mallId -->
+<!-- 		WHERE 1=1 -->
+<!-- 		<trim suffixOverrides=","> -->
+<!-- 			<if test="groupId != null"> and l.groupId = #{groupId} </if> -->
+<!-- 			<if test="mallId != null"> and l.mallId = #{mallId} </if> -->
+<!-- 			<if test="carParkId != null"> and l.carParkId = #{carParkId} </if> -->
+<!-- 			<if test="licensePlateNumber != null"> and l.licensePlateNumber -->
+<!-- 				LIKE #{licensePlateNumber} -->
+<!-- 			</if> -->
+<!-- 		</trim> -->
+<!-- 		order by l.inTime desc -->
+<!-- 		<if -->
+<!-- 			test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''"> -->
+<!-- 			${pager.mysqlQueryCondition} -->
+<!-- 		</if> -->
+<!-- 	</select> -->
+
+	<!-- 修改停车记录进场时间，用于测试计费规则 -->
+	<update id="updateInTime" parameterType="Object">
+		update
+		gd_license_recognize set inTime=#{inTime} where recordId=#{recordId}
+	</update>
+	<!-- 修改停车记录出场标记 -->
+	<update id="updateMark" parameterType="Object">
+		update
+		gd_license_recognize set mark = #{mark} where recordId=#{recordId}
+	</update>
+	<!-- 根据车牌号查询所以停车记录 无分页 -->
+	<select id="findByCarParkAll" resultMap="BaseResultMap"
+		parameterType="Object">
+		SELECT L.recordId, L.parkingId, L.oldRecordId, L.licensePlateNumber,
+		L.inTime, L.imgName, L.carParkId, L.addTime
+		FROM gd_license_recognize
+		AS L
+		RIGHT JOIN (SELECT MAX(recordId) AS recordId_1 FROM
+		gd_license_recognize
+		WHERE licensePlateNumber
+		<choose>
+			<when test="isStart == true">
+				REGEXP '${licensePlateNumber}'
+			</when>
+			<otherwise>
+				LIKE '%${licensePlateNumber}%'
+			</otherwise>
+		</choose>
+
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+		GROUP BY licensePlateNumber) AS A
+		ON L.recordId = A.recordId_1
+		RIGHT
+		JOIN (SELECT MAX(recordId) AS recordId_2 FROM gd_license_recognize
+		WHERE licensePlateNumber
+		<choose>
+			<when test="isStart == true">
+				REGEXP '${licensePlateNumber}'
+			</when>
+			<otherwise>
+				LIKE '%${licensePlateNumber}%'
+			</otherwise>
+		</choose>
+		<if test="carParkId != null"> and carParkId = #{carParkId} </if>
+		GROUP BY parkingId) AS B
+		ON L.recordId = B.recordId_2
+		RIGHT JOIN
+		gd_car_parks AS C ON L.carParkId = C.recordId
+		WHERE L.carParkId IS NOT
+		NULL
+		<include refid="Filter_Example_Where_Clause" />
+
+	</select>
+	<!-- 根据外部数据库ID和停车场ID查询 页面 -->
+	<select id="getParkingExportRecordByOldRecordId" resultMap="BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from gd_license_recognize where oldRecordId = #{oldRecordId} and
+		carParkId = #{carParkId}
+		order by recordId desc limit 0,1
+	</select>
+	<!-- 根据停车场位ID和停车场ID查询 页面 -->
+	<select id="getParkingRecordByParkingId" resultMap="BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from gd_license_recognize where parkingId = #{parkingId} and carParkId
+		= #{carParkId}
+		order by recordId desc limit 0,1
+	</select>
+	<!-- 根据停车位ID，修改记录 -->
+	<update id="updateByParkingId" parameterType="Object">
+		update
+		gd_license_recognize set mark = #{mark} where parkingId=#{parkingId}
+		and carParkId = #{carParkId}
+	</update>
+	<update id="updateByParkingId1" parameterType="Object">
+		update
+		gd_license_recognize set mark = #{mark} where parkingId=#{parkingId}
+		and carParkId = #{carParkId}
+	</update>
+	<!-- 更新 ImagePath -->
+	<update id="updateParkingRecordImagePath" parameterType="Object">
+		update
+		gd_license_recognize set imgName= #{imgName} where
+		oldRecordId=#{oldRecordId} and carParkId = #{carParkId}
+	</update>
+	<update id="updateParkingRecordImagePath1" parameterType="Object">
+		update
+		gd_license_recognize set imgName= #{imgName} where
+		oldRecordId=#{oldRecordId} and carParkId = #{carParkId}
+	</update>
+
+	<!-- 根据车牌号查询 页面 -->
+	<select id="getParkingRecordBylicensePlateNumber" resultMap="BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+
+		from gd_license_recognize where licensePlateNumber =
+		#{licensePlateNumber} and carParkId = #{carParkId} and mark = 0 and
+		imgName !=''
+		and inTime = ( SELECT MAX(inTime) from
+		gd_license_recognize where
+		licensePlateNumber = #{licensePlateNumber}
+		and carParkId =
+		#{carParkId} ) limit 0,1
+	</select>
+	
+	<!-- 根据车牌号查询  场内 -->
+	<select id="getLicenseRecognizePlateNumber"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	FROM  gd_license_recognize WHERE licensePlateNumber = #{licensePlateNumber}  
+	and inTime >= DATE_ADD(NOW(), INTERVAL -24 * 3 HOUR)
+	<if test="carParkId != null and carParkId != '' "> and carParkId = #{carParkId} </if>
+	ORDER BY inTime DESC LIMIT 0,1
+	</select>
+	
+	<select id="findById" resultType="java.util.Map" parameterType="Object">
+		select
+		*
+		from gd_license_recognize where carParkId=#{carParkId} and oldRecordId = #{oldRecordId}
+	</select>
+	
+	
+	<!-- 修改记录，只修改只不为空的字段 -->
+	<update id="licenseRecognizeOut" parameterType="Object">
+		update gd_license_recognize set	mark = 1 ,exportTime = now()
+		where parkingId=#{parkingId} and carParkId = #{carParkId} and mark = 0
+	</update>
+	
+	
+	<!-- 根据 carParkId，oldRecordId 修改停车记录 -->
+	<update id="updateLicense" parameterType="Object">
+		update gd_license_recognize set
+		<trim suffixOverrides=",">
+			<if test="parkingId != null and parkingId != ''  ">
+				parkingId=#{parkingId},
+			</if>
+			<if test="oldRecordId != null and oldRecordId != ''  ">
+				oldRecordId=#{oldRecordId},
+			</if>
+			<if test="licensePlateNumber != null  and licensePlateNumber != '' ">
+				licensePlateNumber=#{licensePlateNumber},
+			</if>
+			<if test="inTime != null and inTime != ''  ">
+				inTime=#{inTime},
+			</if>
+			<if test="imgName != null  and imgName != '' ">
+				imgName=#{imgName},
+			</if>
+			<if test="carParkId != null and carParkId != ''  ">
+				carParkId=#{carParkId},
+			</if>
+			<if test="addTime != null and addTime != ''  ">
+				addTime=#{addTime},
+			</if>
+			<if test="mark != null and mark != ''   ">
+				mark=#{mark},
+			</if>
+			<if test="groupId != null and groupId != ''  ">
+				groupId=#{groupId},
+			</if>
+			<if test="mallId != null and mallId != ''   ">
+				mallId=#{mallId},
+			</if>
+
+		</trim>
+		where oldRecordId=#{oldRecordId} and carParkId=#{carParkId}
+	</update>
+	
+	
+	
+	
+</mapper>   

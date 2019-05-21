@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.ActivationcodeMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Activationcode" >
+    <id column="RecordID" property="recordid" jdbcType="INTEGER" />
+    <result column="StationID" property="stationid" jdbcType="INTEGER" />
+    <result column="Code" property="code" jdbcType="VARCHAR" />
+    <result column="IsUsed" property="isused" jdbcType="INTEGER" />
+    <result column="CreateUserID" property="createuserid" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="IsActivated" property="isactivated" jdbcType="INTEGER" />
+    <result column="ActivatedTime" property="activatedtime" jdbcType="TIMESTAMP" />
+    <result column="IsDelete" property="isdelete" jdbcType="INTEGER" />
+    <result column="DeleteTime" property="deletetime" jdbcType="TIMESTAMP" />
+    <result column="DeleteUserID" property="deleteuserid" jdbcType="INTEGER" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordID, StationID, Code, IsUsed, CreateUserID, CreateTime, IsActivated, ActivatedTime, 
+    IsDelete, DeleteTime, DeleteUserID, ParkingLotNo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from activationcode
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from activationcode
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Activationcode" >
+    insert into activationcode (RecordID, StationID, Code, 
+      IsUsed, CreateUserID, CreateTime, 
+      IsActivated, ActivatedTime, IsDelete, 
+      DeleteTime, DeleteUserID, ParkingLotNo
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{stationid,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, 
+      #{isused,jdbcType=INTEGER}, #{createuserid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{isactivated,jdbcType=INTEGER}, #{activatedtime,jdbcType=TIMESTAMP}, #{isdelete,jdbcType=INTEGER}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{deleteuserid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Activationcode" >
+    insert into activationcode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordID,
+      </if>
+      <if test="stationid != null" >
+        StationID,
+      </if>
+      <if test="code != null" >
+        Code,
+      </if>
+      <if test="isused != null" >
+        IsUsed,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="isactivated != null" >
+        IsActivated,
+      </if>
+      <if test="activatedtime != null" >
+        ActivatedTime,
+      </if>
+      <if test="isdelete != null" >
+        IsDelete,
+      </if>
+      <if test="deletetime != null" >
+        DeleteTime,
+      </if>
+      <if test="deleteuserid != null" >
+        DeleteUserID,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="stationid != null" >
+        #{stationid,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="isused != null" >
+        #{isused,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactivated != null" >
+        #{isactivated,jdbcType=INTEGER},
+      </if>
+      <if test="activatedtime != null" >
+        #{activatedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="deletetime != null" >
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteuserid != null" >
+        #{deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Activationcode" >
+    update activationcode
+    <set >
+      <if test="stationid != null" >
+        StationID = #{stationid,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="isused != null" >
+        IsUsed = #{isused,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isactivated != null" >
+        IsActivated = #{isactivated,jdbcType=INTEGER},
+      </if>
+      <if test="activatedtime != null" >
+        ActivatedTime = #{activatedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        IsDelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="deletetime != null" >
+        DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteuserid != null" >
+        DeleteUserID = #{deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Activationcode" >
+    update activationcode
+    set StationID = #{stationid,jdbcType=INTEGER},
+      Code = #{code,jdbcType=VARCHAR},
+      IsUsed = #{isused,jdbcType=INTEGER},
+      CreateUserID = #{createuserid,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      IsActivated = #{isactivated,jdbcType=INTEGER},
+      ActivatedTime = #{activatedtime,jdbcType=TIMESTAMP},
+      IsDelete = #{isdelete,jdbcType=INTEGER},
+      DeleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      DeleteUserID = #{deleteuserid,jdbcType=INTEGER},
+      ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+    where RecordID = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from activationcode
+    where IsDelete=0 and Code = #{code,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

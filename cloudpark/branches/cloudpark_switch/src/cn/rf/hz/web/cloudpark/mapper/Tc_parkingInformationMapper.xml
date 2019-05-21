@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_parkInformationMapper">
+	<select id="queryparkingarea" resultType="java.util.Map"
+		parameterType="String">
+	select
+	a.parkinglotno,a.areaid,b.countcw,b.stopedcw,b.prepcw
+	from
+	tc_parkingarea a LEFT JOIN tc_cwnuminfo b on a.AreaID=b.AreaID
+	where a.IsDelete=0 and 
+	a.ParkingLotNo= #{ParkingLotNo}
+	</select>
+
+	<select id="queryparkingchannelID" resultType="java.util.Map"
+		parameterType="Object">
+		select
+		ChannelID
+		from tc_channel b
+		where
+		b.ParkingAreaID=#{AreaID}
+		and b.ParkingLotNo=#{ParkingLotNo}
+	</select>
+
+	<select id="queryBlackWhite" resultType="java.util.Map"
+		parameterType="Object">
+		SELECT licensePlateNumber carCode,startTime
+		startTime,endTine
+		endTime,whiteType carType,'blackWhite' dataType from
+		tc_whiteuserinfo
+		where ParkingNo = #{ParkingLotNo}
+		union
+		SELECT CarCode
+		carCode,Bgndt startTime,Enddt endTime,UserPropertiy
+		carType,'longCar'
+		dataType from tc_userinfo where ParkingLotNo =
+		#{ParkingLotNo}
+	</select>
+
+
+
+	<select id="countAll" resultType="Integer">
+		select distinct
+		count(ParkingLotNo) from tc_parkinglotinfo where IsDelete=0
+	</select>
+
+
+	<select id="queryparkings" resultType="java.util.Map"
+		parameterType="Object">
+		select ParkingLotNo,ParkingLotName from tc_parkinglotinfo
+		where 1=1
+		<if
+			test="(id != null and id != '') || (parkname != null and parkname != '')">
+			and
+		</if>
+		<trim prefix="(" suffix=")" suffixOverrides="or">
+			<if test="id != null and id != ''">
+				CONCAT(ParkingLotNo,IFNULL(ParkingLotNo,'')) like
+				'%${id}%' or
+			</if>
+			<if test="parkname != null and parkname != ''">
+				CONCAT(ParkingLotName,IFNULL(ParkingLotName,'')) like
+				'%${parkname}%' or
+			</if>
+		</trim>
+		LIMIT #{offset},#{limit}
+	</select>
+
+
+	<select id="countChannelAll" resultType="Integer">
+		select distinct
+		count(ChannelID) from tc_channel
+	</select>
+
+
+
+	<select id="queryparkingchannels" resultType="java.util.Map"
+		parameterType="Object">
+		select
+		a.ParkingLotNo,ParkingLotName,r.AreaID,r.AreaName,p.SerialNumber,p.StationName,ChannelID,ChannelType,ChannelName
+		from tc_parkinglotinfo a,tc_channel b,pb_parkingbox p,tc_parkingarea r
+		where a.ParkingLotNo=b.ParkingLotNo
+		and p.RecordID= b.ParkingChannelID
+		and b.ParkingAreaID=r.AreaID
+		<if
+			test="(id != null and id != '') || (parkname != null and parkname != '')">
+			and
+		</if>
+		<trim prefix="(" suffix=")" suffixOverrides="or">
+			<if test="id != null and id != ''">
+				CONCAT(a.ParkingLotNo,IFNULL(a.ParkingLotNo,'')) like
+				'%${id}%' or
+			</if>
+			<if test="parkname != null and parkname != ''">
+				CONCAT(a.ParkingLotName,IFNULL(a.ParkingLotName,'')) like
+				'%${parkname}%' or
+			</if>
+		</trim>
+		LIMIT #{offset},#{limit}
+	</select>
+
+	<select id="queryparkingchannelById" resultType="java.util.Map"
+		parameterType="Object">
+		select
+		a.ParkingLotNo,ParkingLotName,r.AreaID,r.AreaName,p.SerialNumber,p.StationName,ChannelID,ChannelType,ChannelName
+		from tc_parkinglotinfo a,tc_channel b,pb_parkingbox p,tc_parkingarea r
+		where a.ParkingLotNo=b.ParkingLotNo
+		and p.RecordID= b.ParkingChannelID
+		and b.ParkingAreaID=r.AreaID
+		and a.ParkingLotNo=#{id} order by
+		a.ParkingLotNo
+	</select>
+
+	<select id="queryparkingNameById" resultType="java.lang.String"
+		parameterType="Object">
+		select ParkingLotName from tc_parkinglotinfo
+		where
+		ParkingLotNo=#{parkinglotno} and IsDelete=0
+
+	</select>
+
+
+
+	<select id="queryParkingTypeById" resultType="java.lang.String"
+		parameterType="Object">
+		select ParkingType from tc_parkinglotinfo
+		where
+		ParkingLotNo=#{parkinglotno} and IsDelete=0
+
+	</select>
+
+	<select id="queryChannelByParkingLotNoAndAreaID" resultType="java.util.Map"
+		parameterType="Object">
+		select
+		*
+		from tc_channel b
+		where
+		b.ParkingAreaID=#{areaid}
+		and b.ParkingLotNo=#{parkinglotno}
+	</select>
+
+</mapper>

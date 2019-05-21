@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.XiHuRuleMapper" > 
+   
+   <delete id="delXiHuRuleVip" parameterType="Object">
+	delete 	 from park_vip_rule where parkId = #{carParkId}
+	</delete>
+	<delete id="delXiHuRuleShopping" parameterType="Object">
+		delete 	 from park_shopping_rule where parkId = #{carParkId}
+	</delete>
+	
+	<insert id="insertXiHuRuleVip" parameterType="Object">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into park_vip_rule(id,name,grade,relief,allowPerDay,parkId )
+		values(#{recordId},#{name},#{grade},#{relief},1,#{carParkId})
+	</insert>
+	
+	<insert id="insertXiHuRuleShopping" parameterType="Object">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into park_shopping_rule(id,name,total,relief,parkId )
+		values(#{recordId},#{name},#{total},#{relief},#{carParkId})
+	</insert>
+   
+</mapper>   

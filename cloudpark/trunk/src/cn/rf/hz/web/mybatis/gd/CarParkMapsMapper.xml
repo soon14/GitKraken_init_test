@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.CarParkMapsMapper">
+	<!-- Result Map -->
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.bean.gd.OrderForm">
+		<result column="orderFormId" property="orderFormId" />
+		<result column="orderFormNo" property="orderFormNo" />
+		<result column="userPhoneId" property="userPhoneId" />
+		<result column="staffId" property="staffId" />
+		<result column="orderGenerationTime" property="orderGenerationTime" />
+		<result column="areFare" property="areFare" />
+		<result column="phone" property="phone" />
+		<result column="changeOrderTime" property="changeOrderTime" />
+		<result column="acquiringPerson" property="acquiringPerson" />
+		<result column="clearingPeople" property="clearingPeople" />
+		<result column="playingPeople" property="playingPeople" />
+		<result column="orderAmount" property="orderAmount" />
+		<result column="acquiringTime" property="acquiringTime" />
+		<result column="settlementTime" property="settlementTime" />
+		<result column="licensePlateNumber" property="licensePlateNumber" />
+		<result column="carParkId" property="carParkId" />
+		<result column="playingTime" property="playingTime" />
+		<result column="days" property="days" />
+		<result column="months" property="months" />
+		<result column="isItEffective" property="isItEffective" />
+		<result column="reasonForCancellation" property="reasonForCancellation" />
+	</resultMap>
+
+	<!-- 场内巡车 -->
+	<select id="findLicensePlateNumber"  resultType="java.util.Map" parameterType="Object">
+		select *
+	FROM  gd_license_recognize WHERE licensePlateNumber = #{licensePlateNumber}   AND imgName !=''
+	and inTime >= DATE_ADD(NOW(), INTERVAL - 24 *7 HOUR) 
+<!-- 	<if test="carParkId != null and carParkId != '' "> and carParkId = #{carParkId} </if> -->
+	ORDER BY inTime DESC LIMIT 0,1
+	</select>
+	
+	<!-- 车位信息 -->
+	<select id="findCarInfo"  resultType="java.util.Map" parameterType="Object">
+		SELECT A.recordId, A.areaId, A.areaName, A.picPath, A.carParkId, A.updTime,n.*
+	FROM
+	gd_area AS A LEFT JOIN gd_area_node AS N ON A.areaId = N.areaId
+	WHERE N.nodeId=#{nodeId} AND A.carParkId=#{carParkId} AND A.carParkId = N.carParkId GROUP BY A.areaId
+	</select>
+
+
+</mapper>   

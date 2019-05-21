@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Pb_holidayinfo_historyMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Pb_holidayinfo_history" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <id column="ParkingLotNo" property="parkinglotno" jdbcType="CHAR" />
+    <id column="VersionNumber" property="versionnumber" jdbcType="VARCHAR" />
+    <result column="HolidayName" property="holidayname" jdbcType="VARCHAR" />
+    <result column="StartDate" property="startdate" jdbcType="TIMESTAMP" />
+    <result column="EndDate" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="HolidayState" property="holidaystate" jdbcType="INTEGER" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="ChargeRuleId" property="chargeruleid" jdbcType="INTEGER" />
+    <result column="UserType" property="usertype" jdbcType="INTEGER" />
+    <result column="InChargeRuleId" property="inchargeruleid" jdbcType="INTEGER" />
+    <result column="EventTime" property="eventtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ParkingLotNo, VersionNumber, HolidayName, StartDate, EndDate, HolidayState, Remarks, 
+    CreatePeople, CreateDate, UpdatePeople, UpdateDate, ChargeRuleId, UserType, InChargeRuleId, 
+    EventTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_holidayinfo_historyKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from pb_holidayinfo_history
+    where ID = #{id,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=CHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_holidayinfo_historyKey" >
+    delete from pb_holidayinfo_history
+    where ID = #{id,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=CHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_holidayinfo_history" >
+    insert into pb_holidayinfo_history (ID, ParkingLotNo, VersionNumber, 
+      HolidayName, StartDate, EndDate, 
+      HolidayState, Remarks, CreatePeople, 
+      CreateDate, UpdatePeople, UpdateDate, 
+      ChargeRuleId, UserType, InChargeRuleId, 
+      EventTime)
+    values (#{id,jdbcType=INTEGER}, #{parkinglotno,jdbcType=CHAR}, #{versionnumber,jdbcType=VARCHAR}, 
+      #{holidayname,jdbcType=VARCHAR}, #{startdate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, 
+      #{holidaystate,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{createpeople,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updatepeople,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP}, 
+      #{chargeruleid,jdbcType=INTEGER}, #{usertype,jdbcType=INTEGER}, #{inchargeruleid,jdbcType=INTEGER}, 
+      #{eventtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_holidayinfo_history" >
+    insert into pb_holidayinfo_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="versionnumber != null" >
+        VersionNumber,
+      </if>
+      <if test="holidayname != null" >
+        HolidayName,
+      </if>
+      <if test="startdate != null" >
+        StartDate,
+      </if>
+      <if test="enddate != null" >
+        EndDate,
+      </if>
+      <if test="holidaystate != null" >
+        HolidayState,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+      <if test="chargeruleid != null" >
+        ChargeRuleId,
+      </if>
+      <if test="usertype != null" >
+        UserType,
+      </if>
+      <if test="inchargeruleid != null" >
+        InChargeRuleId,
+      </if>
+      <if test="eventtime != null" >
+        EventTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=CHAR},
+      </if>
+      <if test="versionnumber != null" >
+        #{versionnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="holidayname != null" >
+        #{holidayname,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holidaystate != null" >
+        #{holidaystate,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createpeople != null" >
+        #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargeruleid != null" >
+        #{chargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="inchargeruleid != null" >
+        #{inchargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="eventtime != null" >
+        #{eventtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_holidayinfo_history" >
+    update pb_holidayinfo_history
+    <set >
+      <if test="holidayname != null" >
+        HolidayName = #{holidayname,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        StartDate = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        EndDate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holidaystate != null" >
+        HolidayState = #{holidaystate,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createpeople != null" >
+        CreatePeople = #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatepeople != null" >
+        UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargeruleid != null" >
+        ChargeRuleId = #{chargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        UserType = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="inchargeruleid != null" >
+        InChargeRuleId = #{inchargeruleid,jdbcType=INTEGER},
+      </if>
+      <if test="eventtime != null" >
+        EventTime = #{eventtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=CHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_holidayinfo_history" >
+    update pb_holidayinfo_history
+    set HolidayName = #{holidayname,jdbcType=VARCHAR},
+      StartDate = #{startdate,jdbcType=TIMESTAMP},
+      EndDate = #{enddate,jdbcType=TIMESTAMP},
+      HolidayState = #{holidaystate,jdbcType=INTEGER},
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      CreatePeople = #{createpeople,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      ChargeRuleId = #{chargeruleid,jdbcType=INTEGER},
+      UserType = #{usertype,jdbcType=INTEGER},
+      InChargeRuleId = #{inchargeruleid,jdbcType=INTEGER},
+      EventTime = #{eventtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+      and ParkingLotNo = #{parkinglotno,jdbcType=CHAR}
+      and VersionNumber = #{versionnumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

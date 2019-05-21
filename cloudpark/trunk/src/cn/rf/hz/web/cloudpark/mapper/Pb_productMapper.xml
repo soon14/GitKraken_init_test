@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Pb_productMapper">
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Pb_product">
+		<id column="ProductID" property="productid" jdbcType="INTEGER" />
+		<id column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="HolidayID" property="holidayid" jdbcType="INTEGER" />
+		<result column="WeekID" property="weekid" jdbcType="INTEGER" />
+		<result column="RuleID" property="ruleid" jdbcType="INTEGER" />
+		<result column="IsLong" property="islong" jdbcType="INTEGER" />
+		<result column="ProductName" property="productname" jdbcType="VARCHAR" />
+		<result column="LongRuleID" property="longruleid" jdbcType="INTEGER" />
+		<result column="CreatePeople" property="createpeople" jdbcType="INTEGER" />
+		<result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+		<result column="UpdatePeople" property="updatepeople" jdbcType="INTEGER" />
+		<result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+		<result column="IsDelete" property="isdelete" jdbcType="INTEGER" />
+		<result column="OverProductID" property="overproductid" 
+			jdbcType="INTEGER" />
+		<result column="ChannelIds" property="channelids" jdbcType="VARCHAR" />
+		<result column="AreaIds" property="areaids" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List"> 
+		ProductID, ParkingLotNo, HolidayID, WeekID, RuleID, IsLong,
+		ProductName,
+		LongRuleID,
+		CreatePeople, CreateDate, UpdatePeople,
+		UpdateDate, IsDelete, OverProductID,IsOver,ChannelIds,AreaIds
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="cn.rf.hz.web.cloudpark.moder.Pb_productKey">
+		select
+		<include refid="Base_Column_List" />
+		from pb_product
+		where ProductID = #{productid,jdbcType=INTEGER}
+		and
+		ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_productKey">
+		delete from
+		pb_product
+		where ProductID = #{productid,jdbcType=INTEGER}
+		and
+		ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product">
+		insert into pb_product
+		(ProductID, ParkingLotNo, HolidayID,
+		WeekID, RuleID, IsLong,
+		ProductName, LongRuleID, CreatePeople,
+		CreateDate, UpdatePeople,
+		UpdateDate,
+		IsDelete, OverProductID,IsOver)
+		values
+		(#{productid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR},
+		#{holidayid,jdbcType=INTEGER},
+		#{weekid,jdbcType=INTEGER},
+		#{ruleid,jdbcType=INTEGER}, #{islong,jdbcType=INTEGER},
+		#{productname,jdbcType=VARCHAR}, #{longruleid,jdbcType=INTEGER},
+		#{createpeople,jdbcType=INTEGER},
+		#{createdate,jdbcType=TIMESTAMP},
+		#{updatepeople,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP},
+		#{isdelete,jdbcType=INTEGER}, #{overproductid,jdbcType=INTEGER},
+		#{isover,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product">
+		insert into pb_product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="productid != null">
+				ProductID,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+			<if test="holidayid != null">
+				HolidayID,
+			</if>
+			<if test="weekid != null">
+				WeekID,
+			</if>
+			<if test="ruleid != null">
+				RuleID,
+			</if>
+			<if test="islong != null">
+				IsLong,
+			</if>
+			<if test="productname != null">
+				ProductName,
+			</if>
+			<if test="longruleid != null">
+				LongRuleID,
+			</if>
+			<if test="createpeople != null">
+				CreatePeople,
+			</if>
+			<if test="createdate != null">
+				CreateDate,
+			</if>
+			<if test="updatepeople != null">
+				UpdatePeople,
+			</if>
+			<if test="updatedate != null">
+				UpdateDate,
+			</if>
+			<if test="isdelete != null">
+				IsDelete,
+			</if>
+			<if test="overproductid != null">
+				OverProductID,
+			</if>
+			<if test="isover != null">
+				IsOver,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="productid != null">
+				#{productid,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="holidayid != null">
+				#{holidayid,jdbcType=INTEGER},
+			</if>
+			<if test="weekid != null">
+				#{weekid,jdbcType=INTEGER},
+			</if>
+			<if test="ruleid != null">
+				#{ruleid,jdbcType=INTEGER},
+			</if>
+			<if test="islong != null">
+				#{islong,jdbcType=INTEGER},
+			</if>
+			<if test="productname != null">
+				#{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="longruleid != null">
+				#{longruleid,jdbcType=INTEGER},
+			</if>
+			<if test="createpeople != null">
+				#{createpeople,jdbcType=INTEGER},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatepeople != null">
+				#{updatepeople,jdbcType=INTEGER},
+			</if>
+			<if test="updatedate != null">
+				#{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isdelete != null">
+				#{isdelete,jdbcType=INTEGER},
+			</if>
+			<if test="overproductid != null">
+				#{overproductid,jdbcType=INTEGER},
+			</if>
+			<if test="isover != null">
+				#{isover,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product">
+		update pb_product
+		<set>
+			<if test="holidayid != null">
+				HolidayID = #{holidayid,jdbcType=INTEGER},
+			</if>
+			<if test="weekid != null">
+				WeekID = #{weekid,jdbcType=INTEGER},
+			</if>
+			<if test="ruleid != null">
+				RuleID = #{ruleid,jdbcType=INTEGER},
+			</if>
+			<if test="islong != null">
+				IsLong = #{islong,jdbcType=INTEGER},
+			</if>
+			<if test="productname != null">
+				ProductName = #{productname,jdbcType=VARCHAR},
+			</if>
+			<if test="longruleid != null">
+				LongRuleID = #{longruleid,jdbcType=INTEGER},
+			</if>
+			<if test="createpeople != null">
+				CreatePeople = #{createpeople,jdbcType=INTEGER},
+			</if>
+			<if test="createdate != null">
+				CreateDate = #{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatepeople != null">
+				UpdatePeople = #{updatepeople,jdbcType=INTEGER},
+			</if>
+			<if test="updatedate != null">
+				UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isdelete != null">
+				IsDelete = #{isdelete,jdbcType=INTEGER},
+			</if>
+			<if test="overproductid != null">
+				OverProductID = #{overproductid,jdbcType=INTEGER},
+			</if>
+			<if test="isover != null">
+				IsOver = #{isover,jdbcType=INTEGER},
+			</if>
+			<if test="channelids != null">
+				channelids = #{channelids,jdbcType=INTEGER},
+			</if>
+		</set>
+		where 
+		ProductID = #{productid,jdbcType=INTEGER}
+		and 
+		ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_product">
+		update pb_product
+		set HolidayID = #{holidayid,jdbcType=INTEGER},
+		WeekID =
+		#{weekid,jdbcType=INTEGER},
+		RuleID = #{ruleid,jdbcType=INTEGER},
+		IsLong
+		= #{islong,jdbcType=INTEGER},
+		ProductName =
+		#{productname,jdbcType=VARCHAR},
+		LongRuleID =
+		#{longruleid,jdbcType=INTEGER},
+		CreatePeople =
+		#{createpeople,jdbcType=INTEGER},
+		CreateDate =
+		#{createdate,jdbcType=TIMESTAMP},
+		UpdatePeople =
+		#{updatepeople,jdbcType=INTEGER},
+		UpdateDate =
+		#{updatedate,jdbcType=TIMESTAMP},
+		IsDelete =
+		#{isdelete,jdbcType=INTEGER},
+		OverProductID =
+		#{overproductid,jdbcType=INTEGER},
+		IsOver
+		= #{isover,jdbcType=INTEGER}
+		where ProductID =
+		#{productid,jdbcType=INTEGER}
+		and ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByParkinglotno" resultMap="BaseResultMap">
+		select
+		ProductName,ProductID,IsLong
+		from pb_product
+		where 1=1
+		and ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR}
+		and IsDelete=0 and IsOver=0
+	</select>
+	<select id="selectByParkinglotnoAndIslong" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		ProductName,ProductID,IsLong
+		from pb_product
+		where 1=1
+		and ParkingLotNo =
+		#{ParkingLotNo,jdbcType=VARCHAR}
+		and
+		IsLong = #{IsLong,jdbcType=VARCHAR}
+		and IsDelete=0 and IsOver=0
+	</select>
+	<select id="selectByModel" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		*
+		from pb_product
+		where ParkingLotNo = #{parkNo}
+		and
+		IsDelete=0 and IsOver=0
+		Limit #{offset},#{limit}
+	</select>
+
+	<select id="selectCountByModel" parameterType="java.util.Map"
+		resultType="int">
+		select
+		CONVERT(count(*),SIGNED) total
+		from pb_product
+		where
+		ParkingLotNo = #{parkNo}
+		and IsDelete=0 and IsOver=0
+	</select>
+
+	<select id="selectCountForChargeRule" parameterType="java.util.Map"
+		resultType="int">
+		select
+		CONVERT(count(*),SIGNED) total
+		from pb_product
+		where
+		ParkingLotNo = #{parkno}
+		and (RuleID=#{ruleID} or LongRuleID=#{ruleID})
+		and IsDelete=0
+	</select>
+
+	<select id="SelectProductByid1" resultType="String"
+		parameterType="java.util.Map">
+		select
+		ProductName
+		from pb_product
+		where
+		ParkingLotNo =
+		#{ParkingLotNo}
+		and
+		ProductID = #{ProductID}
+		and
+		IsLong = 0
+		and
+		IsDelete = 0
+	</select>
+	<select id="selectOverByModel" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		*
+		from pb_product
+		where ParkingLotNo = #{parkNo}
+		and
+		IsDelete=0 and IsOver=1
+		Limit #{offset},#{limit}
+	</select>
+
+	<select id="selectOverByParkinglotno" resultMap="BaseResultMap">
+		select
+		ProductName,ProductID,IsLong
+		from pb_product
+		where ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR} and IsDelete=0 and IsOver=1
+	</select>
+
+
+
+	<select id="selectCountByParkingLotNo" resultType="int">
+		select
+		CONVERT(count(*),SIGNED) total
+		from pb_product
+		where
+		ParkingLotNo =
+		#{parkno,jdbcType=VARCHAR}
+		and IsDelete=0
+	</select>
+
+	<select id="selectMaxIdByParkingLotNo" resultType="int">
+		select
+		max(ProductID)+1
+		from pb_product
+		where
+		ParkingLotNo =
+		#{parkno,jdbcType=VARCHAR}
+	</select>
+
+	<select id="SelectProductByid" resultMap="BaseResultMap">
+		select *
+		from pb_product
+		where
+		ParkingLotNo = #{parkid}
+		and
+		ProductID = #{productid}
+	</select>
+
+	<select id="SelectProductByparkno" resultMap="BaseResultMap">
+		select *
+		from
+		pb_product
+		where
+		ParkingLotNo = #{parkid}
+		and
+		IsLong = 0
+		and IsDelete = 0
+	</select>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from pb_product
+		where IsDelete = 0
+		<if test="parkid != null">
+			and ParkingLotNo = #{parkid}
+		</if>
+		<if test="islong != null">
+			and IsLong = #{islong}
+		</if>
+		<if test="isover != null">
+			and IsOver = #{isover}
+		</if>
+	</select>
+	<delete id="deleteProductByParkingLotNoAndProductID" parameterType="java.util.Map">
+	delete from pb_product
+	where ParkingLotNo = #{ParkingLotNo}
+	and ProductID = #{ProductID}
+	</delete>
+</mapper>

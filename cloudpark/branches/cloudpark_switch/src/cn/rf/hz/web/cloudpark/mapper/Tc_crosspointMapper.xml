@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.sharding.dao.Tc_crosspointMapper">
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint">
+		<id column="RecordID" property="recordid" jdbcType="INTEGER" />
+		<id column="partitionID" property="partitionid" jdbcType="INTEGER" />
+		<result column="CarCode" property="carcode" jdbcType="VARCHAR" />					
+		<result column="areaId" property="areaId" jdbcType="VARCHAR" />
+		<result column="parentAreaId" property="parentAreaId" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="inoutTime" property="inoutTime" jdbcType="TIMESTAMP" />						
+		<result column="ruleId" property="ruleId" jdbcType="INTEGER" />
+		<result column="mstart" property="mstart" jdbcType="TIMESTAMP" />		
+		<result column="mend" property="mend" jdbcType="TIMESTAMP" />	
+		<result column="ChannelID" property="channelId" jdbcType="INTEGER" />
+		<result column="lastouttime" property="lastouttime" jdbcType="TIMESTAMP" />				
+		<result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="mruleId" property="mruleId" jdbcType="INTEGER" />
+	</resultMap>
+	<!--<sql id="Base_Column_List"> RecordID, partitionID, UserName, CarCode, 
+		ChargeRuleID, CarLabel, CarColor, CarStyleid, Crdtm, ChannelID, ImagePath, 
+		RecognizeCarCode, Note, CarCode2, ParkingLotNo, Parkinglocation </sql> -->
+	<sql id="Base_Column_List">
+		recordid, partitionid, carcode,areaId,parentAreaId,
+		status,inoutTime,
+		ruleId, mstart,
+		mend,lastouttime,
+		channelId, 
+		parkinglotno,
+		mruleId
+	</sql>
+
+	<sql id="Base_Column_List_ALL">
+		recordid, partitionid, carcode,areaId,parentAreaId,
+		status,inoutTime,
+		ruleId, mstart,
+		mend,lastouttime,
+		channelId, 
+		parkinglotno,
+		mruleId
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="cn.rf.hz.web.cloudpark.moder.Tc_crosspointKey">
+		select
+		<include refid="Base_Column_List" />
+		from tc_crosspoint
+		where RecordID = #{recordid,jdbcType=INTEGER}
+		and
+		partitionID = #{partitionid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_crosspointKey">
+		delete from
+		tc_crosspoint
+		where RecordID = #{recordid,jdbcType=INTEGER}
+		and
+		partitionID = #{partitionid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint">
+		insert into tc_crosspoint
+		(RecordID, partitionID, 
+		CarCode, areaId,parentAreaId,
+		status,inoutTime,
+		ruleId, mstart,mend,lastouttime,
+		paidValue,channelId,ParkingLotNo,mruleId)
+		values
+		(#{recordid,jdbcType=INTEGER}, #{partitionid,jdbcType=INTEGER},
+		#{carcode,jdbcType=VARCHAR},
+		#{areaId,jdbcType=VARCHAR}, #{parentAreaId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+		#{inoutTime,jdbcType=TIMESTAMP},
+		#{ruleId,jdbcType=INTEGER},#{mstart,jdbcType=TIMESTAMP},#{mend,jdbcType=TIMESTAMP},#{lastouttime,jdbcType=TIMESTAMP},	
+		#{channelId,jdbcType=INTEGER},
+		#{parkinglotno,jdbcType=VARCHAR},#{mruleId,jdbcType=INTEGER})
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint">
+		update tc_crosspoint
+		<set>	
+			<if test="carcode != null">
+				CarCode = #{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="areaId != null">
+				areaId = #{areaId,jdbcType=VARCHAR},
+			</if>
+			<if test="parentAreaId != null">
+				parentAreaId = #{parentAreaId,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>	
+			<if test="ruleId != null">
+				ruleId = #{ruleId,jdbcType=INTEGER},
+			</if>
+			<if test="mstart != null">
+				mstart = #{mstart,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mend != null">
+				mend = #{mend,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastouttime != null">
+				lastouttime = #{lastouttime,jdbcType=TIMESTAMP},
+			</if>		
+			<if test="channelId != null">
+				channelId = #{channelId,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>	
+			<if test="mruleId != null">
+				mruleId = #{mruleId,jdbcType=VARCHAR},
+			</if>		
+		</set>
+		where RecordID = #{recordid,jdbcType=INTEGER}
+		and partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint">
+		update
+		tc_crosspoint
+		set 
+		CarCode =
+		#{carcode,jdbcType=VARCHAR},
+		areaId =
+		#{areaId,jdbcType=VARCHAR},
+		parentAreaId =
+		#{parentAreaId,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER},
+		inoutTime = #{inoutTime,jdbcType=TIMESTAMP},
+		ruleId = #{ruleId,jdbcType=INTEGER},
+		mstart =
+		#{mstart,jdbcType=TIMESTAMP},
+		mend =
+		#{mend,jdbcType=TIMESTAMP},
+		lastouttime =
+		#{lastouttime,jdbcType=TIMESTAMP},
+		ChannelID = #{channelid,jdbcType=INTEGER},
+		ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR},
+		mruleId = #{mruleId,jdbcType=INTEGER}
+		where RecordID =
+		#{recordid,jdbcType=INTEGER}
+		and partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</update>
+
+	<delete id="deleteParkOut" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint">
+		delete from
+		tc_crosspoint
+		where CarCode = #{carcode,jdbcType=VARCHAR} and
+		ParkingLotNo=#{parkinglotno,jdbcType=VARCHAR}
+		AND partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</delete>
+
+	<select id="queryTc_crosspoint_limit" resultType="java.util.Map"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List_ALL" />
+		FROM tc_crosspoint a WHERE a.ParkingLotNo= #{ParkingLotNo} ORDER BY
+		RecordID LIMIT #{fpage},#{limtcount}
+	</select>
+
+	<select id="queryTc_crosspoint" resultType="java.util.Map" parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from tc_crosspoint
+		where ParkingLotNo =
+		#{ParkingLotNo} order by inoutTime,status asc
+	</select>
+
+
+	<select id="queryParkingStatebyCarCode" resultType="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from tc_crosspoint
+		where CarCode = #{carcode}
+		and
+		ParkingLotNo=#{parkinglotno} and partitionID=#{partitionID}  order by inoutTime,status asc
+	</select>
+
+
+	<delete id="delcarfrom_in" parameterType="Object">
+		delete from
+		tc_crosspoint
+		where CarCode = #{carcode}
+		and
+		ParkingLotNo=#{parkinglotno} and partitionID=#{partitionID}
+	</delete>
+
+	<select id="selectByParknoAndNumber" resultType="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint"
+		parameterType="Object">
+		select 
+		<include refid="Base_Column_List" />
+		from tc_crosspoint
+		where ParkingLotNo =
+		#{parkinglotno} order by inoutTime desc limit #{topsize}
+	</select>
+
+
+	<select id="queryByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tc_crosspoint
+		where PartitionID = #{PartitionID} and
+		ParkingLotNo = #{ParkingLotNo}
+		<if test="CarCode != null">
+			and CarCode = #{CarCode}
+		</if>
+		<if test="inoutTime != null">
+			and inoutTime = #{inoutTime} order by inoutTime,status asc
+		</if>
+	</select>
+
+	<select id="queryOneByCarCodeOrderByCrdtm" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		tc_crosspoint
+		where
+		partitionID = #{partitionID}
+		and ParkingLotNo =
+		#{ParkingLotNo}
+		and CarCode = #{CarCode}
+		order by inoutTime desc Limit 1
+	</select>
+	
+	<select id="queryFirstCrosspointByCarCode" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		tc_crosspoint
+		where
+		partitionID = #{partitionID}
+		and ParkingLotNo = #{ParkingLotNo}
+		and CarCode = #{CarCode}
+		order by inoutTime,status asc Limit 1
+	</select>
+
+	<delete id="deletebyrecordid" parameterType="Object">
+		delete from
+		tc_crosspoint
+		where RecordID = #{recordid} and ParkingLotNo =
+		#{parkinglotno} and partitionID = #{partitionid}
+	</delete>
+
+	<select id="selectByParknoAndSize" resultType="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint"
+		parameterType="Object">
+		select *
+		from tc_crosspoint
+		where ParkingLotNo =
+		#{parkinglotno} and partitionID = #{partitionid} order by inoutTime desc
+		limit #{offset}
+	</select>
+
+	<select id="selectcarin" resultType="cn.rf.hz.web.cloudpark.moder.Tc_crosspoint"
+		parameterType="Object">
+		select *
+		from tc_crosspoint
+		where ParkingLotNo
+		=#{parkinglotno} and CarCode =#{carcode} limit 1
+	</select>
+
+
+	<!-- <select id="selectcarincount" parameterType="Object" resultType="java.lang.Integer"> 
+		select count(1) from tc_crosspoint where ParkingLotNo ='12' </select> -->
+	<select id="selectcarinCount" resultType="java.lang.Integer">
+		select CONVERT(count(recordid),SIGNED) from tc_crosspoint where
+		ParkingLotNo=#{parkinglotno}
+	</select>
+
+
+<select id="selectCarInNoLincenPlateNumber" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select 
+		<include refid="Base_Column_List" />
+		from tc_crosspoint
+		where ParkingLotNo
+		=#{parkinglotno} and CarCode like ${carcode} and partitionID = #{partitionid}
+	</select>
+
+</mapper>

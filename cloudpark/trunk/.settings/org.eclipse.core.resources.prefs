@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//conf/config.properties=UTF-8
+encoding//conf/log4j.properties=UTF-8
+encoding//conf/parkinglotconfig.properties=UTF-8
+encoding//conf/urls.properties=UTF-8
+encoding//src/cn/rf/hz/web/cloudpark/impl/ParkOutInServiceImp.java=UTF-8
+encoding//src/cn/rf/hz/web/model/BaseModel.java=UTF-8
+encoding//src/cn/rf/hz/web/utils/DateUtil.java=UTF-8
+encoding//src/cn/rf/hz/web/utils/JedisPoolUtils.java=UTF-8
+encoding/<project>=UTF-8
+encoding/src=UTF-8
+encoding/test=UTF-8

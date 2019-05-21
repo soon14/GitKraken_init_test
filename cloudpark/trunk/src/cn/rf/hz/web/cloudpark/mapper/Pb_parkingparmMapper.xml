@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Pb_parkingparmMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Pb_parkingparm" >
+    <id column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <id column="ParmID" property="parmid" jdbcType="INTEGER" />
+    <result column="ParmValue" property="parmvalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ParkingLotNo, ParmID, ParmValue
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pb_parkingparm
+    where ParkingLotNo = #{0}
+      and ParmID = #{1}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_parkingparmKey" >
+    delete from pb_parkingparm
+    where ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and ParmID = #{parmid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_parkingparm" >
+    insert into pb_parkingparm (ParkingLotNo, ParmID, ParmValue
+      )
+    values (#{parkinglotno,jdbcType=VARCHAR}, #{parmid,jdbcType=INTEGER}, #{parmvalue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_parkingparm" >
+    insert into pb_parkingparm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="parmid != null" >
+        ParmID,
+      </if>
+      <if test="parmvalue != null" >
+        ParmValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="parmid != null" >
+        #{parmid,jdbcType=INTEGER},
+      </if>
+      <if test="parmvalue != null" >
+        #{parmvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_parkingparm" >
+    update pb_parkingparm
+    <set >
+      <if test="parmvalue != null" >
+        ParmValue = #{parmvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and ParmID = #{parmid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_parkingparm" >
+    update pb_parkingparm
+    set ParmValue = #{parmvalue,jdbcType=VARCHAR}
+    where ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR}
+      and ParmID = #{parmid,jdbcType=INTEGER}
+  </update>
+  
+      <select id="selectByParkingLotNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pb_parkingparm
+    where ParkingLotNo = #{0}
+  </select>
+</mapper>

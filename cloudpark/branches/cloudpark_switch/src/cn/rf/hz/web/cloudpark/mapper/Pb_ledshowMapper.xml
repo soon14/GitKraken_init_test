@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Pb_ledshowMapper">
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Pb_ledshow">
+		<id column="RecordId" property="recordid" jdbcType="INTEGER" />
+		<result column="ip" property="ip" jdbcType="VARCHAR" />
+		<result column="line" property="line" jdbcType="INTEGER" />
+		<result column="color" property="color" jdbcType="INTEGER" />
+		<result column="method" property="method" jdbcType="INTEGER" />
+		<result column="scrollDelay" property="scrolldelay" jdbcType="INTEGER" />
+		<result column="stayTime" property="staytime" jdbcType="INTEGER" />
+		<result column="ideltime" property="ideltime" jdbcType="INTEGER" />
+		<result column="swdelay" property="swdelay" jdbcType="INTEGER" />
+		<result column="toflash" property="toflash" jdbcType="BIT" />
+		<result column="programId" property="programid" jdbcType="INTEGER" />
+		<result column="ledType" property="ledtype" jdbcType="INTEGER" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="parkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="channelId" property="channelid" jdbcType="INTEGER" />
+		<result column="ledName" property="ledname" jdbcType="VARCHAR" />
+		<result column="pid" property="pid" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RecordId, ip, line, color, method, scrollDelay, stayTime, ideltime, swdelay,
+		toflash,
+		programId, ledType, content, parkingLotNo, channelId, ledName, pid
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from pb_ledshow
+		where RecordId = #{recordid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from pb_ledshow
+		where RecordId = #{recordid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_ledshow">
+		insert into pb_ledshow (RecordId, ip, line,
+		color, method, scrollDelay,
+		stayTime, ideltime, swdelay,
+		toflash, programId, ledType,
+		content, parkingLotNo, channelId,
+		ledName, pid)
+		values (#{recordid,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR},
+		#{line,jdbcType=INTEGER},
+		#{color,jdbcType=INTEGER}, #{method,jdbcType=INTEGER}, #{scrolldelay,jdbcType=INTEGER},
+		#{staytime,jdbcType=INTEGER}, #{ideltime,jdbcType=INTEGER},
+		#{swdelay,jdbcType=INTEGER},
+		#{toflash,jdbcType=BIT}, #{programid,jdbcType=INTEGER}, #{ledtype,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR}, #{parkinglotno,jdbcType=VARCHAR},
+		#{channelid,jdbcType=INTEGER},
+		#{ledname,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_ledshow">
+		insert into pb_ledshow
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				RecordId,
+			</if>
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="line != null">
+				line,
+			</if>
+			<if test="color != null">
+				color,
+			</if>
+			<if test="method != null">
+				method,
+			</if>
+			<if test="scrolldelay != null">
+				scrollDelay,
+			</if>
+			<if test="staytime != null">
+				stayTime,
+			</if>
+			<if test="ideltime != null">
+				ideltime,
+			</if>
+			<if test="swdelay != null">
+				swdelay,
+			</if>
+			<if test="toflash != null">
+				toflash,
+			</if>
+			<if test="programid != null">
+				programId,
+			</if>
+			<if test="ledtype != null">
+				ledType,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="parkinglotno != null">
+				parkingLotNo,
+			</if>
+			<if test="channelid != null">
+				channelId,
+			</if>
+			<if test="ledname != null">
+				ledName,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				#{recordid,jdbcType=INTEGER},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="line != null">
+				#{line,jdbcType=INTEGER},
+			</if>
+			<if test="color != null">
+				#{color,jdbcType=INTEGER},
+			</if>
+			<if test="method != null">
+				#{method,jdbcType=INTEGER},
+			</if>
+			<if test="scrolldelay != null">
+				#{scrolldelay,jdbcType=INTEGER},
+			</if>
+			<if test="staytime != null">
+				#{staytime,jdbcType=INTEGER},
+			</if>
+			<if test="ideltime != null">
+				#{ideltime,jdbcType=INTEGER},
+			</if>
+			<if test="swdelay != null">
+				#{swdelay,jdbcType=INTEGER},
+			</if>
+			<if test="toflash != null">
+				#{toflash,jdbcType=BIT},
+			</if>
+			<if test="programid != null">
+				#{programid,jdbcType=INTEGER},
+			</if>
+			<if test="ledtype != null">
+				#{ledtype,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="channelid != null">
+				#{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="ledname != null">
+				#{ledname,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_ledshow">
+		update pb_ledshow
+		<set>
+			<if test="ip != null">
+				ip = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="line != null">
+				line = #{line,jdbcType=INTEGER},
+			</if>
+			<if test="color != null">
+				color = #{color,jdbcType=INTEGER},
+			</if>
+			<if test="method != null">
+				method = #{method,jdbcType=INTEGER},
+			</if>
+			<if test="scrolldelay != null">
+				scrollDelay = #{scrolldelay,jdbcType=INTEGER},
+			</if>
+			<if test="staytime != null">
+				stayTime = #{staytime,jdbcType=INTEGER},
+			</if>
+			<if test="ideltime != null">
+				ideltime = #{ideltime,jdbcType=INTEGER},
+			</if>
+			<if test="swdelay != null">
+				swdelay = #{swdelay,jdbcType=INTEGER},
+			</if>
+			<if test="toflash != null">
+				toflash = #{toflash,jdbcType=BIT},
+			</if>
+			<if test="programid != null">
+				programId = #{programid,jdbcType=INTEGER},
+			</if>
+			<if test="ledtype != null">
+				ledType = #{ledtype,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="parkinglotno != null">
+				parkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="channelid != null">
+				channelId = #{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="ledname != null">
+				ledName = #{ledname,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				pid = #{pid,jdbcType=INTEGER},
+			</if>
+		</set>
+		where RecordId = #{recordid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Pb_ledshow">
+		update pb_ledshow
+		set ip = #{ip,jdbcType=VARCHAR},
+		line = #{line,jdbcType=INTEGER},
+		color = #{color,jdbcType=INTEGER},
+		method = #{method,jdbcType=INTEGER},
+		scrollDelay = #{scrolldelay,jdbcType=INTEGER},
+		stayTime = #{staytime,jdbcType=INTEGER},
+		ideltime = #{ideltime,jdbcType=INTEGER},
+		swdelay = #{swdelay,jdbcType=INTEGER},
+		toflash = #{toflash,jdbcType=BIT},
+		programId = #{programid,jdbcType=INTEGER},
+		ledType = #{ledtype,jdbcType=INTEGER},
+		content = #{content,jdbcType=VARCHAR},
+		parkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+		channelId = #{channelid,jdbcType=INTEGER},
+		ledName = #{ledname,jdbcType=VARCHAR},
+		pid = #{pid,jdbcType=INTEGER}
+		where RecordId = #{recordid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectByPid" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from pb_ledshow
+		where pid = #{pid,jdbcType=INTEGER}
+	</select>
+
+
+</mapper>

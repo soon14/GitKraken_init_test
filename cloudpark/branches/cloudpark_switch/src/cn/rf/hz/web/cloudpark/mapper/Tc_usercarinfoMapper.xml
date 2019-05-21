@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_usercarinfoMapper">
+	<resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_usercarinfo">
+		<id column="RecordID" property="recordid" jdbcType="INTEGER" />
+		<result column="UserID" property="userid" jdbcType="INTEGER" />
+		<result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+		<result column="CarCode" property="carcode" jdbcType="VARCHAR" />
+		<result column="CarLabel" property="carlabel" jdbcType="VARCHAR" />
+		<result column="CarColor" property="carcolor" jdbcType="VARCHAR" />
+		<result column="CarStyleid" property="carstyleid" jdbcType="INTEGER" />
+		<result column="PersonalName" property="personalname" jdbcType="VARCHAR" />
+		<result column="PersonalPhone" property="personalphone"
+			jdbcType="VARCHAR" />
+		<result column="CreateUser" property="createuser" jdbcType="INTEGER" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RecordID, UserID, ParkingLotNo, CarCode, CarLabel,
+		CarColor, CarStyleid,
+		PersonalName,
+		PersonalPhone, CreateUser,
+		CreateTime, Remarks
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercarinfo
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tc_usercarinfo
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercarinfo">
+		insert into tc_usercarinfo
+		(RecordID, UserID, ParkingLotNo,
+		CarCode, CarLabel, CarColor,
+		CarStyleid, PersonalName, PersonalPhone,
+		CreateUser, CreateTime,
+		Remarks
+		)
+		values (#{recordid,jdbcType=INTEGER},
+		#{userid,jdbcType=INTEGER},
+		#{parkinglotno,jdbcType=VARCHAR},
+		#{carcode,jdbcType=VARCHAR}, #{carlabel,jdbcType=VARCHAR},
+		#{carcolor,jdbcType=VARCHAR},
+		#{carstyleid,jdbcType=INTEGER},
+		#{personalname,jdbcType=VARCHAR},
+		#{personalphone,jdbcType=VARCHAR},
+		#{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP},
+		#{remarks,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercarinfo">
+		insert into tc_usercarinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				RecordID,
+			</if>
+			<if test="userid != null">
+				UserID,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+			<if test="carcode != null">
+				CarCode,
+			</if>
+			<if test="carlabel != null">
+				CarLabel,
+			</if>
+			<if test="carcolor != null">
+				CarColor,
+			</if>
+			<if test="carstyleid != null">
+				CarStyleid,
+			</if>
+			<if test="personalname != null">
+				PersonalName,
+			</if>
+			<if test="personalphone != null">
+				PersonalPhone,
+			</if>
+			<if test="createuser != null">
+				CreateUser,
+			</if>
+			<if test="createtime != null">
+				CreateTime,
+			</if>
+			<if test="remarks != null">
+				Remarks,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="recordid != null">
+				#{recordid,jdbcType=INTEGER},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode != null">
+				#{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="carlabel != null">
+				#{carlabel,jdbcType=VARCHAR},
+			</if>
+			<if test="carcolor != null">
+				#{carcolor,jdbcType=VARCHAR},
+			</if>
+			<if test="carstyleid != null">
+				#{carstyleid,jdbcType=INTEGER},
+			</if>
+			<if test="personalname != null">
+				#{personalname,jdbcType=VARCHAR},
+			</if>
+			<if test="personalphone != null">
+				#{personalphone,jdbcType=VARCHAR},
+			</if>
+			<if test="createuser != null">
+				#{createuser,jdbcType=INTEGER},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<insert id="batchInsert" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		<foreach close="" collection="list" index="index" item="item"
+			open="" separator=";">
+			insert into tc_usercarinfo (RecordID, UserID,
+			ParkingLotNo,
+			CarCode, CarLabel, CarColor,
+			CarStyleid, PersonalName,
+			PersonalPhone,
+			CreateUser, CreateTime, Remarks
+			) values
+			(#{recordid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER},
+			#{parkinglotno,jdbcType=VARCHAR},
+			#{carcode,jdbcType=VARCHAR},
+			#{carlabel,jdbcType=VARCHAR}, #{carcolor,jdbcType=VARCHAR},
+			#{carstyleid,jdbcType=INTEGER}, #{personalname,jdbcType=VARCHAR},
+			#{personalphone,jdbcType=VARCHAR},
+			#{createuser,jdbcType=INTEGER},
+			#{createtime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
+
+
+	<delete id="batchDelete">
+		delete from tc_usercarinfo where RecordID in (
+		<foreach collection="recordids" item="recordid" separator=",">
+			#{recordid}
+		</foreach>
+		)
+	</delete>
+
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercarinfo">
+		update tc_usercarinfo
+		<set>
+			<if test="userid != null">
+				UserID = #{userid,jdbcType=INTEGER},
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode != null">
+				CarCode = #{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="carlabel != null">
+				CarLabel = #{carlabel,jdbcType=VARCHAR},
+			</if>
+			<if test="carcolor != null">
+				CarColor = #{carcolor,jdbcType=VARCHAR},
+			</if>
+			<if test="carstyleid != null">
+				CarStyleid = #{carstyleid,jdbcType=INTEGER},
+			</if>
+			<if test="personalname != null">
+				PersonalName = #{personalname,jdbcType=VARCHAR},
+			</if>
+			<if test="personalphone != null">
+				PersonalPhone = #{personalphone,jdbcType=VARCHAR},
+			</if>
+			<if test="createuser != null">
+				CreateUser = #{createuser,jdbcType=INTEGER},
+			</if>
+			<if test="createtime != null">
+				CreateTime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				Remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_usercarinfo">
+		update
+		tc_usercarinfo
+		set UserID = #{userid,jdbcType=INTEGER},
+		ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR},
+		CarCode =
+		#{carcode,jdbcType=VARCHAR},
+		CarLabel = #{carlabel,jdbcType=VARCHAR},
+		CarColor = #{carcolor,jdbcType=VARCHAR},
+		CarStyleid =
+		#{carstyleid,jdbcType=INTEGER},
+		PersonalName =
+		#{personalname,jdbcType=VARCHAR},
+		PersonalPhone =
+		#{personalphone,jdbcType=VARCHAR},
+		CreateUser =
+		#{createuser,jdbcType=INTEGER},
+		CreateTime =
+		#{createtime,jdbcType=TIMESTAMP},
+		Remarks = #{remarks,jdbcType=VARCHAR}
+		where RecordID = #{recordid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectByUserID" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercarinfo
+		where UserID = #{userid,jdbcType=INTEGER}
+	</select>
+
+
+	<select id="selectByUserIDAndCarCode" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from tc_usercarinfo
+		where UserID = #{userid,jdbcType=INTEGER} and
+		CarCode =
+		#{carcode,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

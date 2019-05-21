@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.rf.hz.web.cloudpark.daoxx.Tc_cwnuminfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.rf.hz.web.cloudpark.moder.Tc_cwnuminfo" >
+    <id column="RecordId" property="recordid" jdbcType="INTEGER" />
+    <result column="ParkingLotNo" property="parkinglotno" jdbcType="VARCHAR" />
+    <result column="AreaID" property="areaid" jdbcType="INTEGER" />
+    <result column="CountCw" property="countcw" jdbcType="INTEGER" />
+    <result column="StopedCw" property="stopedcw" jdbcType="INTEGER" />
+    <result column="PrepCw" property="prepcw" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RecordId, ParkingLotNo, AreaID, CountCw, StopedCw, PrepCw
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_cwnuminfo
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_cwnuminfo
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_cwnuminfo" >
+    insert into tc_cwnuminfo (RecordId, ParkingLotNo, AreaID, 
+      CountCw, StopedCw, PrepCw
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{parkinglotno,jdbcType=VARCHAR}, #{areaid,jdbcType=INTEGER}, 
+      #{countcw,jdbcType=INTEGER}, #{stopedcw,jdbcType=INTEGER}, #{prepcw,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_cwnuminfo" >
+    insert into tc_cwnuminfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        RecordId,
+      </if>
+      <if test="parkinglotno != null" >
+        ParkingLotNo,
+      </if>
+      <if test="areaid != null" >
+        AreaID,
+      </if>
+      <if test="countcw != null" >
+        CountCw,
+      </if>
+      <if test="stopedcw != null" >
+        StopedCw,
+      </if>
+      <if test="prepcw != null" >
+        PrepCw,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="parkinglotno != null" >
+        #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="countcw != null" >
+        #{countcw,jdbcType=INTEGER},
+      </if>
+      <if test="stopedcw != null" >
+        #{stopedcw,jdbcType=INTEGER},
+      </if>
+      <if test="prepcw != null" >
+        #{prepcw,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_cwnuminfo" >
+    update tc_cwnuminfo
+    <set >
+      <if test="parkinglotno != null" >
+        ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        AreaID = #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="countcw != null" >
+        CountCw = #{countcw,jdbcType=INTEGER},
+      </if>
+      <if test="stopedcw != null" >
+        StopedCw = #{stopedcw,jdbcType=INTEGER},
+      </if>
+      <if test="prepcw != null" >
+        PrepCw = #{prepcw,jdbcType=INTEGER},
+      </if>
+    </set>
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_cwnuminfo" >
+    update tc_cwnuminfo
+    set ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+      AreaID = #{areaid,jdbcType=INTEGER},
+      CountCw = #{countcw,jdbcType=INTEGER},
+      StopedCw = #{stopedcw,jdbcType=INTEGER},
+      PrepCw = #{prepcw,jdbcType=INTEGER}
+    where RecordId = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryOnebyParkinglotnoAndAreaid" resultMap="BaseResultMap">
+  	select 
+    	<include refid="Base_Column_List" />
+    from 
+    	tc_cwnuminfo
+    where 
+    	ParkingLotNo = #{parkNo}
+    and
+    	AreaID= #{areaId}
+    Limit 1
+  </select>
+  
+    <update id="batchUpdateCwnuminfo" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+    		update tc_cwnuminfo  
+                <set>  
+                  ParkingLotNo = #{item.parkinglotno},
+      			  AreaID = #{item.areaid},
+      			  CountCw = #{item.countcw},
+      			  StopedCw = #{item.stopedcw},
+      			  PrepCw = #{item.prepcw}
+                </set>  
+   			where 
+   				RecordId = #{item.recordid}
+         </foreach>  
+	</update>
+  
+</mapper>

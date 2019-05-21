@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.mapper.gd.DataErrorMapper" > 
+   
+	
+	<insert id="inserDataError" parameterType="Object">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="recordId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_data_error(recordId,businessType,carParkId,oldRecordId,errorInfo,dataInfo,addTime )
+		values(#{recordId},#{businessType},#{carParkId},#{oldRecordId},#{errorInfo},#{sourceData},now())
+	</insert>
+   
+</mapper>   

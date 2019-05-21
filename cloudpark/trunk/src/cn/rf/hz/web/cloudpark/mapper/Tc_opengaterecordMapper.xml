@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rf.hz.web.sharding.dao.Tc_opengaterecordMapper">
+	<resultMap id="BaseResultMap"
+		type="cn.rf.hz.web.cloudpark.moder.Tc_opengaterecord">
+		<id column="partitionID" property="partitionid" jdbcType="INTEGER" />
+		<id column="RecordId" jdbcType="INTEGER" property="recordid" />
+		<result column="ChannelID" jdbcType="INTEGER" property="channelid" />
+		<result column="GateType" jdbcType="INTEGER" property="gatetype" />
+		<result column="ImagePath" jdbcType="VARCHAR" property="imagepath" />
+		<result column="OperatorId" jdbcType="INTEGER" property="operatorid" />
+		<result column="OperatorDate" jdbcType="TIMESTAMP" property="operatordate" />
+		<result column="IsUpload" jdbcType="BIT" property="isupload" />
+		<result column="ParkingLotNo" jdbcType="VARCHAR" property="parkinglotno" />
+		<result column="CarCode" jdbcType="VARCHAR" property="carcode" />
+		<result column="TextReason" jdbcType="VARCHAR" property="textreason" />
+		<result column="VoiceReason" jdbcType="VARCHAR" property="voicereason" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		partitionID,RecordId, ChannelID, GateType, ImagePath,
+		OperatorId, OperatorDate, IsUpload,
+		ParkingLotNo,CarCode,TextReason,VoiceReason
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tc_opengaterecord
+		where RecordId = #{recordid,jdbcType=INTEGER}
+		and
+		partitionID = #{partitionid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tc_opengaterecord
+		where RecordId = #{recordid,jdbcType=INTEGER}
+		and
+		partitionID = #{partitionid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_opengaterecord">
+		insert into tc_opengaterecord
+		(partitionID,RecordId, ChannelID, GateType,
+		ImagePath, OperatorId,
+		OperatorDate,
+		IsUpload, ParkingLotNo,CarCode,TextReason,VoiceReason)
+		values
+		(#{partitionid,jdbcType=INTEGER},#{recordid,jdbcType=INTEGER},
+		#{channelid,jdbcType=INTEGER}, #{gatetype,jdbcType=INTEGER},
+		#{imagepath,jdbcType=VARCHAR}, #{operatorid,jdbcType=INTEGER},
+		#{operatordate,jdbcType=TIMESTAMP},
+		#{isupload,jdbcType=BIT},
+		#{parkinglotno,jdbcType=VARCHAR},#{carcode,jdbcType=VARCHAR},#{textreason,jdbcType=VARCHAR},#{voicereason,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_opengaterecord">
+		insert into tc_opengaterecord
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="partitionid != null">
+				partitionID,
+			</if>
+			<if test="recordid != null">
+				RecordId,
+			</if>
+			<if test="channelid != null">
+				ChannelID,
+			</if>
+			<if test="gatetype != null">
+				GateType,
+			</if>
+			<if test="imagepath != null">
+				ImagePath,
+			</if>
+			<if test="operatorid != null">
+				OperatorId,
+			</if>
+			<if test="operatordate != null">
+				OperatorDate,
+			</if>
+			<if test="isupload != null">
+				IsUpload,
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo,
+			</if>
+			<if test="carcode != null">
+				CarCode,
+			</if>
+			<if test="textreason != null">
+				TextReason,
+			</if>
+			<if test="voicereason != null">
+				VoiceReason,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="partitionid != null">
+				#{partitionid,jdbcType=INTEGER},
+			</if>
+			<if test="recordid != null"> #{recordid,jdbcType=INTEGER},
+			</if>
+			<if test="channelid != null">
+				#{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="gatetype != null">
+				#{gatetype,jdbcType=INTEGER},
+			</if>
+			<if test="imagepath != null">
+				#{imagepath,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorid != null">
+				#{operatorid,jdbcType=INTEGER},
+			</if>
+			<if test="operatordate != null">
+				#{operatordate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isupload != null">
+				#{isupload,jdbcType=BIT},
+			</if>
+			<if test="parkinglotno != null">
+				#{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode != null">
+				#{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="textreason != null">
+				#{textreason,jdbcType=VARCHAR},
+			</if>
+			<if test="voicereason != null">
+				#{voicereason,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_opengaterecord">
+		update tc_opengaterecord
+		<set>
+			<if test="channelid != null">
+				ChannelID = #{channelid,jdbcType=INTEGER},
+			</if>
+			<if test="gatetype != null">
+				GateType = #{gatetype,jdbcType=INTEGER},
+			</if>
+			<if test="imagepath != null">
+				ImagePath = #{imagepath,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorid != null">
+				OperatorId = #{operatorid,jdbcType=INTEGER},
+			</if>
+			<if test="operatordate != null">
+				OperatorDate = #{operatordate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isupload != null">
+				IsUpload = #{isupload,jdbcType=BIT},
+			</if>
+			<if test="parkinglotno != null">
+				ParkingLotNo = #{parkinglotno,jdbcType=VARCHAR},
+			</if>
+			<if test="carcode != null">
+				CarCode = #{carcode,jdbcType=VARCHAR},
+			</if>
+			<if test="textreason != null">
+				TextReason = #{textreason,jdbcType=VARCHAR},
+			</if>
+			<if test="voicereason != null">
+				VoiceReason = #{voicereason,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		where RecordId = #{recordid,jdbcType=INTEGER}
+		and partitionID
+		=#{partitionid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.rf.hz.web.cloudpark.moder.Tc_opengaterecord">
+		update
+		tc_opengaterecord
+		set ChannelID = #{channelid,jdbcType=INTEGER},
+		GateType = #{gatetype,jdbcType=INTEGER},
+		ImagePath =
+		#{imagepath,jdbcType=VARCHAR},
+		OperatorId =
+		#{operatorid,jdbcType=INTEGER},
+		OperatorDate =
+		#{operatordate,jdbcType=TIMESTAMP},
+		IsUpload =
+		#{isupload,jdbcType=BIT},
+		ParkingLotNo =
+		#{parkinglotno,jdbcType=VARCHAR},
+		CarCode =
+		#{carcode,jdbcType=VARCHAR},
+		TextReason =
+		#{textreason,jdbcType=VARCHAR},
+		VoiceReason =
+		#{voicereason,jdbcType=VARCHAR}
+		where RecordId =
+		#{recordid,jdbcType=INTEGER}
+		and partitionID =
+		#{partitionid,jdbcType=INTEGER}
+	</update>
+	<insert id="batchInsertOpengaterecord" parameterType="java.util.List">
+		insert into tc_opengaterecord (partitionID,RecordId, ChannelID,
+		GateType,
+		ImagePath, OperatorId, OperatorDate,
+		IsUpload,
+		ParkingLotNo,CarCode,TextReason,VoiceReason)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.partitionid},#{item.recordid},#{item.channelid},#{item.gatetype}
+			,#{item.imagepath},#{item.operatorid},#{item.operatordate}
+			,#{item.isupload},#{item.parkinglotno},#{item.carcode},#{item.textreason},#{item.voicereason}
+			)
+		</foreach>
+	</insert>
+</mapper>
